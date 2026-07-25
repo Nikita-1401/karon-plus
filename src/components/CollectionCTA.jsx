@@ -2,10 +2,10 @@ import { FiArrowUpRight } from "react-icons/fi";
 import "./CollectionCTA.css";
 
 const collections = [
-  { number: "01", name: "FORMAL", href: "/shop?category=formal" },
-  { number: "02", name: "CASUAL", href: "/shop?category=casual" },
-  { number: "03", name: "PRINTED", href: "/shop?category=printed" },
-  { number: "04", name: "PREMIUM", href: "/shop?category=premium" },
+  { number: "01", name: "FORMAL", href: "/shirts/formal" },
+  { number: "02", name: "CASUAL", href: "/shirts/casual" },
+  { number: "03", name: "PRINTED", href: "/shirts/printed" },
+  { number: "04", name: "PREMIUM", href: "/shirts/premium" },
 ];
 
 const CollectionCTA = () => {

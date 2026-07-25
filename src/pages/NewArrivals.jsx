@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   FiArrowRight,
-  FiHeart,
   FiStar,
 } from "react-icons/fi";
 
@@ -74,67 +72,6 @@ const products = [
 ];
 
 const NewArrivals = () => {
-  const [wishlist, setWishlist] = useState([]);
-
-  useEffect(() => {
-    try {
-      const saved =
-        JSON.parse(localStorage.getItem("karonWishlist")) || [];
-
-      setWishlist(saved);
-    } catch {
-      setWishlist([]);
-    }
-  }, []);
-
-  const toggleWishlist = (productId) => {
-    const updated = wishlist.includes(productId)
-      ? wishlist.filter((id) => id !== productId)
-      : [...wishlist, productId];
-
-    setWishlist(updated);
-
-    localStorage.setItem(
-      "karonWishlist",
-      JSON.stringify(updated)
-    );
-
-    window.dispatchEvent(new Event("wishlistUpdated"));
-  };
-
-  const HeartButton = ({ productId }) => {
-    const liked = wishlist.includes(productId);
-
-    return (
-      <button
-        type="button"
-        onClick={() => toggleWishlist(productId)}
-        aria-label={
-          liked
-            ? "Remove from wishlist"
-            : "Add to wishlist"
-        }
-        className={`
-          w-8 h-8
-          rounded-full
-          flex items-center
-          justify-center
-          transition
-          ${
-            liked
-              ? "bg-[#171714] text-white"
-              : "bg-[#faf7f1] text-[#171714] hover:bg-[#171714] hover:text-white"
-          }
-        `}
-      >
-        <FiHeart
-          size={12}
-          className={liked ? "fill-current" : ""}
-        />
-      </button>
-    );
-  };
-
   const topProducts = products.slice(0, 3);
   const moreProducts = products.slice(3);
 
@@ -145,7 +82,7 @@ const NewArrivals = () => {
       <section className="border-b border-[#d6cbbb]">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-9 xl:px-10">
 
-          <div className="h-auto sm:h-[66px] py-3 sm:py-0 flex items-center justify-between gap-4">
+          <div className="h-auto sm:h-[60px] py-2.5 sm:py-0 flex items-center justify-between gap-4">
 
             {/* LEFT */}
             <div className="flex items-center gap-3">
@@ -191,15 +128,16 @@ const NewArrivals = () => {
                 </p>
               </div>
             </div>
+
           </div>
         </div>
       </section>
 
       {/* ================= NEW DROP ================= */}
-      <section className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-9 xl:px-10 pt-4">
+      <section className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-9 xl:px-10 pt-2.5">
 
         {/* SECTION HEADER */}
-        <div className="flex items-end justify-between mb-3">
+        <div className="flex items-end justify-between mb-2">
 
           <div>
             <p className="text-[#c77718] text-[7px] font-bold tracking-[0.2em]">
@@ -220,7 +158,7 @@ const NewArrivals = () => {
           </Link>
         </div>
 
-        {/* TOP 3 DIFFERENT CARDS */}
+        {/* TOP 3 CARDS */}
         <div
           className="
             grid
@@ -245,29 +183,24 @@ const NewArrivals = () => {
                     relative
                     overflow-hidden
                     bg-[#ddd3c5]
-                    h-[300px]
-                    sm:h-[320px]
-                    lg:h-[325px]
+                    h-[275px]
+                    sm:h-[290px]
+                    lg:h-[295px]
                     ${isFeatured ? "sm:col-span-2 lg:col-span-1" : ""}
                   `}
                 >
-                  <Link
-                    to={`/product/${product.id}`}
-                    className="block w-full h-full"
-                  >
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="
-                        w-full
-                        h-full
-                        object-contain
-                        transition-transform
-                        duration-500
-                        group-hover:scale-[1.025]
-                      "
-                    />
-                  </Link>
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="
+                      w-full
+                      h-full
+                      object-contain
+                      transition-transform
+                      duration-500
+                      group-hover:scale-[1.025]
+                    "
+                  />
 
                   {/* BADGE */}
                   <span className="absolute top-3 left-3 bg-[#171714] text-white px-2.5 py-1.5 text-[7px] font-bold tracking-[0.15em]">
@@ -275,20 +208,10 @@ const NewArrivals = () => {
                       ? "EDITOR'S PICK"
                       : product.badge}
                   </span>
-
-                  {/* HEART */}
-                  <div className="absolute top-3 right-3">
-                    <HeartButton productId={product.id} />
-                  </div>
-
-                  {/* NUMBER */}
-                  <span className="absolute left-3 bottom-3 bg-[#f8f3eb]/95 px-2 py-1 text-[7px] font-bold tracking-[0.15em]">
-                    0{index + 1}
-                  </span>
                 </div>
 
                 {/* PRODUCT INFO */}
-                <div className="pt-2.5 pb-3 border-b border-[#cfc3b2]">
+                <div className="pt-2 pb-2.5 border-b border-[#cfc3b2]">
 
                   <div className="flex items-center justify-between gap-3">
 
@@ -304,22 +227,12 @@ const NewArrivals = () => {
                     </p>
                   </div>
 
-                  <div className="flex items-end justify-between gap-3 mt-1">
-
-                    <Link
-                      to={`/product/${product.id}`}
-                      className="font-serif text-[16px] sm:text-[17px] lg:text-[18px] leading-tight hover:text-[#c77718] transition"
-                    >
+                  <div className="mt-1">
+                    <h3 className="font-serif text-[16px] sm:text-[17px] lg:text-[18px] leading-tight">
                       {product.name}
-                    </Link>
-
-                    <Link
-                      to={`/product/${product.id}`}
-                      className="w-7 h-7 shrink-0 border border-[#bdae9b] flex items-center justify-center hover:bg-[#171714] hover:text-white hover:border-[#171714] transition"
-                    >
-                      <FiArrowRight size={10} />
-                    </Link>
+                    </h3>
                   </div>
+
                 </div>
               </article>
             );
@@ -328,7 +241,7 @@ const NewArrivals = () => {
       </section>
 
       {/* ================= SECOND COLLECTION ================= */}
-      <section className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-9 xl:px-10 pt-6 pb-9">
+      <section className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-9 xl:px-10 pt-5 pb-8">
 
         {/* HEADER */}
         <div className="flex items-end justify-between border-b border-[#cec1af] pb-2 mb-3">
@@ -346,6 +259,7 @@ const NewArrivals = () => {
           <p className="hidden md:block text-[9px] text-[#756b5f]">
             Five fresh additions to the collection.
           </p>
+
         </div>
 
         {/* 5 SMALL CARDS */}
@@ -358,122 +272,70 @@ const NewArrivals = () => {
             gap-3
           "
         >
-          {moreProducts.map((product, index) => {
-            const liked = wishlist.includes(product.id);
+          {moreProducts.map((product) => (
+            <article
+              key={product.id}
+              className="group min-w-0"
+            >
 
-            return (
-              <article
-                key={product.id}
-                className="group min-w-0"
+              {/* IMAGE */}
+              <div
+                className="
+                  relative
+                  overflow-hidden
+                  bg-[#ddd3c5]
+                  h-[220px]
+                  sm:h-[240px]
+                  lg:h-[225px]
+                "
               >
-
-                {/* IMAGE */}
-                <div
+                <img
+                  src={product.image}
+                  alt={product.name}
                   className="
-                    relative
-                    overflow-hidden
-                    bg-[#ddd3c5]
-                    h-[220px]
-                    sm:h-[240px]
-                    lg:h-[225px]
+                    w-full
+                    h-full
+                    object-contain
+                    transition-transform
+                    duration-500
+                    group-hover:scale-[1.025]
                   "
-                >
-                  <Link
-                    to={`/product/${product.id}`}
-                    className="block w-full h-full"
-                  >
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="
-                        w-full
-                        h-full
-                        object-contain
-                        transition-transform
-                        duration-500
-                        group-hover:scale-[1.025]
-                      "
-                    />
-                  </Link>
+                />
 
-                  <span className="absolute top-2.5 left-2.5 bg-[#171714] text-white px-2 py-1 text-[6px] font-bold tracking-[0.14em]">
-                    {product.badge}
-                  </span>
+                {/* BADGE */}
+                <span className="absolute top-2.5 left-2.5 bg-[#171714] text-white px-2 py-1 text-[6px] font-bold tracking-[0.14em]">
+                  {product.badge}
+                </span>
+              </div>
 
-                  <button
-                    type="button"
-                    onClick={() =>
-                      toggleWishlist(product.id)
-                    }
-                    aria-label="Wishlist"
-                    className={`
-                      absolute
-                      top-2.5
-                      right-2.5
-                      w-7
-                      h-7
-                      rounded-full
-                      flex
-                      items-center
-                      justify-center
-                      transition
-                      ${
-                        liked
-                          ? "bg-[#171714] text-white"
-                          : "bg-[#f8f4ed] hover:bg-[#171714] hover:text-white"
-                      }
-                    `}
-                  >
-                    <FiHeart
-                      size={11}
-                      className={
-                        liked ? "fill-current" : ""
-                      }
-                    />
-                  </button>
+              {/* INFO */}
+              <div className="pt-2 pb-2.5 border-b border-[#cfc3b2]">
 
-                  <span className="absolute left-2.5 bottom-2.5 bg-[#f8f3eb]/95 px-2 py-1 text-[6px] font-bold tracking-[0.14em]">
-                    0{index + 4}
-                  </span>
+                <div className="flex items-center justify-between gap-2">
+
+                  <p className="text-[#b66d17] text-[6px] sm:text-[7px] font-bold tracking-[0.15em] uppercase">
+                    {product.category}
+                  </p>
+
+                  <p className="text-[9px] font-semibold">
+                    ₹
+                    {product.price.toLocaleString(
+                      "en-IN"
+                    )}
+                  </p>
+
                 </div>
 
-                {/* INFO */}
-                <div className="pt-2 pb-2.5 border-b border-[#cfc3b2]">
+                <h3 className="font-serif text-[14px] sm:text-[15px] leading-tight mt-1">
+                  {product.name}
+                </h3>
 
-                  <div className="flex items-center justify-between gap-2">
-
-                    <p className="text-[#b66d17] text-[6px] sm:text-[7px] font-bold tracking-[0.15em] uppercase">
-                      {product.category}
-                    </p>
-
-                    <p className="text-[9px] font-semibold">
-                      ₹
-                      {product.price.toLocaleString(
-                        "en-IN"
-                      )}
-                    </p>
-                  </div>
-
-                  <Link
-                    to={`/product/${product.id}`}
-                    className="block font-serif text-[14px] sm:text-[15px] leading-tight mt-1 hover:text-[#c77718] transition"
-                  >
-                    {product.name}
-                  </Link>
-
-                  <Link
-                    to={`/product/${product.id}`}
-                    className="mt-2 flex items-center justify-between text-[7px] font-bold tracking-[0.13em] hover:text-[#c77718] transition"
-                  >
-                    DISCOVER
-                    <FiArrowRight size={9} />
-                  </Link>
-                </div>
-              </article>
-            );
-          })}
+              </div>
+            </article>
+          ))}
         </div>
       </section>
+
     </main>
   );
 };

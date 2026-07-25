@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   FiSearch,
-  FiUser,
   FiChevronDown,
   FiMenu,
   FiX,
@@ -537,16 +536,6 @@ const Navbar = () => {
               Contact
             </NavLink>
 
-            {/* ACCOUNT */}
-
-            <Link
-              to="/account"
-              aria-label="Account"
-              className="hover:text-[#B98949] transition"
-            >
-              <FiUser size={20} />
-            </Link>
-
           </nav>
 
           {/* ================= MOBILE ICONS ================= */}
@@ -868,14 +857,6 @@ const Navbar = () => {
               className="block py-4 border-b border-black/10 text-[14px]"
             >
               Contact
-            </NavLink>
-
-            <NavLink
-              to="/account"
-              className="flex items-center gap-3 py-4 text-[14px]"
-            >
-              <FiUser size={17} />
-              My Account
             </NavLink>
 
           </nav>

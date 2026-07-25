@@ -36,6 +36,7 @@ const PrintedShirts = () => {
   return (
     <main className="bg-[#f4efe7] text-[#171714]">
       <section className="max-w-[1400px] mx-auto px-4 sm:px-5 lg:px-5 pt-3 pb-3">
+
         {/* HEADER */}
         <div className="flex items-end justify-between gap-8 pb-3 border-b border-[#cdbfae]">
           <div>
@@ -52,7 +53,9 @@ const PrintedShirts = () => {
 
                 <span className="text-[#9c8d7b]">/</span>
 
-                <span className="text-[#a85e16]">PRINTED</span>
+                <span className="text-[#a85e16]">
+                  PRINTED
+                </span>
               </div>
             </div>
 
@@ -95,35 +98,33 @@ const PrintedShirts = () => {
 
         {/* PRODUCTS */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-3 lg:gap-x-4 gap-y-6">
+
           {printedProducts.map((product) => (
-            <article key={product.id} className="group min-w-0">
+            <article
+              key={product.id}
+              className="group min-w-0"
+            >
+
+              {/* IMAGE */}
               <div className="relative overflow-hidden bg-[#ded4c6] h-[315px] sm:h-[270px] lg:h-[290px] xl:h-[300px]">
-                <Link
-                  to={`/product/${product.id}`}
-                  className="block w-full h-full"
-                >
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.025]"
-                  />
-                </Link>
+
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.025]"
+                />
 
                 <span className="absolute bottom-3 left-3 bg-[#f8f4ed] text-[#171714] px-3 py-1.5 text-[9px] font-bold tracking-[0.14em]">
                   PRINTED
                 </span>
 
-                <Link
-                  to={`/product/${product.id}`}
-                  aria-label={`View ${product.name}`}
-                  className="hidden lg:flex absolute right-3 bottom-3 w-9 h-9 bg-[#171714] text-white items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
-                >
-                  <FiArrowRight size={12} />
-                </Link>
               </div>
 
+              {/* PRODUCT INFO */}
               <div className="pt-2 pb-2 border-b border-[#cdbfae]">
+
                 <div className="flex items-center justify-between gap-3">
+
                   <p className="text-[#a85e16] text-[10px] font-bold tracking-[0.11em] uppercase truncate">
                     {product.type}
                   </p>
@@ -131,30 +132,25 @@ const PrintedShirts = () => {
                   <p className="text-[11px] font-semibold whitespace-nowrap">
                     ₹{product.price.toLocaleString("en-IN")}
                   </p>
+
                 </div>
 
-                <Link
-                  to={`/product/${product.id}`}
-                  className="block mt-1 font-serif text-[17px] lg:text-[18px] leading-tight hover:text-[#c77718] transition"
-                >
+                <h3 className="mt-1 font-serif text-[17px] lg:text-[18px] leading-tight">
                   {product.name}
-                </Link>
+                </h3>
 
-                <Link
-                  to={`/product/${product.id}`}
-                  className="lg:hidden flex items-center gap-2 mt-2 text-[9px] font-bold tracking-[0.13em]"
-                >
-                  VIEW SHIRT
-                  <FiArrowRight size={10} />
-                </Link>
               </div>
             </article>
           ))}
+
         </div>
 
+        {/* BOTTOM */}
         <div className="hidden lg:flex items-center justify-between mt-2.5 pt-2">
+
           <div className="flex items-center gap-3">
             <span className="w-6 h-px bg-[#c77718]" />
+
             <p className="text-[10px] text-[#665d52]">
               Refined prints. Considered details. Individual style.
             </p>
@@ -167,7 +163,9 @@ const PrintedShirts = () => {
             BACK TO SHOP
             <FiArrowRight size={11} />
           </Link>
+
         </div>
+
       </section>
     </main>
   );

@@ -25,7 +25,6 @@ import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
 
 import Wishlist from "./pages/Wishlist";
-import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Account from "./pages/Account";
 
@@ -83,12 +82,6 @@ function App() {
         <Route
           path="/shirts/premium"
           element={<PremiumShirts />}
-        />
-
-        {/* ================= PRODUCT DETAILS ================= */}
-        <Route
-          path="/product/:id"
-          element={<ProductDetails />}
         />
 
         {/* ================= OTHER PAGES ================= */}

@@ -27,13 +27,13 @@ const CategorySection = () => {
   return (
     <section
       id="collection"
-      className="bg-[#f7f3ed] px-5 py-10 md:px-8 lg:px-9 lg:py-11"
+      className="bg-[#f7f3ed] px-5 py-4 md:px-8 md:py-5 lg:px-9 lg:py-4"
     >
       <div className="mx-auto max-w-[1450px]">
 
         {/* HEADING */}
-        <div className="mx-auto mb-7 max-w-[750px] text-center">
-          <p className="mb-2 text-[9px] font-semibold uppercase tracking-[0.42em] text-[#c99142]">
+        <div className="mx-auto mb-4 max-w-[750px] text-center">
+          <p className="mb-1.5 text-[9px] font-semibold uppercase tracking-[0.42em] text-[#c99142]">
             Discover Your Style
           </p>
 
@@ -44,9 +44,9 @@ const CategorySection = () => {
             </span>
           </h2>
 
-          <div className="mx-auto mt-3 h-px w-12 bg-[#c99142]" />
+          <div className="mx-auto mt-2 h-px w-12 bg-[#c99142]" />
 
-          <p className="mx-auto mt-3 max-w-[600px] text-[12px] leading-5 text-[#777] md:text-[13px]">
+          <p className="mx-auto mt-2 max-w-[600px] text-[12px] leading-5 text-[#777] md:text-[13px]">
             Explore signature styles crafted for every occasion, from everyday
             essentials to refined statement pieces.
           </p>
@@ -60,12 +60,12 @@ const CategorySection = () => {
               key={category.title}
               className="
                 group relative block
-                h-[430px]
+                h-[400px]
                 overflow-hidden
                 bg-[#111]
-                sm:h-[420px]
-                lg:h-[390px]
-                xl:h-[410px]
+                sm:h-[370px]
+                lg:h-[315px]
+                xl:h-[325px]
               "
             >
               {/* IMAGE */}
@@ -107,7 +107,7 @@ const CategorySection = () => {
               </div>
 
               {/* BOTTOM CONTENT */}
-              <div className="absolute bottom-0 left-0 w-full p-5 text-white lg:p-6">
+              <div className="absolute bottom-0 left-0 w-full p-5 text-white lg:p-5">
                 <p className="mb-2 text-[8px] font-semibold uppercase tracking-[0.3em] text-[#d8a657]">
                   {category.subtitle}
                 </p>
@@ -116,7 +116,7 @@ const CategorySection = () => {
                   {category.title}
                 </h3>
 
-                <div className="mt-4 flex items-center gap-3">
+                <div className="mt-3 flex items-center gap-3">
                   <span className="text-[8px] font-semibold uppercase tracking-[0.2em] text-white">
                     Explore Collection
                   </span>
@@ -134,7 +134,7 @@ const CategorySection = () => {
 
                 <div
                   className="
-                    mt-4
+                    mt-3
                     h-px
                     w-10
                     bg-[#d1a052]

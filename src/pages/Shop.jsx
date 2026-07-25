@@ -4,7 +4,6 @@ import {
   FiArrowLeft,
   FiArrowRight,
   FiChevronDown,
-  FiHeart,
   FiSliders,
 } from "react-icons/fi";
 
@@ -189,211 +188,34 @@ const filterCategories = [
    PRODUCT CARD
 ========================================================= */
 
-const ProductCard = ({ product, isLiked, onWishlist }) => {
+const ProductCard = ({ product }) => {
   return (
     <div className="group min-w-0">
       <div className="relative overflow-hidden bg-[#ded5c8] aspect-[4/5]">
-        <Link
-          to={`/product/${product.id}`}
-          className="block w-full h-full"
-        >
-          <img
-            src={product.image}
-            alt={product.name}
-            className="
-              w-full
-              h-full
-              object-cover
-              transition-transform
-              duration-700
-              group-hover:scale-[1.035]
-            "
-          />
-        </Link>
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"
+        />
 
         {product.badge && (
-          <span
-            className="
-              absolute
-              top-3
-              left-3
-              sm:top-4
-              sm:left-4
-
-              bg-[#f7f2e9]
-
-              px-3
-              py-2
-
-              text-[8px]
-              sm:text-[9px]
-
-              font-bold
-              tracking-[0.18em]
-
-              z-10
-            "
-          >
+          <span className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-[#f7f2e9] px-3 py-2 text-[8px] sm:text-[9px] font-bold tracking-[0.18em] z-10">
             {product.badge}
           </span>
         )}
-
-        {/* WISHLIST */}
-
-        <button
-          type="button"
-          aria-label={
-            isLiked
-              ? `Remove ${product.name} from wishlist`
-              : `Add ${product.name} to wishlist`
-          }
-          onClick={() => onWishlist(product.id)}
-          className={`
-            absolute
-            top-3
-            right-3
-            sm:top-4
-            sm:right-4
-
-            z-20
-
-            w-9
-            h-9
-            sm:w-10
-            sm:h-10
-
-            rounded-full
-
-            flex
-            items-center
-            justify-center
-
-            border
-
-            transition-all
-            duration-300
-
-            ${
-              isLiked
-                ? "bg-[#171714] border-[#171714] text-white"
-                : "bg-[#f7f2e9]/95 border-[#d7c9b5] text-[#171714] hover:bg-[#171714] hover:text-white"
-            }
-          `}
-        >
-          <FiHeart
-            size={16}
-            className={isLiked ? "fill-current" : ""}
-          />
-        </button>
-
-        {/* VIEW PRODUCT */}
-
-        <Link
-          to={`/product/${product.id}`}
-          className="
-            absolute
-            inset-x-0
-            bottom-0
-
-            translate-y-full
-            group-hover:translate-y-0
-
-            transition-transform
-            duration-300
-
-            hidden
-            lg:block
-          "
-        >
-          <div
-            className="
-              bg-[#151513]
-              text-white
-
-              px-5
-              py-4
-
-              flex
-              items-center
-              justify-between
-            "
-          >
-            <span
-              className="
-                text-[9px]
-                font-semibold
-                tracking-[0.2em]
-              "
-            >
-              VIEW PRODUCT
-            </span>
-
-            <FiArrowRight
-              size={14}
-              className="text-[#d58a29]"
-            />
-          </div>
-        </Link>
       </div>
 
-      {/* PRODUCT INFO */}
-
-      <div
-        className="
-          pt-3
-          sm:pt-4
-          pb-4
-
-          border-b
-          border-[#cfc4b4]
-        "
-      >
-        <p
-          className="
-            text-[#b66d17]
-
-            text-[8px]
-            sm:text-[9px]
-
-            tracking-[0.2em]
-            font-semibold
-            uppercase
-
-            mb-2
-          "
-        >
+      <div className="pt-3 sm:pt-4 pb-4 border-b border-[#cfc4b4]">
+        <p className="text-[#b66d17] text-[8px] sm:text-[9px] tracking-[0.2em] font-semibold uppercase mb-2">
           {product.category}
         </p>
 
         <div className="flex items-start justify-between gap-3">
-          <Link
-            to={`/product/${product.id}`}
-            className="
-              font-serif
-
-              text-[16px]
-              sm:text-[19px]
-              lg:text-[20px]
-
-              leading-tight
-
-              hover:text-[#bd7119]
-              transition-colors
-            "
-          >
+          <h3 className="font-serif text-[16px] sm:text-[19px] lg:text-[20px] leading-tight">
             {product.name}
-          </Link>
+          </h3>
 
-          <span
-            className="
-              font-semibold
-
-              text-[11px]
-              sm:text-[12px]
-
-              whitespace-nowrap
-            "
-          >
+          <span className="font-semibold text-[11px] sm:text-[12px] whitespace-nowrap">
             ₹{product.price.toLocaleString("en-IN")}
           </span>
         </div>
@@ -420,38 +242,6 @@ const Shop = () => {
 
   const [visibleCount, setVisibleCount] = useState(4);
 
-  const [wishlist, setWishlist] = useState(() => {
-    try {
-      return (
-        JSON.parse(
-          localStorage.getItem("karonWishlist")
-        ) || []
-      );
-    } catch {
-      return [];
-    }
-  });
-
-  /* ================= WISHLIST ================= */
-
-  const toggleWishlist = (productId) => {
-    setWishlist((current) => {
-      const updated = current.includes(productId)
-        ? current.filter((id) => id !== productId)
-        : [...current, productId];
-
-      localStorage.setItem(
-        "karonWishlist",
-        JSON.stringify(updated)
-      );
-
-      window.dispatchEvent(
-        new Event("wishlistUpdated")
-      );
-
-      return updated;
-    });
-  };
 
   /* ================= FILTER ================= */
 
@@ -823,10 +613,6 @@ const Shop = () => {
                 <ProductCard
                   key={product.id}
                   product={product}
-                  isLiked={wishlist.includes(
-                    product.id
-                  )}
-                  onWishlist={toggleWishlist}
                 />
               ))}
           </div>
@@ -1007,11 +793,7 @@ const Shop = () => {
                     relative
                   "
                 >
-                  <Link
-                    to={`/product/${product.id}`}
-                    className="block w-full h-full"
-                  >
-                    <img
+                  <img
                       src={product.image}
                       alt={product.name}
                       className="
@@ -1025,7 +807,6 @@ const Shop = () => {
                         duration-700
                       "
                     />
-                  </Link>
 
                   <span
                     className="
@@ -1046,50 +827,6 @@ const Shop = () => {
                   >
                     BESTSELLER
                   </span>
-
-                  <button
-                    type="button"
-                    onClick={() =>
-                      toggleWishlist(product.id)
-                    }
-                    className={`
-                      absolute
-                      top-4
-                      right-4
-
-                      w-10
-                      h-10
-
-                      rounded-full
-
-                      flex
-                      items-center
-                      justify-center
-
-                      border
-
-                      transition
-
-                      ${
-                        wishlist.includes(
-                          product.id
-                        )
-                          ? "bg-[#171714] text-white border-[#171714]"
-                          : "bg-[#f5f0e8] text-[#171714] border-white/40"
-                      }
-                    `}
-                  >
-                    <FiHeart
-                      size={16}
-                      className={
-                        wishlist.includes(
-                          product.id
-                        )
-                          ? "fill-current"
-                          : ""
-                      }
-                    />
-                  </button>
                 </div>
 
                 <div className="pt-3">
@@ -1114,19 +851,16 @@ const Shop = () => {
                       gap-4
                     "
                   >
-                    <Link
-                      to={`/product/${product.id}`}
-                      className="
+                    <h3 className="
                         font-serif
                         text-[19px]
 
                         hover:text-[#d68a28]
 
                         transition
-                      "
-                    >
+                      ">
                       {product.name}
-                    </Link>
+                    </h3>
 
                     <span
                       className="
@@ -1512,10 +1246,6 @@ const Shop = () => {
                 <ProductCard
                   key={product.id}
                   product={product}
-                  isLiked={wishlist.includes(
-                    product.id
-                  )}
-                  onWishlist={toggleWishlist}
                 />
               )
             )}

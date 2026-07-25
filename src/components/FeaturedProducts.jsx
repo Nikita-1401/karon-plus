@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   FiArrowUpRight,
-  FiHeart,
   FiEye,
   FiX,
 } from "react-icons/fi";
@@ -53,24 +52,42 @@ const FeaturedProducts = () => {
     <>
       <section
         id="shop"
-        className="bg-[#fffdf9] px-5 py-12 md:px-8 md:py-14 lg:px-10 lg:py-16"
+        className="
+          bg-[#fffdf9]
+          px-5
+          py-5
+          md:px-8
+          md:py-5
+          lg:px-10
+          lg:py-4
+        "
       >
         <div className="mx-auto max-w-[1450px]">
+
           {/* HEADER */}
-          <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+          <div className="
+            mb-4
+            flex
+            flex-col
+            gap-3
+            md:flex-row
+            md:items-end
+            md:justify-between
+            lg:mb-4
+          ">
             <div>
-              <p className="mb-2 text-[9px] font-semibold uppercase tracking-[0.4em] text-[#c99142]">
+              <p className="mb-1.5 text-[9px] font-semibold uppercase tracking-[0.4em] text-[#c99142]">
                 Curated For You
               </p>
 
-              <h2 className="font-serif text-[30px] leading-tight text-[#171717] md:text-[38px] lg:text-[42px]">
+              <h2 className="font-serif text-[30px] leading-none text-[#171717] md:text-[36px] lg:text-[38px]">
                 The Karon{" "}
                 <span className="italic text-[#c99142]">
                   Edit
                 </span>
               </h2>
 
-              <p className="mt-3 max-w-[540px] text-[13px] leading-6 text-[#777]">
+              <p className="mt-2 max-w-[540px] text-[12px] leading-5 text-[#777]">
                 A refined selection of our signature shirts, designed for
                 effortless style and everyday distinction.
               </p>
@@ -80,11 +97,18 @@ const FeaturedProducts = () => {
             <Link
               to="/shop"
               className="
-                group flex w-fit items-center gap-3
-                border-b border-[#222]
+                group
+                flex
+                w-fit
+                items-center
+                gap-3
+                border-b
+                border-[#222]
                 pb-2
-                text-[9px] font-semibold
-                uppercase tracking-[0.22em]
+                text-[9px]
+                font-semibold
+                uppercase
+                tracking-[0.22em]
                 text-[#222]
               "
             >
@@ -98,12 +122,22 @@ const FeaturedProducts = () => {
           </div>
 
           {/* PRODUCTS */}
-          <div className="grid grid-cols-1 gap-x-4 gap-y-9 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-x-4 gap-y-7 sm:grid-cols-2 lg:grid-cols-4">
             {products.map((product) => (
               <article key={product.id} className="group">
+
                 {/* IMAGE */}
                 <div className="relative overflow-hidden bg-[#f2ede6]">
-                  <div className="aspect-[4/5] overflow-hidden">
+
+                  <div
+                    className="
+                      h-[350px]
+                      overflow-hidden
+                      sm:h-[360px]
+                      lg:h-[315px]
+                      xl:h-[325px]
+                    "
+                  >
                     <img
                       src={product.image}
                       alt={product.name}
@@ -111,6 +145,7 @@ const FeaturedProducts = () => {
                         h-full
                         w-full
                         object-cover
+                        object-center
                         transition-transform
                         duration-700
                         ease-out
@@ -122,9 +157,12 @@ const FeaturedProducts = () => {
                   {/* TAG */}
                   <span
                     className="
-                      absolute left-4 top-4
+                      absolute
+                      left-4
+                      top-4
                       bg-[#fffdf9]
-                      px-3 py-2
+                      px-3
+                      py-2
                       text-[8px]
                       font-bold
                       tracking-[0.18em]
@@ -134,36 +172,19 @@ const FeaturedProducts = () => {
                     {product.tag}
                   </span>
 
-                  {/* HEART */}
-                  <button
-                    type="button"
-                    aria-label={`Add ${product.name} to wishlist`}
-                    className="
-                      absolute right-4 top-4
-                      flex h-9 w-9
-                      items-center justify-center
-                      rounded-full
-                      bg-white
-                      text-[#111]
-                      shadow-sm
-                      transition
-                      duration-300
-                      hover:bg-[#c99142]
-                      hover:text-white
-                    "
-                  >
-                    <FiHeart size={16} />
-                  </button>
-
                   {/* QUICK VIEW */}
                   <button
                     type="button"
                     onClick={() => setQuickViewProduct(product)}
                     className="
-                      absolute bottom-0 left-0
-                      flex w-full
+                      absolute
+                      bottom-0
+                      left-0
+                      flex
+                      w-full
                       translate-y-0
-                      items-center justify-center
+                      items-center
+                      justify-center
                       gap-2
                       bg-[#171717]/95
                       py-3.5
@@ -176,7 +197,7 @@ const FeaturedProducts = () => {
                       duration-300
 
                       lg:translate-y-full
-                      lg:py-4
+                      lg:py-3
                       lg:group-hover:translate-y-0
                     "
                   >
@@ -186,28 +207,30 @@ const FeaturedProducts = () => {
                 </div>
 
                 {/* PRODUCT INFO */}
-                <div className="pt-4">
+                <div className="pt-2.5">
                   <p className="mb-1 text-[8px] font-semibold uppercase tracking-[0.25em] text-[#b9853d]">
                     {product.category}
                   </p>
 
                   <div className="flex items-start justify-between gap-3">
-                    <h3 className="font-serif text-[19px] text-[#191919] md:text-[20px]">
+                    <h3 className="font-serif text-[18px] leading-tight text-[#191919]">
                       {product.name}
                     </h3>
 
-                    <p className="whitespace-nowrap text-[13px] font-semibold text-[#222]">
+                    <p className="whitespace-nowrap text-[12px] font-semibold text-[#222]">
                       {product.price}
                     </p>
                   </div>
 
-                  <div className="mt-3 h-px w-full bg-[#e5ded4]">
+                  <div className="mt-2.5 h-px w-full bg-[#e5ded4]">
                     <div className="h-px w-0 bg-[#c99142] transition-all duration-500 group-hover:w-full" />
                   </div>
                 </div>
+
               </article>
             ))}
           </div>
+
         </div>
       </section>
 
@@ -236,6 +259,7 @@ const FeaturedProducts = () => {
             "
             onClick={(e) => e.stopPropagation()}
           >
+
             {/* CLOSE */}
             <button
               type="button"
@@ -260,6 +284,7 @@ const FeaturedProducts = () => {
             </button>
 
             <div className="grid md:grid-cols-2">
+
               {/* IMAGE */}
               <div className="bg-[#eee6db]">
                 <img
@@ -277,6 +302,7 @@ const FeaturedProducts = () => {
 
               {/* DETAILS */}
               <div className="flex flex-col justify-center p-5 sm:p-7 md:p-9">
+
                 <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.25em] text-[#b9853d] md:mb-3">
                   {quickViewProduct.category}
                 </p>
@@ -327,30 +353,9 @@ const FeaturedProducts = () => {
                   </div>
                 </div>
 
-                {/* VIEW PRODUCT */}
-                <Link
-                  to={`/product/${quickViewProduct.id}`}
-                  onClick={closeQuickView}
-                  className="
-                    mt-5
-                    flex h-11 w-full
-                    items-center justify-center
-                    bg-[#171717]
-                    text-[9px]
-                    font-bold
-                    uppercase
-                    tracking-[0.2em]
-                    text-white
-                    transition
-                    hover:bg-[#c99142]
-                    md:mt-7
-                    md:h-12
-                  "
-                >
-                  VIEW PRODUCT
-                </Link>
               </div>
             </div>
+
           </div>
         </div>
       )}

@@ -3,11 +3,9 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   FiArrowLeft,
   FiHeart,
-  FiShoppingBag,
   FiMinus,
   FiPlus,
   FiX,
-  FiCheck,
 } from "react-icons/fi";
 
 const products = [
@@ -121,8 +119,6 @@ const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const [liked, setLiked] = useState(false);
   const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
-  const [added, setAdded] = useState(false);
-  const [error, setError] = useState("");
 
   useEffect(() => {
     if (!product) return;
@@ -167,59 +163,6 @@ const ProductDetails = () => {
     setLiked(updated.includes(product.id));
 
     window.dispatchEvent(new Event("wishlistUpdated"));
-  };
-
-  const addToBag = () => {
-    if (!selectedSize) {
-      setError("Please select a size.");
-      return;
-    }
-
-    setError("");
-
-    let cart = [];
-
-    try {
-      cart =
-        JSON.parse(localStorage.getItem("karonCart")) || [];
-    } catch {
-      cart = [];
-    }
-
-    const cartItem = {
-      id: product.id,
-      name: product.name,
-      image: product.image,
-      category: product.category,
-      price: product.price,
-      size: selectedSize,
-      quantity,
-    };
-
-    const existingIndex = cart.findIndex(
-      (item) =>
-        item.id === product.id &&
-        item.size === selectedSize
-    );
-
-    if (existingIndex >= 0) {
-      cart[existingIndex].quantity += quantity;
-    } else {
-      cart.push(cartItem);
-    }
-
-    localStorage.setItem(
-      "karonCart",
-      JSON.stringify(cart)
-    );
-
-    window.dispatchEvent(new Event("cartUpdated"));
-
-    setAdded(true);
-
-    setTimeout(() => {
-      setAdded(false);
-    }, 1600);
   };
 
   return (
@@ -294,6 +237,7 @@ const ProductDetails = () => {
                 <button
                   type="button"
                   onClick={toggleWishlist}
+                  aria-label="Add to wishlist"
                   className={`w-8 h-8 rounded-full border flex items-center justify-center transition ${
                     liked
                       ? "bg-[#c77b20] border-[#c77b20] text-white"
@@ -312,9 +256,10 @@ const ProductDetails = () => {
                 {product.description}
               </p>
 
-              {/* SIZE + QUANTITY SIDE BY SIDE */}
+              {/* SIZE + QUANTITY */}
               <div className="grid sm:grid-cols-[1fr_auto] gap-4 mt-3">
 
+                {/* SIZE */}
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
                     <span className="text-[7px] font-bold tracking-[0.18em]">
@@ -322,6 +267,7 @@ const ProductDetails = () => {
                     </span>
 
                     <button
+                      type="button"
                       onClick={() => setSizeGuideOpen(true)}
                       className="text-[7px] border-b border-[#171714]"
                     >
@@ -332,15 +278,13 @@ const ProductDetails = () => {
                   <div className="flex gap-1.5">
                     {["S", "M", "L", "XL"].map((size) => (
                       <button
+                        type="button"
                         key={size}
-                        onClick={() => {
-                          setSelectedSize(size);
-                          setError("");
-                        }}
-                        className={`w-9 h-8 border text-[8px] ${
+                        onClick={() => setSelectedSize(size)}
+                        className={`w-9 h-8 border text-[8px] transition ${
                           selectedSize === size
                             ? "bg-[#171714] text-white border-[#171714]"
-                            : "border-[#bfb19e]"
+                            : "border-[#bfb19e] hover:border-[#171714]"
                         }`}
                       >
                         {size}
@@ -349,6 +293,7 @@ const ProductDetails = () => {
                   </div>
                 </div>
 
+                {/* QUANTITY */}
                 <div>
                   <span className="block text-[7px] font-bold tracking-[0.18em] mb-1.5">
                     QUANTITY
@@ -356,6 +301,7 @@ const ProductDetails = () => {
 
                   <div className="h-8 w-[100px] border border-[#bfb19e] flex items-center">
                     <button
+                      type="button"
                       onClick={() =>
                         setQuantity((prev) =>
                           Math.max(1, prev - 1)
@@ -371,6 +317,7 @@ const ProductDetails = () => {
                     </span>
 
                     <button
+                      type="button"
                       onClick={() =>
                         setQuantity((prev) => prev + 1)
                       }
@@ -382,54 +329,8 @@ const ProductDetails = () => {
                 </div>
               </div>
 
-              {error && (
-                <p className="text-[8px] text-[#a95128] mt-2">
-                  {error}
-                </p>
-              )}
-
-              {/* ADD TO BAG */}
-              <div className="flex gap-2 mt-3">
-                <button
-                  type="button"
-                  onClick={addToBag}
-                  className={`flex-1 h-10 text-white flex items-center justify-center gap-2 text-[8px] font-bold tracking-[0.17em] transition ${
-                    added
-                      ? "bg-[#9a6b31]"
-                      : "bg-[#171714] hover:bg-[#bd741c]"
-                  }`}
-                >
-                  {added ? (
-                    <>
-                      <FiCheck size={12} />
-                      ADDED TO BAG
-                    </>
-                  ) : (
-                    <>
-                      <FiShoppingBag size={12} />
-                      ADD TO BAG
-                    </>
-                  )}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={toggleWishlist}
-                  className={`w-10 h-10 border flex items-center justify-center ${
-                    liked
-                      ? "bg-[#c77b20] border-[#c77b20] text-white"
-                      : "border-[#171714]"
-                  }`}
-                >
-                  <FiHeart
-                    size={13}
-                    className={liked ? "fill-current" : ""}
-                  />
-                </button>
-              </div>
-
               {/* DETAILS */}
-              <div className="mt-3 border-t border-[#d1c5b4]">
+              <div className="mt-4 border-t border-[#d1c5b4]">
                 {[
                   ["FABRIC", product.fabric],
                   ["FIT", product.fit],
@@ -449,6 +350,7 @@ const ProductDetails = () => {
                   </div>
                 ))}
               </div>
+
             </div>
           </div>
         </div>
@@ -465,6 +367,7 @@ const ProductDetails = () => {
             className="relative bg-[#f4efe7] w-full max-w-[390px] p-5"
           >
             <button
+              type="button"
               onClick={() => setSizeGuideOpen(false)}
               className="absolute top-4 right-4 w-7 h-7 border rounded-full flex items-center justify-center"
             >
@@ -496,13 +399,16 @@ const ProductDetails = () => {
                   }`}
                 >
                   {row.map((item) => (
-                    <span key={item}>{item}</span>
+                    <span key={item}>
+                      {item}
+                    </span>
                   ))}
                 </div>
               ))}
             </div>
 
             <button
+              type="button"
               onClick={() => setSizeGuideOpen(false)}
               className="w-full h-9 mt-4 bg-[#171714] text-white text-[8px] tracking-[0.18em]"
             >
@@ -511,6 +417,7 @@ const ProductDetails = () => {
           </div>
         </div>
       )}
+
     </main>
   );
 };

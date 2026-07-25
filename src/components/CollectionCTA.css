@@ -4,7 +4,7 @@
 
 .wardrobe-section {
   width: 100%;
-  padding: 22px 2.2% 26px;
+  padding: 14px 2.2% 16px;
   background: #eee8de;
   overflow: hidden;
   box-sizing: border-box;
@@ -15,7 +15,7 @@
 .wardrobe-container {
   width: 100%;
   max-width: 1220px;
-  height: 525px;
+  height: 440px;
   margin: 0 auto;
 
   display: grid;
@@ -88,7 +88,6 @@
   z-index: 3;
 
   margin: 0;
-
   color: #ffffff;
 
   font-family: Georgia, "Times New Roman", serif;
@@ -145,7 +144,7 @@
   flex-direction: column;
   justify-content: center;
 
-  padding: 42px 50px;
+  padding: 28px 50px;
 
   background: #171715;
   color: #ffffff;
@@ -161,7 +160,7 @@
 
   gap: 13px;
 
-  margin: 0 0 17px;
+  margin: 0 0 12px;
 }
 
 .wardrobe-eyebrow > span {
@@ -191,7 +190,7 @@
   color: #ffffff;
 
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(44px, 3.7vw, 53px);
+  font-size: clamp(40px, 3.4vw, 48px);
   font-weight: 400;
 
   line-height: 0.96;
@@ -213,12 +212,12 @@
   width: 100%;
   max-width: 510px;
 
-  margin: 23px 0 25px;
+  margin: 18px 0 19px;
 
   color: rgba(255, 255, 255, 0.72);
 
-  font-size: 11px;
-  line-height: 1.75;
+  font-size: 10px;
+  line-height: 1.65;
 }
 
 /* =========================================
@@ -236,7 +235,7 @@
 }
 
 .wardrobe-category {
-  min-height: 74px;
+  min-height: 60px;
 
   display: flex;
   align-items: center;
@@ -244,7 +243,7 @@
 
   gap: 15px;
 
-  padding: 13px 18px;
+  padding: 10px 18px;
 
   color: #ffffff;
   background: #1b1b18;
@@ -264,7 +263,7 @@
 .wardrobe-category div > span {
   display: block;
 
-  margin-bottom: 7px;
+  margin-bottom: 5px;
 
   color: #dda044;
 
@@ -279,7 +278,7 @@
   color: inherit;
 
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
 }
 
@@ -320,8 +319,8 @@
   align-items: center;
   justify-content: space-between;
 
-  margin-top: 25px;
-  padding-bottom: 8px;
+  margin-top: 17px;
+  padding-bottom: 7px;
 
   color: #ffffff;
 
@@ -355,7 +354,7 @@
 .wardrobe-footer-line {
   width: 100%;
   max-width: 1220px;
-  height: 44px;
+  height: 38px;
 
   margin: 0 auto;
 
@@ -398,31 +397,31 @@
 
 @media (max-width: 1200px) {
   .wardrobe-section {
-    padding: 22px 2.5% 26px;
+    padding: 14px 2.5% 16px;
   }
 
   .wardrobe-container {
-    height: 500px;
+    height: 430px;
   }
 
   .wardrobe-content {
-    padding: 37px 40px;
+    padding: 26px 40px;
   }
 
   .wardrobe-content h2 {
-    font-size: 47px;
+    font-size: 43px;
   }
 
   .wardrobe-description {
-    margin: 19px 0 22px;
+    margin: 15px 0 17px;
   }
 
   .wardrobe-category {
-    min-height: 68px;
+    min-height: 58px;
   }
 
   .wardrobe-main-link {
-    margin-top: 20px;
+    margin-top: 15px;
   }
 }
 
@@ -432,32 +431,32 @@
 
 @media (max-width: 950px) {
   .wardrobe-section {
-    padding: 22px 20px 25px;
+    padding: 16px 20px 18px;
   }
 
   .wardrobe-container {
-    height: 470px;
+    height: 420px;
     grid-template-columns: 44% 56%;
   }
 
   .wardrobe-content {
-    padding: 31px 27px;
+    padding: 25px 27px;
   }
 
   .wardrobe-content h2 {
-    font-size: 40px;
+    font-size: 38px;
   }
 
   .wardrobe-description {
-    margin: 16px 0 19px;
+    margin: 14px 0 16px;
 
     font-size: 10px;
     line-height: 1.6;
   }
 
   .wardrobe-category {
-    min-height: 63px;
-    padding: 10px 13px;
+    min-height: 56px;
+    padding: 9px 13px;
   }
 
   .wardrobe-category h3 {
@@ -465,7 +464,7 @@
   }
 
   .wardrobe-main-link {
-    margin-top: 17px;
+    margin-top: 14px;
   }
 }
 
