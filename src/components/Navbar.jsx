@@ -438,7 +438,7 @@ const Navbar = () => {
                   </NavLink>
 
                   <NavLink
-                    to="/shop/premium"
+                    to="/shirts/premium"
                     className="block px-5 py-3 text-[13px] hover:bg-[#f5efe6] hover:text-[#B98949]"
                   >
                     Premium Collection
@@ -483,10 +483,10 @@ const Navbar = () => {
                 <div className="w-[210px] bg-[#fffdf9] border border-black/10 shadow-xl py-3">
 
                   {[
-                    ["Formal Shirts", "/shop/formal"],
-                    ["Casual Shirts", "/shop/casual"],
-                    ["Printed Shirts", "/shop/printed"],
-                    ["Premium Shirts", "/shop/premium"],
+                    ["Formal Shirts", "/shirts/formal"],
+                    ["Casual Shirts", "/shirts/casual"],
+                    ["Printed Shirts", "/shirts/printed"],
+                    ["Premium Shirts", "/shirts/premium"],
                   ].map(([label, path]) => (
                     <NavLink
                       key={label}
@@ -892,28 +892,28 @@ const Navbar = () => {
                 <div className="pb-4 pl-4 grid grid-cols-2 gap-3">
 
                   <NavLink
-                    to="/shop/formal"
+                    to="/shirts/formal"
                     className="text-[13px] text-black/65"
                   >
                     Formal
                   </NavLink>
 
                   <NavLink
-                    to="/shop/casual"
+                    to="/shirts/casual"
                     className="text-[13px] text-black/65"
                   >
                     Casual
                   </NavLink>
 
                   <NavLink
-                    to="/shop/printed"
+                    to="/shirts/printed"
                     className="text-[13px] text-black/65"
                   >
                     Printed
                   </NavLink>
 
                   <NavLink
-                    to="/shop/premium"
+                    to="/shirts/premium"
                     className="text-[13px] text-black/65"
                   >
                     Premium
