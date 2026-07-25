@@ -56,6 +56,7 @@ const FeaturedProducts = () => {
         className="bg-[#fffdf9] px-5 py-12 md:px-8 md:py-14 lg:px-10 lg:py-16"
       >
         <div className="mx-auto max-w-[1450px]">
+
           {/* HEADER */}
           <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <div>
@@ -100,8 +101,10 @@ const FeaturedProducts = () => {
           <div className="grid grid-cols-1 gap-x-4 gap-y-9 sm:grid-cols-2 lg:grid-cols-4">
             {products.map((product) => (
               <article key={product.id} className="group">
+
                 {/* IMAGE */}
                 <div className="relative overflow-hidden bg-[#f2ede6]">
+
                   <div className="aspect-[4/5] overflow-hidden">
                     <img
                       src={product.image}
@@ -161,11 +164,11 @@ const FeaturedProducts = () => {
                     className="
                       absolute bottom-0 left-0
                       flex w-full
-                      translate-y-full
+                      translate-y-0
                       items-center justify-center
                       gap-2
                       bg-[#171717]/95
-                      py-4
+                      py-3.5
                       text-[9px]
                       font-semibold
                       uppercase
@@ -173,21 +176,27 @@ const FeaturedProducts = () => {
                       text-white
                       transition-transform
                       duration-300
-                      group-hover:translate-y-0
+
+                      lg:translate-y-full
+                      lg:py-4
+                      lg:group-hover:translate-y-0
                     "
                   >
                     <FiEye size={15} />
                     Quick View
                   </button>
+
                 </div>
 
                 {/* PRODUCT INFO */}
                 <div className="pt-4">
+
                   <p className="mb-1 text-[8px] font-semibold uppercase tracking-[0.25em] text-[#b9853d]">
                     {product.category}
                   </p>
 
                   <div className="flex items-start justify-between gap-3">
+
                     <h3 className="font-serif text-[19px] text-[#191919] md:text-[20px]">
                       {product.name}
                     </h3>
@@ -195,11 +204,13 @@ const FeaturedProducts = () => {
                     <p className="whitespace-nowrap text-[13px] font-semibold text-[#222]">
                       {product.price}
                     </p>
+
                   </div>
 
                   <div className="mt-3 h-px w-full bg-[#e5ded4]">
                     <div className="h-px w-0 bg-[#c99142] transition-all duration-500 group-hover:w-full" />
                   </div>
+
                 </div>
               </article>
             ))}
@@ -207,34 +218,39 @@ const FeaturedProducts = () => {
         </div>
       </section>
 
-      {/* QUICK VIEW MODAL */}
+      {/* ================= QUICK VIEW MODAL ================= */}
       {quickViewProduct && (
         <div
           className="
             fixed inset-0 z-[9999]
             flex items-center justify-center
             bg-black/55
-            p-4
+            p-3
+            sm:p-4
           "
           onClick={closeQuickView}
         >
           <div
             className="
               relative
-              w-full max-w-[760px]
-              overflow-hidden
+              w-full
+              max-w-[760px]
+              max-h-[92vh]
+              overflow-y-auto
               bg-[#fffdf9]
               shadow-2xl
+              md:overflow-hidden
             "
             onClick={(e) => e.stopPropagation()}
           >
+
             {/* CLOSE */}
             <button
               type="button"
               onClick={closeQuickView}
               aria-label="Close quick view"
               className="
-                absolute right-4 top-4 z-20
+                absolute right-3 top-3 z-20
                 flex h-10 w-10
                 items-center justify-center
                 rounded-full
@@ -244,50 +260,54 @@ const FeaturedProducts = () => {
                 transition
                 hover:bg-[#171717]
                 hover:text-white
+                sm:right-4
+                sm:top-4
               "
             >
               <FiX size={19} />
             </button>
 
             <div className="grid md:grid-cols-2">
+
               {/* IMAGE */}
               <div className="bg-[#eee6db]">
                 <img
                   src={quickViewProduct.image}
                   alt={quickViewProduct.name}
                   className="
-                    h-[340px]
+                    h-[280px]
                     w-full
                     object-cover
-                    sm:h-[400px]
+                    sm:h-[340px]
                     md:h-[460px]
                   "
                 />
               </div>
 
               {/* DETAILS */}
-              <div className="flex flex-col justify-center p-7 sm:p-9">
-                <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.25em] text-[#b9853d]">
+              <div className="flex flex-col justify-center p-5 sm:p-7 md:p-9">
+
+                <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.25em] text-[#b9853d] md:mb-3">
                   {quickViewProduct.category}
                 </p>
 
-                <h2 className="font-serif text-[30px] leading-tight text-[#171717]">
+                <h2 className="font-serif text-[26px] leading-tight text-[#171717] sm:text-[30px]">
                   {quickViewProduct.name}
                 </h2>
 
-                <p className="mt-4 text-[18px] font-semibold text-[#171717]">
+                <p className="mt-3 text-[17px] font-semibold text-[#171717] md:mt-4 md:text-[18px]">
                   {quickViewProduct.price}
                 </p>
 
-                <div className="my-6 h-px bg-[#ded5c9]" />
+                <div className="my-4 h-px bg-[#ded5c9] md:my-6" />
 
-                <p className="text-[13px] leading-6 text-[#70685e]">
+                <p className="text-[12px] leading-5 text-[#70685e] sm:text-[13px] sm:leading-6">
                   Refined craftsmanship, comfortable fabric and timeless
                   styling designed for effortless everyday wear.
                 </p>
 
                 {/* SIZES */}
-                <div className="mt-7">
+                <div className="mt-5 md:mt-7">
                   <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.2em]">
                     Available Sizes
                   </p>
@@ -298,7 +318,7 @@ const FeaturedProducts = () => {
                         key={size}
                         type="button"
                         className="
-                          flex h-10 w-10
+                          flex h-9 w-9
                           items-center justify-center
                           border border-[#cfc4b5]
                           text-[11px]
@@ -307,6 +327,8 @@ const FeaturedProducts = () => {
                           hover:border-[#171717]
                           hover:bg-[#171717]
                           hover:text-white
+                          sm:h-10
+                          sm:w-10
                         "
                       >
                         {size}
@@ -320,8 +342,8 @@ const FeaturedProducts = () => {
                   to={`/product/${quickViewProduct.id}`}
                   onClick={closeQuickView}
                   className="
-                    mt-7
-                    flex h-12 w-full
+                    mt-5
+                    flex h-11 w-full
                     items-center justify-center
                     bg-[#171717]
                     text-[9px]
@@ -331,10 +353,13 @@ const FeaturedProducts = () => {
                     text-white
                     transition
                     hover:bg-[#c99142]
+                    md:mt-7
+                    md:h-12
                   "
                 >
                   VIEW PRODUCT
                 </Link>
+
               </div>
             </div>
           </div>
