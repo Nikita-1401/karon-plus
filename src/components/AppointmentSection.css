@@ -1,0 +1,526 @@
+/* =========================================
+   APPOINTMENT WRAPPER
+========================================= */
+
+.appointment-wrapper {
+  width: 100%;
+  background: #f8f4ed;
+}
+
+
+/* =========================================
+   SECTION SEPARATOR
+   Testimonials aur Appointment ko
+   visually separate karta hai
+========================================= */
+
+.appointment-separator {
+  position: relative;
+  width: 100%;
+  height: 28px;
+  background: #f8f4ed;
+}
+
+.appointment-separator::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 1px;
+
+  background: #d8c9b5;
+}
+
+.appointment-separator span {
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+
+  width: 80px;
+  height: 2px;
+
+  background: #d99c3f;
+
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+
+/* =========================================
+   MAIN SECTION
+========================================= */
+
+.appointment-section {
+  position: relative;
+
+  width: 100%;
+  height: 550px;
+
+  display: flex;
+  align-items: center;
+
+  background-image: url("/appointment-banner.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  overflow: hidden;
+  color: #ffffff;
+}
+
+
+/* =========================================
+   OVERLAY
+========================================= */
+
+.appointment-overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(5, 5, 4, 0.86) 0%,
+      rgba(5, 5, 4, 0.72) 25%,
+      rgba(5, 5, 4, 0.38) 48%,
+      rgba(5, 5, 4, 0.10) 75%,
+      rgba(5, 5, 4, 0.05) 100%
+    );
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.appointment-content {
+  position: relative;
+  z-index: 3;
+
+  width: 100%;
+  max-width: 540px;
+
+  margin-left: 5.4%;
+}
+
+
+/* =========================================
+   TOP LABEL
+========================================= */
+
+.appointment-line {
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 22px;
+}
+
+.appointment-line > span {
+  width: 38px;
+  height: 1px;
+
+  background: #dda447;
+}
+
+.appointment-line p {
+  margin: 0;
+
+  color: #dda447;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 4px;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.appointment-content h2 {
+  margin: 0;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: clamp(50px, 4.5vw, 64px);
+  font-weight: 400;
+
+  line-height: 0.98;
+
+  letter-spacing: -1.5px;
+
+  color: #ffffff;
+}
+
+.appointment-content h2 em {
+  color: #dfa348;
+  font-weight: 400;
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.appointment-description {
+  max-width: 470px;
+
+  margin: 28px 0 0;
+
+  color: rgba(255, 255, 255, 0.88);
+
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.appointment-buttons {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  margin-top: 30px;
+}
+
+.appointment-buttons a {
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 24px;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  transition: all 0.3s ease;
+}
+
+.appointment-buttons a span {
+  margin-left: 28px;
+
+  font-size: 15px;
+
+  transition: transform 0.3s ease;
+}
+
+.appointment-buttons a:hover span {
+  transform: translate(3px, -3px);
+}
+
+
+/* PRIMARY */
+
+.appointment-primary {
+  min-width: 195px;
+
+  color: #ffffff;
+
+  background: #dda447;
+
+  border: 1px solid #dda447;
+}
+
+.appointment-primary:hover {
+  background: #c98e36;
+  border-color: #c98e36;
+}
+
+
+/* SECONDARY */
+
+.appointment-secondary {
+  min-width: 245px;
+
+  color: #ffffff;
+
+  background: rgba(0, 0, 0, 0.28);
+
+  border: 1px solid rgba(255, 255, 255, 0.38);
+
+  backdrop-filter: blur(2px);
+}
+
+.appointment-secondary:hover {
+  border-color: #dda447;
+
+  background: rgba(221, 164, 71, 0.12);
+}
+
+
+/* =========================================
+   DETAILS
+========================================= */
+
+.appointment-details {
+  width: 100%;
+  max-width: 530px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  margin-top: 36px;
+
+  padding-top: 16px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.appointment-details > div {
+  min-height: 45px;
+
+  padding: 0 18px;
+}
+
+.appointment-details > div:first-child {
+  padding-left: 0;
+}
+
+.appointment-details > div:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.appointment-details span {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #dda447;
+
+  font-size: 7px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+.appointment-details p {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 14px;
+}
+
+
+/* =========================================
+   RIGHT SIGNATURE
+========================================= */
+
+.appointment-signature {
+  position: absolute;
+
+  right: 5%;
+  bottom: 38px;
+
+  z-index: 3;
+
+  text-align: right;
+}
+
+.appointment-signature p {
+  margin: 0;
+
+  color: #dda447;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 21px;
+  font-style: italic;
+}
+
+.appointment-signature span {
+  display: block;
+
+  margin-top: 12px;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size: 7px;
+  font-weight: 700;
+
+  letter-spacing: 4px;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+  .appointment-separator {
+    height: 22px;
+  }
+
+  .appointment-section {
+    height: auto;
+    min-height: 540px;
+
+    background-position: 60% center;
+  }
+
+  .appointment-overlay {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.90) 0%,
+        rgba(0, 0, 0, 0.72) 48%,
+        rgba(0, 0, 0, 0.30) 100%
+      );
+  }
+
+  .appointment-content {
+    max-width: 520px;
+
+    margin-left: 6%;
+
+    padding: 55px 30px 55px 0;
+  }
+
+  .appointment-signature {
+    display: none;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 640px) {
+
+  .appointment-separator {
+    height: 18px;
+  }
+
+  .appointment-separator span {
+    width: 55px;
+  }
+
+  .appointment-section {
+    min-height: auto;
+
+    align-items: flex-start;
+
+    background-position: 63% center;
+  }
+
+  .appointment-overlay {
+    background: rgba(0, 0, 0, 0.72);
+  }
+
+  .appointment-content {
+    max-width: none;
+
+    margin-left: 0;
+
+    padding: 50px 24px 42px;
+  }
+
+  .appointment-line {
+    gap: 12px;
+
+    margin-bottom: 18px;
+  }
+
+  .appointment-line > span {
+    width: 28px;
+  }
+
+  .appointment-line p {
+    font-size: 7px;
+
+    letter-spacing: 3px;
+  }
+
+  .appointment-content h2 {
+    font-size: 43px;
+
+    line-height: 1;
+  }
+
+  .appointment-description {
+    max-width: 390px;
+
+    margin-top: 23px;
+
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+
+  /* BUTTONS */
+
+  .appointment-buttons {
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 10px;
+
+    margin-top: 26px;
+  }
+
+  .appointment-buttons a {
+    width: 100%;
+    min-width: 0;
+
+    height: 50px;
+  }
+
+
+  /* DETAILS */
+
+  .appointment-details {
+    grid-template-columns: 1fr;
+
+    margin-top: 30px;
+
+    padding-top: 10px;
+  }
+
+  .appointment-details > div {
+    min-height: auto;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 12px 0;
+
+    border-right: none !important;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .appointment-details > div:last-child {
+    border-bottom: none;
+  }
+
+  .appointment-details span {
+    min-width: 20px;
+
+    margin: 0;
+  }
+
+  .appointment-details p {
+    font-size: 13px;
+  }
+}
