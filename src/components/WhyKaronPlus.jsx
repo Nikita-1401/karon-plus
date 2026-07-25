@@ -35,7 +35,7 @@ const features = [
 
 const WhyKaronPlus = () => {
   return (
-    <section className="bg-[#f7f3ed] px-5 py-12 sm:px-8 lg:px-10 lg:py-14">
+    <section className="bg-[#f7f3ed] px-5 py-12 sm:px-8 lg:px-10 lg:py-14 font-['Nunito']">
       <div className="mx-auto max-w-[1450px]">
 
         <div className="grid overflow-hidden bg-[#181815] lg:grid-cols-[35%_65%]">
@@ -52,7 +52,7 @@ const WhyKaronPlus = () => {
                 </p>
               </div>
 
-              <h2 className="max-w-[390px] font-serif text-[34px] leading-[1.08] text-white sm:text-[40px] lg:text-[44px]">
+              <h2 className="font-['Nunito'] max-w-[390px] text-[34px] leading-[1.08] text-white sm:text-[40px] lg:text-[44px]">
                 More Than
                 <span className="block italic text-[#d39a46]">
                   Just a Shirt.
@@ -81,7 +81,7 @@ const WhyKaronPlus = () => {
               <div className="mt-3 h-px w-16 bg-[#d39a46]" />
             </div>
 
-            <span className="absolute bottom-5 right-7 font-serif text-[70px] leading-none text-white/[0.025] lg:text-[90px]">
+            <span className="absolute bottom-5 right-7 font-['Nunito'] text-[70px] leading-none text-white/[0.025] lg:text-[90px]">
               KP
             </span>
           </div>
@@ -125,7 +125,7 @@ const WhyKaronPlus = () => {
                       Karon Plus Standard
                     </p>
 
-                    <h3 className="font-serif text-[20px] text-white sm:text-[21px]">
+                    <h3 className="font-['Nunito'] text-[20px] text-white sm:text-[21px]">
                       {feature.title}
                     </h3>
 
@@ -145,7 +145,7 @@ const WhyKaronPlus = () => {
 
         {/* BOTTOM TEXT */}
         <div className="flex flex-col gap-2 border-x border-b border-[#ddd4c8] px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-serif text-[14px] italic text-[#625b52]">
+          <p className="font-['Nunito'] text-[14px] italic text-[#625b52]">
             Style that speaks. Comfort that lasts.
           </p>
 

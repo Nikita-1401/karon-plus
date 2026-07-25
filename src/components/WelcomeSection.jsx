@@ -1,6 +1,6 @@
 const WelcomeSection = () => {
   return (
-    <section className="bg-[#fffdf9] px-6 py-12 md:px-10 md:py-14 lg:px-14 lg:py-16">
+    <section className="bg-[#fffdf9] px-6 py-12 md:px-10 md:py-14 lg:px-14 lg:py-16 font-['Nunito']">
       <div className="mx-auto max-w-[1200px] text-center">
 
         {/* Small Heading */}
@@ -9,7 +9,7 @@ const WelcomeSection = () => {
         </p>
 
         {/* Main Heading */}
-        <h2 className="font-serif text-[30px] leading-tight text-[#181818] md:text-[38px] lg:text-[44px]">
+        <h2 className="font-['Nunito'] text-[30px] leading-tight text-[#181818] md:text-[38px] lg:text-[44px]">
           Premium Shirts for the{" "}
           <span className="italic text-[#c99142]">
             Modern Man

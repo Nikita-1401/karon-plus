@@ -34,7 +34,7 @@ const casualProducts = [
 
 const CasualShirts = () => {
   return (
-    <main className="bg-[#f4efe7] text-[#171714]">
+    <main className="bg-[#f4efe7] text-[#171714] font-['Nunito']">
       <section className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-7 pt-3 pb-3">
 
         {/* HEADER */}
@@ -59,7 +59,7 @@ const CasualShirts = () => {
               </div>
             </div>
 
-            <h1 className="font-serif text-[29px] sm:text-[32px] lg:text-[35px] leading-none">
+            <h1 className="font-['Nunito'] text-[29px] sm:text-[32px] lg:text-[35px] leading-none">
               The Everyday{" "}
               <span className="italic font-normal text-[#d17d1d]">
                 Edit.
@@ -136,7 +136,7 @@ const CasualShirts = () => {
 
                 </div>
 
-                <h3 className="mt-1 font-serif text-[17px] lg:text-[18px] leading-tight">
+                <h3 className="mt-1 font-['Nunito'] text-[17px] lg:text-[18px] leading-tight">
                   {product.name}
                 </h3>
 

@@ -27,6 +27,7 @@ import Blog from "./pages/Blog";
 import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import Account from "./pages/Account";
+import ProductDetails from "./pages/ProductDetails";
 
 // ================= SCROLL TO TOP =================
 const ScrollToTop = () => {
@@ -59,6 +60,12 @@ function App() {
 
         {/* ================= SHOP ================= */}
         <Route path="/shop" element={<Shop />} />
+
+        {/* ================= PRODUCT DETAILS ================= */}
+        <Route
+          path="/product/:id"
+          element={<ProductDetails />}
+        />
 
         {/* ================= SHIRTS MAIN PAGE ================= */}
         <Route path="/shirts" element={<CategoryPage />} />

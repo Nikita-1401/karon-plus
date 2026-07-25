@@ -33,13 +33,14 @@ const Contact = () => {
     placeholder:text-[#93887a]
     focus:border-[#171714]
     transition
+    font-['Nunito']
   `;
 
   const labelClass =
     "block text-[9px] font-bold tracking-[0.12em] mb-1";
 
   return (
-    <main className="bg-[#f4efe7] text-[#171714] lg:h-[calc(100vh-110px)] lg:overflow-hidden">
+    <main className="bg-[#f4efe7] text-[#171714] lg:h-[calc(100vh-110px)] lg:overflow-hidden font-['Nunito']">
 
       <section
         className="
@@ -78,7 +79,7 @@ const Contact = () => {
 
             <h1
               className="
-                font-serif
+                font-['Nunito']
                 text-[27px]
                 sm:text-[30px]
                 lg:text-[33px]
@@ -130,7 +131,7 @@ const Contact = () => {
                 Karon Plus Care
               </p>
 
-              <h2 className="font-serif text-[23px] lg:text-[25px] leading-[1.05] mt-1.5">
+              <h2 className="font-['Nunito'] text-[23px] lg:text-[25px] leading-[1.05] mt-1.5">
                 Here when
                 <br />
                 <span className="italic text-[#d58a29] font-normal">
@@ -198,7 +199,7 @@ const Contact = () => {
                 Send a Message
               </p>
 
-              <h2 className="font-serif text-[20px] lg:text-[22px] leading-none mt-1">
+              <h2 className="font-['Nunito'] text-[20px] lg:text-[22px] leading-none mt-1">
                 How can we help?
               </h2>
             </div>
@@ -294,6 +295,7 @@ const Contact = () => {
                     placeholder:text-[#93887a]
                     focus:border-[#171714]
                     transition
+                    font-['Nunito']
                   "
                 />
               </div>
@@ -313,6 +315,7 @@ const Contact = () => {
                   font-bold
                   tracking-[0.14em]
                   transition
+                  font-['Nunito']
                   ${
                     sent
                       ? "bg-[#9a6b31]"

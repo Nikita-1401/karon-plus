@@ -27,6 +27,7 @@ const CategorySection = () => {
   return (
     <section
       id="collection"
+      style={{ fontFamily: "'Nunito', sans-serif" }}
       className="bg-[#f7f3ed] px-5 py-4 md:px-8 md:py-5 lg:px-9 lg:py-4"
     >
       <div className="mx-auto max-w-[1450px]">
@@ -37,7 +38,7 @@ const CategorySection = () => {
             Discover Your Style
           </p>
 
-          <h2 className="font-serif text-[30px] leading-tight text-[#151515] md:text-[36px] lg:text-[40px]">
+          <h2 className="text-[30px] leading-tight text-[#151515] md:text-[36px] lg:text-[40px]">
             Shop by{" "}
             <span className="italic text-[#c99142]">
               Category
@@ -112,7 +113,7 @@ const CategorySection = () => {
                   {category.subtitle}
                 </p>
 
-                <h3 className="font-serif text-[25px] leading-[1.05] lg:text-[27px]">
+                <h3 className="text-[25px] leading-[1.05] lg:text-[27px]">
                   {category.title}
                 </h3>
 

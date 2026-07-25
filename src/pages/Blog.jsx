@@ -38,7 +38,7 @@ const stories = [
 
 const Blog = () => {
   return (
-    <main className="bg-[#f5f0e8] text-[#171714]">
+    <main className="bg-[#f5f0e8] text-[#171714] font-['Nunito']">
 
       {/* ================= HERO ================= */}
       <section className="px-5 pt-4 sm:px-7 lg:px-8">
@@ -57,7 +57,7 @@ const Blog = () => {
                 </p>
               </div>
 
-              <h1 className="max-w-[520px] font-serif text-[38px] leading-[0.98] sm:text-[44px] lg:text-[50px]">
+              <h1 className="max-w-[520px] font-['Nunito'] text-[38px] leading-[0.98] sm:text-[44px] lg:text-[50px]">
                 Dressing well,
                 <br />
                 <span className="italic text-[#c77b20]">
@@ -151,7 +151,7 @@ const Blog = () => {
                   The Karon Edit
                 </p>
 
-                <p className="mt-1 font-serif text-[17px]">
+                <p className="mt-1 font-['Nunito'] text-[17px]">
                   Style with distinction.
                 </p>
 
@@ -175,7 +175,7 @@ const Blog = () => {
                 From The Journal
               </p>
 
-              <h2 className="font-serif text-[30px] leading-none sm:text-[34px]">
+              <h2 className="font-['Nunito'] text-[30px] leading-none sm:text-[34px]">
                 Ideas for{" "}
                 <span className="italic text-[#c77b20]">
                   better dressing.
@@ -239,7 +239,7 @@ const Blog = () => {
                 <div className="flex flex-1 flex-col border-b border-[#d3c6b5] pb-3 pt-3">
 
                   <Link to={story.link}>
-                    <h3 className="font-serif text-[20px] leading-[1.1] transition-colors hover:text-[#b76c17]">
+                    <h3 className="font-['Nunito'] text-[20px] leading-[1.1] transition-colors hover:text-[#b76c17]">
                       {story.title}
                     </h3>
                   </Link>
@@ -293,7 +293,7 @@ const Blog = () => {
                 Karon Plus
               </p>
 
-              <h2 className="mt-1 font-serif text-[22px] leading-tight sm:text-[25px]">
+              <h2 className="mt-1 font-['Nunito'] text-[22px] leading-tight sm:text-[25px]">
                 Find your next{" "}
                 <span className="italic text-[#c77b20]">
                   signature shirt.

@@ -76,7 +76,7 @@ const NewArrivals = () => {
   const moreProducts = products.slice(3);
 
   return (
-    <main className="min-h-screen bg-[#f4efe7] text-[#171714]">
+    <main className="min-h-screen bg-[#f4efe7] text-[#171714] font-['Nunito']">
 
       {/* ================= TOP INTRO ================= */}
       <section className="border-b border-[#d6cbbb]">
@@ -100,7 +100,7 @@ const NewArrivals = () => {
                   <span className="w-5 h-px bg-[#c77718]" />
                 </div>
 
-                <h1 className="font-serif text-[25px] sm:text-[28px] leading-none mt-[2px]">
+                <h1 className="font-['Nunito'] text-[25px] sm:text-[28px] leading-none mt-[2px]">
                   Just{" "}
                   <span className="italic font-normal text-[#d27c19]">
                     Arrived.
@@ -144,7 +144,7 @@ const NewArrivals = () => {
               01 / NEW SEASON
             </p>
 
-            <h2 className="font-serif text-[20px] sm:text-[22px] leading-none mt-1">
+            <h2 className="font-['Nunito'] text-[20px] sm:text-[22px] leading-none mt-1">
               The New Drop
             </h2>
           </div>
@@ -228,7 +228,7 @@ const NewArrivals = () => {
                   </div>
 
                   <div className="mt-1">
-                    <h3 className="font-serif text-[16px] sm:text-[17px] lg:text-[18px] leading-tight">
+                    <h3 className="font-['Nunito'] text-[16px] sm:text-[17px] lg:text-[18px] leading-tight">
                       {product.name}
                     </h3>
                   </div>
@@ -251,7 +251,7 @@ const NewArrivals = () => {
               02 / FRESH PICKS
             </p>
 
-            <h2 className="font-serif text-[18px] sm:text-[20px] leading-none mt-1">
+            <h2 className="font-['Nunito'] text-[18px] sm:text-[20px] leading-none mt-1">
               Just Landed
             </h2>
           </div>
@@ -326,7 +326,7 @@ const NewArrivals = () => {
 
                 </div>
 
-                <h3 className="font-serif text-[14px] sm:text-[15px] leading-tight mt-1">
+                <h3 className="font-['Nunito'] text-[14px] sm:text-[15px] leading-tight mt-1">
                   {product.name}
                 </h3>
 

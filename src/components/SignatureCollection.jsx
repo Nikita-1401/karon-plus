@@ -4,7 +4,7 @@ const SignatureCollection = () => {
   return (
     <section
       id="signature"
-      className="overflow-hidden bg-[#171714] text-white"
+      className="overflow-hidden bg-[#171714] text-white font-['Nunito']"
     >
       <div className="mx-auto grid max-w-[1600px] lg:grid-cols-[42%_58%]">
 
@@ -12,7 +12,7 @@ const SignatureCollection = () => {
         <div className="relative flex items-center px-6 py-10 sm:px-10 md:px-14 lg:h-[515px] lg:px-16 lg:py-8 xl:px-20">
 
           {/* Decorative number */}
-          <span className="absolute right-8 top-6 hidden font-serif text-[90px] leading-none text-white/[0.025] lg:block">
+          <span className="absolute right-8 top-6 hidden font-['Nunito'] text-[90px] leading-none text-white/[0.025] lg:block">
             01
           </span>
 
@@ -28,7 +28,7 @@ const SignatureCollection = () => {
             </div>
 
             {/* Main heading */}
-            <h2 className="font-serif text-[40px] leading-[1.02] sm:text-[46px] md:text-[50px] lg:text-[52px]">
+            <h2 className="font-['Nunito'] text-[40px] leading-[1.02] sm:text-[46px] md:text-[50px] lg:text-[52px]">
               Designed Beyond
               <span className="mt-1 block italic text-[#d6a04d]">
                 Trends.
@@ -135,7 +135,7 @@ const SignatureCollection = () => {
                 Crafted Detail
               </p>
 
-              <p className="mt-1 font-serif text-[14px]">
+              <p className="mt-1 font-['Nunito'] text-[14px]">
                 Made with Precision
               </p>
             </div>
@@ -143,7 +143,7 @@ const SignatureCollection = () => {
 
           {/* Right text */}
           <div className="absolute bottom-7 right-6 text-right sm:right-8 lg:bottom-8 lg:right-10">
-            <p className="font-serif text-[20px] italic text-[#e0aa58] sm:text-[22px]">
+            <p className="font-['Nunito'] text-[20px] italic text-[#e0aa58] sm:text-[22px]">
               Style That Speaks
             </p>
 

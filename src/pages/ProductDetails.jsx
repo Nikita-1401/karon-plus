@@ -120,6 +120,19 @@ const ProductDetails = () => {
   const [liked, setLiked] = useState(false);
   const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
 
+  // BULK ORDER
+  const [bulkOrderOpen, setBulkOrderOpen] = useState(false);
+  const [bulkOrderSubmitted, setBulkOrderSubmitted] =
+    useState(false);
+
+  const [bulkForm, setBulkForm] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    quantity: 10,
+    message: "",
+  });
+
   useEffect(() => {
     if (!product) return;
 
@@ -135,7 +148,10 @@ const ProductDetails = () => {
 
   if (!product) {
     return (
-      <main className="min-h-[50vh] bg-[#f4efe7] flex items-center justify-center">
+      <main
+        className="min-h-[50vh] bg-[#f4efe7] flex items-center justify-center"
+        style={{ fontFamily: "'Nunito', sans-serif" }}
+      >
         <Link to="/shop">BACK TO SHOP</Link>
       </main>
     );
@@ -165,18 +181,49 @@ const ProductDetails = () => {
     window.dispatchEvent(new Event("wishlistUpdated"));
   };
 
-  return (
-    <main className="bg-[#f4efe7] text-[#171714]">
+  const handleBulkChange = (e) => {
+    const { name, value } = e.target;
 
+    setBulkForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const openBulkOrder = () => {
+    setBulkOrderSubmitted(false);
+
+    setBulkForm((prev) => ({
+      ...prev,
+      quantity: Math.max(10, quantity),
+    }));
+
+    setBulkOrderOpen(true);
+  };
+
+  const closeBulkOrder = () => {
+    setBulkOrderOpen(false);
+    setBulkOrderSubmitted(false);
+  };
+
+  const handleBulkSubmit = (e) => {
+    e.preventDefault();
+    setBulkOrderSubmitted(true);
+  };
+
+  return (
+    <main
+      className="bg-[#f4efe7] text-[#171714]"
+      style={{ fontFamily: "'Nunito', sans-serif" }}
+    >
       <section className="px-4 sm:px-6 lg:px-10 xl:px-12 py-3 lg:py-4">
         <div className="max-w-[1280px] mx-auto">
 
           {/* TOP */}
           <div className="flex items-center justify-between mb-3">
-
             <button
               onClick={() => navigate("/shop")}
-              className="flex items-center gap-2 text-[8px] font-bold tracking-[0.17em]"
+              className="flex items-center gap-2 text-[10px] font-bold tracking-[0.17em]"
             >
               <span className="w-7 h-7 rounded-full border border-[#cbbda8] flex items-center justify-center">
                 <FiArrowLeft size={11} />
@@ -185,7 +232,7 @@ const ProductDetails = () => {
               BACK TO SHOP
             </button>
 
-            <div className="hidden sm:flex text-[7px] tracking-[0.15em] uppercase">
+            <div className="hidden sm:flex text-[9px] tracking-[0.15em] uppercase">
               <Link to="/">Home</Link>
               <span className="mx-2">/</span>
               <Link to="/shop">Shop</Link>
@@ -213,24 +260,24 @@ const ProductDetails = () => {
                 "
               />
 
-              <span className="absolute left-3 bottom-3 bg-[#f7f2e9] px-2.5 py-1.5 text-[7px] font-bold tracking-[0.17em] uppercase">
+              <span className="absolute left-3 bottom-3 bg-[#f7f2e9] px-2.5 py-1.5 text-[9px] font-bold tracking-[0.17em] uppercase">
                 {product.category}
               </span>
             </div>
 
             {/* INFO */}
             <div>
-              <p className="text-[#b66d17] text-[7px] font-bold tracking-[0.24em] uppercase mb-1.5">
+              <p className="text-[#b66d17] text-[9px] font-bold tracking-[0.24em] uppercase mb-1.5">
                 {product.category}
               </p>
 
-              <h1 className="font-serif text-[28px] sm:text-[32px] lg:text-[34px] xl:text-[36px] leading-none tracking-[-0.02em]">
+              <h1 className="text-[28px] sm:text-[32px] lg:text-[34px] xl:text-[36px] leading-none tracking-[-0.02em]">
                 {product.name}
               </h1>
 
               {/* PRICE + HEART */}
               <div className="flex items-center justify-between mt-2">
-                <p className="font-serif text-[17px] lg:text-[18px]">
+                <p className="text-[17px] lg:text-[18px]">
                   ₹{product.price.toLocaleString("en-IN")}
                 </p>
 
@@ -252,7 +299,7 @@ const ProductDetails = () => {
               </div>
 
               {/* DESCRIPTION */}
-              <p className="text-[10px] lg:text-[11px] leading-5 text-[#5b5349] border-y border-[#d1c5b4] py-2 mt-2.5">
+              <p className="text-[11px] lg:text-[12px] leading-5 text-[#5b5349] border-y border-[#d1c5b4] py-2 mt-2.5">
                 {product.description}
               </p>
 
@@ -262,14 +309,14 @@ const ProductDetails = () => {
                 {/* SIZE */}
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-[7px] font-bold tracking-[0.18em]">
+                    <span className="text-[9px] font-bold tracking-[0.18em]">
                       SELECT SIZE
                     </span>
 
                     <button
                       type="button"
                       onClick={() => setSizeGuideOpen(true)}
-                      className="text-[7px] border-b border-[#171714]"
+                      className="text-[9px] border-b border-[#171714]"
                     >
                       SIZE GUIDE
                     </button>
@@ -281,7 +328,7 @@ const ProductDetails = () => {
                         type="button"
                         key={size}
                         onClick={() => setSelectedSize(size)}
-                        className={`w-9 h-8 border text-[8px] transition ${
+                        className={`w-9 h-8 border text-[10px] transition ${
                           selectedSize === size
                             ? "bg-[#171714] text-white border-[#171714]"
                             : "border-[#bfb19e] hover:border-[#171714]"
@@ -295,7 +342,7 @@ const ProductDetails = () => {
 
                 {/* QUANTITY */}
                 <div>
-                  <span className="block text-[7px] font-bold tracking-[0.18em] mb-1.5">
+                  <span className="block text-[9px] font-bold tracking-[0.18em] mb-1.5">
                     QUANTITY
                   </span>
 
@@ -312,7 +359,7 @@ const ProductDetails = () => {
                       <FiMinus size={10} />
                     </button>
 
-                    <span className="flex-1 text-center text-[9px]">
+                    <span className="flex-1 text-center text-[10px]">
                       {quantity}
                     </span>
 
@@ -340,23 +387,323 @@ const ProductDetails = () => {
                     key={label}
                     className="h-8 border-b border-[#d1c5b4] flex items-center justify-between"
                   >
-                    <span className="text-[7px] font-bold tracking-[0.16em]">
+                    <span className="text-[9px] font-bold tracking-[0.16em]">
                       {label}
                     </span>
 
-                    <span className="text-[8px]">
+                    <span className="text-[10px]">
                       {value}
                     </span>
                   </div>
                 ))}
               </div>
 
+              {/* BULK ORDER */}
+              <button
+                type="button"
+                onClick={openBulkOrder}
+                className="
+                  w-full
+                  h-11
+                  mt-4
+                  bg-[#171714]
+                  text-white
+                  text-[10px]
+                  font-bold
+                  tracking-[0.18em]
+                  uppercase
+                  hover:bg-[#c77b20]
+                  transition
+                "
+              >
+                BULK ORDER
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SIZE GUIDE */}
+      {/* ================= BULK ORDER MODAL ================= */}
+      {bulkOrderOpen && (
+        <div
+          onClick={closeBulkOrder}
+          className="
+            fixed inset-0 z-[300]
+            bg-black/55
+            flex items-center justify-center
+            p-3
+          "
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="
+              relative
+              bg-[#f4efe7]
+              w-full
+              max-w-[500px]
+              max-h-[88vh]
+              overflow-y-auto
+              p-5
+              sm:p-6
+            "
+          >
+            <button
+              type="button"
+              onClick={closeBulkOrder}
+              className="
+                absolute top-4 right-4
+                w-8 h-8
+                border border-[#cbbda8]
+                rounded-full
+                flex items-center justify-center
+                hover:bg-[#171714]
+                hover:text-white
+                transition
+              "
+            >
+              <FiX size={13} />
+            </button>
+
+            {!bulkOrderSubmitted ? (
+              <>
+                <p className="text-[#b66d17] text-[10px] tracking-[0.2em] font-bold uppercase">
+                  Karon Plus
+                </p>
+
+                <h2 className="text-[28px] mt-1">
+                  Bulk Order
+                </h2>
+
+                <p className="text-[12px] leading-5 text-[#655d53] mt-2 max-w-[400px]">
+                  Looking to order in quantity? Send us your requirement
+                  and our team will get in touch with you.
+                </p>
+
+                <div className="flex items-center gap-3 mt-4 py-3 border-y border-[#d1c5b4]">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-14 h-16 object-cover bg-[#ded5c8]"
+                  />
+
+                  <div>
+                    <p className="text-[10px] font-bold tracking-[0.15em] uppercase text-[#b66d17]">
+                      {product.category}
+                    </p>
+
+                    <h3 className="text-[17px] mt-1">
+                      {product.name}
+                    </h3>
+
+                    <p className="text-[11px] mt-1">
+                      ₹{product.price.toLocaleString("en-IN")} / piece
+                    </p>
+                  </div>
+                </div>
+
+                <form
+                  onSubmit={handleBulkSubmit}
+                  className="mt-4"
+                >
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[10px] font-bold tracking-[0.14em] mb-1.5">
+                        YOUR NAME
+                      </label>
+
+                      <input
+                        type="text"
+                        name="name"
+                        value={bulkForm.name}
+                        onChange={handleBulkChange}
+                        required
+                        className="
+                          w-full h-9
+                          bg-transparent
+                          border border-[#bfb19e]
+                          px-3
+                          text-[12px]
+                          outline-none
+                          focus:border-[#171714]
+                        "
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] font-bold tracking-[0.14em] mb-1.5">
+                        PHONE NUMBER
+                      </label>
+
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={bulkForm.phone}
+                        onChange={handleBulkChange}
+                        required
+                        className="
+                          w-full h-9
+                          bg-transparent
+                          border border-[#bfb19e]
+                          px-3
+                          text-[12px]
+                          outline-none
+                          focus:border-[#171714]
+                        "
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mt-3">
+                    <label className="block text-[10px] font-bold tracking-[0.14em] mb-1.5">
+                      EMAIL
+                    </label>
+
+                    <input
+                      type="email"
+                      name="email"
+                      value={bulkForm.email}
+                      onChange={handleBulkChange}
+                      required
+                      className="
+                        w-full h-9
+                        bg-transparent
+                        border border-[#bfb19e]
+                        px-3
+                        text-[12px]
+                        outline-none
+                        focus:border-[#171714]
+                      "
+                    />
+                  </div>
+
+                  <div className="mt-3">
+                    <label className="block text-[10px] font-bold tracking-[0.14em] mb-1.5">
+                      REQUIRED QUANTITY
+                    </label>
+
+                    <input
+                      type="number"
+                      name="quantity"
+                      min="10"
+                      value={bulkForm.quantity}
+                      onChange={handleBulkChange}
+                      required
+                      className="
+                        w-full h-9
+                        bg-transparent
+                        border border-[#bfb19e]
+                        px-3
+                        text-[12px]
+                        outline-none
+                        focus:border-[#171714]
+                      "
+                    />
+
+                    <p className="text-[10px] text-[#766d61] mt-1">
+                      Minimum bulk order quantity: 10 pieces
+                    </p>
+                  </div>
+
+                  <div className="mt-3">
+                    <label className="block text-[10px] font-bold tracking-[0.14em] mb-1.5">
+                      REQUIREMENT / MESSAGE
+                    </label>
+
+                    <textarea
+                      name="message"
+                      value={bulkForm.message}
+                      onChange={handleBulkChange}
+                      rows="2"
+                      placeholder="Sizes, quantity split or any special requirement..."
+                      className="
+                        w-full
+                        bg-transparent
+                        border border-[#bfb19e]
+                        p-3
+                        text-[12px]
+                        leading-5
+                        outline-none
+                        resize-none
+                        focus:border-[#171714]
+                      "
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2 mt-4">
+                    <button
+                      type="button"
+                      onClick={closeBulkOrder}
+                      className="
+                        h-10
+                        border border-[#171714]
+                        text-[10px]
+                        font-bold
+                        tracking-[0.15em]
+                        hover:bg-[#e6ddd0]
+                        transition
+                      "
+                    >
+                      CANCEL
+                    </button>
+
+                    <button
+                      type="submit"
+                      className="
+                        h-10
+                        bg-[#171714]
+                        text-white
+                        text-[10px]
+                        font-bold
+                        tracking-[0.15em]
+                        hover:bg-[#c77b20]
+                        transition
+                      "
+                    >
+                      SEND ENQUIRY
+                    </button>
+                  </div>
+                </form>
+              </>
+            ) : (
+              <div className="py-8 text-center">
+                <p className="text-[#b66d17] text-[10px] font-bold tracking-[0.2em] uppercase">
+                  Karon Plus
+                </p>
+
+                <h2 className="text-[28px] mt-2">
+                  Enquiry Received
+                </h2>
+
+                <p className="text-[12px] leading-5 text-[#655d53] mt-3">
+                  Thank you for your bulk order enquiry. Our team will
+                  contact you regarding your requirement.
+                </p>
+
+                <button
+                  type="button"
+                  onClick={closeBulkOrder}
+                  className="
+                    mt-5
+                    bg-[#171714]
+                    text-white
+                    h-10
+                    px-8
+                    text-[10px]
+                    font-bold
+                    tracking-[0.16em]
+                    hover:bg-[#c77b20]
+                    transition
+                  "
+                >
+                  CLOSE
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* ================= SIZE GUIDE ================= */}
       {sizeGuideOpen && (
         <div
           onClick={() => setSizeGuideOpen(false)}
@@ -374,11 +721,11 @@ const ProductDetails = () => {
               <FiX size={11} />
             </button>
 
-            <p className="text-[#b66d17] text-[7px] tracking-[0.22em] font-bold">
+            <p className="text-[#b66d17] text-[9px] tracking-[0.22em] font-bold">
               KARON PLUS
             </p>
 
-            <h2 className="font-serif text-[24px] mt-1">
+            <h2 className="text-[24px] mt-1">
               Size Guide
             </h2>
 
@@ -394,8 +741,8 @@ const ProductDetails = () => {
                   key={index}
                   className={`grid grid-cols-3 py-2 border-b border-[#d7ccbd] ${
                     index === 0
-                      ? "border-t font-bold text-[7px]"
-                      : "text-[9px]"
+                      ? "border-t font-bold text-[9px]"
+                      : "text-[10px]"
                   }`}
                 >
                   {row.map((item) => (
@@ -410,14 +757,13 @@ const ProductDetails = () => {
             <button
               type="button"
               onClick={() => setSizeGuideOpen(false)}
-              className="w-full h-9 mt-4 bg-[#171714] text-white text-[8px] tracking-[0.18em]"
+              className="w-full h-9 mt-4 bg-[#171714] text-white text-[10px] tracking-[0.18em]"
             >
               CLOSE
             </button>
           </div>
         </div>
       )}
-
     </main>
   );
 };

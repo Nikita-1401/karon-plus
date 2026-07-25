@@ -29,7 +29,7 @@ const promises = [
 
 const OurPromise = () => {
   return (
-    <main className="bg-[#eee8de] text-[#171714]">
+    <main className="bg-[#eee8de] text-[#171714] font-['Nunito']">
       <section
         className="
           mx-auto
@@ -136,7 +136,7 @@ const OurPromise = () => {
               <h2
                 className="
                   max-w-[390px]
-                  font-serif
+                  font-['Nunito']
                   text-[25px]
                   leading-[1.02]
                   sm:text-[28px]
@@ -192,7 +192,7 @@ const OurPromise = () => {
             <h1
               className="
                 mt-2
-                font-serif
+                font-['Nunito']
                 text-[34px]
                 leading-[0.98]
                 sm:text-[38px]
@@ -255,7 +255,7 @@ const OurPromise = () => {
 
                     {/* TEXT */}
                     <div>
-                      <h3 className="font-serif text-[17px] leading-none sm:text-[18px] lg:text-[19px]">
+                      <h3 className="font-['Nunito'] text-[17px] leading-none sm:text-[18px] lg:text-[19px]">
                         {item.title}
                       </h3>
 
@@ -365,7 +365,7 @@ const OurPromise = () => {
             px-5
           "
         >
-          <p className="font-serif text-[10px] italic text-[#4c453d]">
+          <p className="font-['Nunito'] text-[10px] italic text-[#4c453d]">
             Better shirts, thoughtfully made.
           </p>
 

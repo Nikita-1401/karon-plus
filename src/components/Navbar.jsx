@@ -162,13 +162,14 @@ const Navbar = () => {
   };
 
   return (
-    <div className="sticky top-0 z-[100]">
-
+    <div
+      className="sticky top-0 z-[100]"
+      style={{ fontFamily: "'Nunito', sans-serif" }}
+    >
       {/* ================= ANNOUNCEMENT ================= */}
 
       <div className="w-full bg-[#C99A55] text-white overflow-hidden">
         <div className="mx-auto flex h-[27px] max-w-[1440px] items-center justify-center px-4 sm:px-6">
-
           <p
             key={announcementIndex}
             className="
@@ -182,14 +183,12 @@ const Navbar = () => {
           >
             {announcements[announcementIndex]}
           </p>
-
         </div>
       </div>
 
       {/* ================= NAVBAR ================= */}
 
       <header className="relative w-full bg-[#fffdf9] border-b border-black/10">
-
         <div className="relative max-w-[1440px] mx-auto h-[78px] lg:h-[92px] px-4 sm:px-6 md:px-8 lg:px-10 flex items-center justify-between">
 
           {/* ================= DESKTOP LEFT ================= */}
@@ -216,9 +215,7 @@ const Navbar = () => {
                 </button>
               ) : (
                 <div className="relative w-[205px]">
-
                   <div className="relative flex items-center">
-
                     <FiSearch
                       size={15}
                       className="absolute left-0 text-[#625b52]"
@@ -308,7 +305,6 @@ const Navbar = () => {
                                 border-b
                                 border-[#e3d9cc]
                                 last:border-b-0
-                                font-serif
                                 text-[15px]
                                 leading-[1.45]
                                 text-[#171714]
@@ -336,7 +332,6 @@ const Navbar = () => {
             {/* SHOP */}
 
             <div className="relative group">
-
               <Link
                 to="/shop"
                 className="flex items-center gap-1.5 text-[14px] xl:text-[15px] text-[#171714] hover:text-[#B98949] transition"
@@ -366,7 +361,6 @@ const Navbar = () => {
                 "
               >
                 <div className="w-[210px] bg-[#fffdf9] border border-black/10 shadow-xl py-3">
-
                   <NavLink
                     to="/shop"
                     className="block px-5 py-3 text-[13px] hover:bg-[#f5efe6] hover:text-[#B98949]"
@@ -387,7 +381,6 @@ const Navbar = () => {
                   >
                     Premium Collection
                   </NavLink>
-
                 </div>
               </div>
             </div>
@@ -395,7 +388,6 @@ const Navbar = () => {
             {/* SHIRTS */}
 
             <div className="relative group">
-
               <Link
                 to="/shop"
                 className="flex items-center gap-1.5 text-[14px] xl:text-[15px] text-[#171714] hover:text-[#B98949] transition"
@@ -425,7 +417,6 @@ const Navbar = () => {
                 "
               >
                 <div className="w-[210px] bg-[#fffdf9] border border-black/10 shadow-xl py-3">
-
                   {[
                     ["Formal Shirts", "/shirts/formal"],
                     ["Casual Shirts", "/shirts/casual"],
@@ -440,7 +431,6 @@ const Navbar = () => {
                       {label}
                     </NavLink>
                   ))}
-
                 </div>
               </div>
             </div>
@@ -453,7 +443,6 @@ const Navbar = () => {
             >
               Collection
             </NavLink>
-
           </nav>
 
           {/* ================= LOGO ================= */}
@@ -500,7 +489,6 @@ const Navbar = () => {
           {/* ================= DESKTOP RIGHT ================= */}
 
           <nav className="hidden lg:flex items-center justify-end gap-5 xl:gap-7 flex-1">
-
             <NavLink
               to="/new-arrivals"
               className="text-[14px] xl:text-[15px] whitespace-nowrap hover:text-[#B98949] transition"
@@ -535,13 +523,11 @@ const Navbar = () => {
             >
               Contact
             </NavLink>
-
           </nav>
 
           {/* ================= MOBILE ICONS ================= */}
 
           <div className="flex lg:hidden items-center gap-3 sm:gap-4 ml-auto">
-
             <button
               type="button"
               aria-label="Search"
@@ -569,7 +555,6 @@ const Navbar = () => {
                 <FiMenu size={22} />
               )}
             </button>
-
           </div>
         </div>
 
@@ -594,7 +579,6 @@ const Navbar = () => {
             "
           >
             <div className="max-w-[600px] mx-auto relative flex items-center">
-
               <FiSearch
                 size={16}
                 className="absolute left-0 text-[#625b52]"
@@ -646,14 +630,12 @@ const Navbar = () => {
               >
                 <FiX size={16} />
               </button>
-
             </div>
 
             {/* MOBILE RESULTS */}
 
             {search.trim() !== "" && (
               <div className="max-w-[600px] mx-auto mt-2 bg-[#fffdf9] border border-[#d8cdbf] shadow-sm">
-
                 {filteredProducts.length > 0 ? (
                   filteredProducts.map(
                     (product) => (
@@ -672,7 +654,6 @@ const Navbar = () => {
                           border-b
                           border-[#e3dbd0]
                           last:border-b-0
-                          font-serif
                           text-[14px]
                           leading-[1.45]
                           text-[#171714]
@@ -690,7 +671,6 @@ const Navbar = () => {
                     No shirts found.
                   </p>
                 )}
-
               </div>
             )}
           </div>
@@ -724,7 +704,6 @@ const Navbar = () => {
             {/* SHOP */}
 
             <div className="border-b border-black/10">
-
               <button
                 type="button"
                 onClick={() =>
@@ -743,7 +722,6 @@ const Navbar = () => {
 
               {shopOpen && (
                 <div className="pb-4 pl-4 flex flex-col gap-3">
-
                   <NavLink
                     to="/shop"
                     className="text-[13px] text-black/65"
@@ -757,7 +735,6 @@ const Navbar = () => {
                   >
                     New Arrivals
                   </NavLink>
-
                 </div>
               )}
             </div>
@@ -765,7 +742,6 @@ const Navbar = () => {
             {/* SHIRTS */}
 
             <div className="border-b border-black/10">
-
               <button
                 type="button"
                 onClick={() =>
@@ -784,7 +760,6 @@ const Navbar = () => {
 
               {shirtsOpen && (
                 <div className="pb-4 pl-4 grid grid-cols-2 gap-3">
-
                   <NavLink
                     to="/shirts/formal"
                     className="text-[13px] text-black/65"
@@ -812,7 +787,6 @@ const Navbar = () => {
                   >
                     Premium
                   </NavLink>
-
                 </div>
               )}
             </div>
@@ -858,10 +832,8 @@ const Navbar = () => {
             >
               Contact
             </NavLink>
-
           </nav>
         </div>
-
       </header>
 
       {/* ANNOUNCEMENT FADE */}
@@ -881,7 +853,6 @@ const Navbar = () => {
           }
         `}
       </style>
-
     </div>
   );
 };

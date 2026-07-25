@@ -61,28 +61,37 @@ const FeaturedProducts = () => {
           lg:px-10
           lg:py-4
         "
+        style={{ fontFamily: "'Nunito', sans-serif" }}
       >
         <div className="mx-auto max-w-[1450px]">
 
           {/* HEADER */}
-          <div className="
-            mb-4
-            flex
-            flex-col
-            gap-3
-            md:flex-row
-            md:items-end
-            md:justify-between
-            lg:mb-4
-          ">
+          <div
+            className="
+              mb-4
+              flex
+              flex-col
+              gap-3
+              md:flex-row
+              md:items-end
+              md:justify-between
+              lg:mb-4
+            "
+          >
             <div>
               <p className="mb-1.5 text-[9px] font-semibold uppercase tracking-[0.4em] text-[#c99142]">
                 Curated For You
               </p>
 
-              <h2 className="font-serif text-[30px] leading-none text-[#171717] md:text-[36px] lg:text-[38px]">
+              <h2
+                className="text-[30px] leading-none text-[#171717] md:text-[36px] lg:text-[38px]"
+                style={{ fontFamily: "'Nunito', sans-serif" }}
+              >
                 The Karon{" "}
-                <span className="italic text-[#c99142]">
+                <span
+                  className="italic text-[#c99142]"
+                  style={{ fontFamily: "'Nunito', sans-serif" }}
+                >
                   Edit
                 </span>
               </h2>
@@ -213,7 +222,10 @@ const FeaturedProducts = () => {
                   </p>
 
                   <div className="flex items-start justify-between gap-3">
-                    <h3 className="font-serif text-[18px] leading-tight text-[#191919]">
+                    <h3
+                      className="text-[18px] leading-tight text-[#191919]"
+                      style={{ fontFamily: "'Nunito', sans-serif" }}
+                    >
                       {product.name}
                     </h3>
 
@@ -257,6 +269,7 @@ const FeaturedProducts = () => {
               shadow-2xl
               md:overflow-hidden
             "
+            style={{ fontFamily: "'Nunito', sans-serif" }}
             onClick={(e) => e.stopPropagation()}
           >
 
@@ -307,7 +320,10 @@ const FeaturedProducts = () => {
                   {quickViewProduct.category}
                 </p>
 
-                <h2 className="font-serif text-[26px] leading-tight text-[#171717] sm:text-[30px]">
+                <h2
+                  className="text-[26px] leading-tight text-[#171717] sm:text-[30px]"
+                  style={{ fontFamily: "'Nunito', sans-serif" }}
+                >
                   {quickViewProduct.name}
                 </h2>
 

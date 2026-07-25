@@ -81,7 +81,7 @@ const Search = () => {
     : [];
 
   return (
-    <main className="bg-[#f4efe7] text-[#171714] min-h-[calc(100vh-110px)]">
+    <main className="bg-[#f4efe7] text-[#171714] min-h-[calc(100vh-110px)] font-['Nunito']">
       <section className="px-5 sm:px-8 lg:px-12 py-5 sm:py-7">
         <div className="max-w-[1160px] mx-auto">
 
@@ -126,7 +126,7 @@ const Search = () => {
                   Karon Plus
                 </p>
 
-                <h1 className="font-serif text-[34px] sm:text-[42px] leading-none">
+                <h1 className="font-['Nunito'] text-[34px] sm:text-[42px] leading-none">
                   What are you{" "}
                   <span className="italic text-[#d5811e]">
                     looking for?
@@ -168,6 +168,7 @@ const Search = () => {
                   placeholder:text-[#94897b]
                   focus:border-[#171714]
                   transition
+                  font-['Nunito']
                 "
               />
 
@@ -233,7 +234,7 @@ const Search = () => {
                           {product.category}
                         </p>
 
-                        <h2 className="font-serif text-[18px] sm:text-[20px] leading-tight">
+                        <h2 className="font-['Nunito'] text-[18px] sm:text-[20px] leading-tight">
                           {product.name}
                         </h2>
 
@@ -257,7 +258,7 @@ const Search = () => {
                     className="mx-auto text-[#b57a34]"
                   />
 
-                  <h2 className="font-serif text-[25px] sm:text-[28px] mt-4">
+                  <h2 className="font-['Nunito'] text-[25px] sm:text-[28px] mt-4">
                     No shirts found.
                   </h2>
 

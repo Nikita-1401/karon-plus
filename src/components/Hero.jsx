@@ -70,6 +70,7 @@ const Hero = () => {
   return (
     <section
       id="home"
+      style={{ fontFamily: "'Nunito', sans-serif" }}
       className="
         relative
         h-[calc(100vh-130px)]
@@ -168,7 +169,6 @@ const Hero = () => {
           {/* Main Heading */}
           <h1
             className="
-              font-serif
               text-[42px]
               font-normal
               leading-[0.96]

@@ -66,7 +66,7 @@ const Testimonials = () => {
   const next = testimonials[getIndex(1)];
 
   return (
-    <section className="overflow-hidden bg-[#fbf8f3] px-4 pb-2 pt-4 sm:px-6 sm:pt-5 lg:px-5 lg:pb-2 lg:pt-5">
+    <section className="overflow-hidden bg-[#fbf8f3] px-4 pb-2 pt-4 sm:px-6 sm:pt-5 lg:px-5 lg:pb-2 lg:pt-5 font-['Nunito']">
       <div className="mx-auto max-w-[1450px]">
 
         {/* ================= HEADING ================= */}
@@ -75,7 +75,7 @@ const Testimonials = () => {
             The Karon Experience
           </p>
 
-          <h2 className="font-serif text-[32px] leading-[1.05] text-[#171715] sm:text-[39px] lg:text-[45px]">
+          <h2 className="font-['Nunito'] text-[32px] leading-[1.05] text-[#171715] sm:text-[39px] lg:text-[45px]">
             Worn. Loved.
             <span className="ml-2 italic text-[#d29742]">
               Remembered.
@@ -96,7 +96,7 @@ const Testimonials = () => {
           {/* LEFT CARD */}
           <article className="hidden h-[285px] border border-[#ded7cd] bg-[#f7f3ed] p-6 lg:flex lg:flex-col lg:justify-between">
             <div>
-              <span className="font-serif text-[40px] leading-none text-[#d4a05c]">
+              <span className="font-['Nunito'] text-[40px] leading-none text-[#d4a05c]">
                 “
               </span>
 
@@ -106,7 +106,7 @@ const Testimonials = () => {
             </div>
 
             <div className="border-t border-[#ddd5ca] pt-4">
-              <h3 className="font-serif text-[17px] text-[#615b54]">
+              <h3 className="font-['Nunito'] text-[17px] text-[#615b54]">
                 {previous.name}
               </h3>
 
@@ -120,7 +120,7 @@ const Testimonials = () => {
           <article className="relative min-h-[285px] overflow-hidden bg-[#171714] px-7 py-6 sm:px-9 lg:h-[285px] lg:px-10">
 
             {/* Decorative Quote */}
-            <span className="pointer-events-none absolute right-8 top-0 font-serif text-[95px] leading-none text-white/[0.035]">
+            <span className="pointer-events-none absolute right-8 top-0 font-['Nunito'] text-[95px] leading-none text-white/[0.035]">
               “
             </span>
 
@@ -139,7 +139,7 @@ const Testimonials = () => {
                 </div>
 
                 {/* Review */}
-                <p className="max-w-[610px] font-serif text-[20px] leading-[1.42] text-white sm:text-[22px] lg:text-[24px]">
+                <p className="max-w-[610px] font-['Nunito'] text-[20px] leading-[1.42] text-white sm:text-[22px] lg:text-[24px]">
                   “{current.quote}”
                 </p>
               </div>
@@ -147,7 +147,7 @@ const Testimonials = () => {
               {/* Customer Information */}
               <div className="mt-4 flex flex-col gap-3 border-t border-white/10 pt-4 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                  <h3 className="font-serif text-[18px] text-white">
+                  <h3 className="font-['Nunito'] text-[18px] text-white">
                     {current.name}
                   </h3>
 
@@ -174,7 +174,7 @@ const Testimonials = () => {
           {/* ================= RIGHT CARD ================= */}
           <article className="hidden h-[285px] border border-[#ded7cd] bg-[#f7f3ed] p-6 lg:flex lg:flex-col lg:justify-between">
             <div>
-              <span className="font-serif text-[40px] leading-none text-[#d4a05c]">
+              <span className="font-['Nunito'] text-[40px] leading-none text-[#d4a05c]">
                 “
               </span>
 
@@ -184,7 +184,7 @@ const Testimonials = () => {
             </div>
 
             <div className="border-t border-[#ddd5ca] pt-4">
-              <h3 className="font-serif text-[17px] text-[#615b54]">
+              <h3 className="font-['Nunito'] text-[17px] text-[#615b54]">
                 {next.name}
               </h3>
 

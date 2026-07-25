@@ -9,7 +9,7 @@ const About = () => {
   ];
 
   return (
-    <main className="bg-[#f4efe7] text-[#171714]">
+    <main className="bg-[#f4efe7] text-[#171714] font-['Nunito']">
       <section
         className="
           max-w-[1360px]
@@ -184,7 +184,7 @@ const About = () => {
 
             <h1
               className="
-                font-serif
+                font-['Nunito']
                 text-[31px]
                 sm:text-[38px]
                 lg:text-[43px]

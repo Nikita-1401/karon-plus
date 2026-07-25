@@ -45,7 +45,7 @@ const shirtCategories = [
 
 const CategoryPage = () => {
   return (
-    <main className="bg-[#f4efe7] text-[#171714]">
+    <main className="bg-[#f4efe7] text-[#171714] font-['Nunito']">
       <section
         className="
           max-w-[1400px]
@@ -90,7 +90,7 @@ const CategoryPage = () => {
 
             <h1
               className="
-                font-serif
+                font-['Nunito']
                 text-[29px]
                 sm:text-[32px]
                 lg:text-[35px]
@@ -163,11 +163,9 @@ const CategoryPage = () => {
               flex
               items-center
               gap-2
-
               text-[9px]
               font-bold
               tracking-[0.14em]
-
               hover:text-[#c77718]
               transition
             "
@@ -185,7 +183,6 @@ const CategoryPage = () => {
             grid-cols-1
             sm:grid-cols-2
             lg:grid-cols-4
-
             gap-x-3
             lg:gap-x-4
             gap-y-6
@@ -203,7 +200,6 @@ const CategoryPage = () => {
                   relative
                   overflow-hidden
                   bg-[#d8cfc3]
-
                   h-[315px]
                   sm:h-[270px]
                   lg:h-[280px]
@@ -222,11 +218,9 @@ const CategoryPage = () => {
                       h-full
                       object-cover
                       object-center
-
                       transition-transform
                       duration-700
                       ease-out
-
                       group-hover:scale-[1.03]
                     "
                   />
@@ -239,13 +233,10 @@ const CategoryPage = () => {
                     absolute
                     left-3
                     top-3
-
                     bg-[#f8f4ed]
                     text-[#171714]
-
                     px-3
                     py-1.5
-
                     text-[9px]
                     font-bold
                     tracking-[0.13em]
@@ -261,27 +252,20 @@ const CategoryPage = () => {
                   className="
                     hidden
                     lg:flex
-
                     absolute
                     left-3
                     right-3
                     bottom-3
-
                     h-10
                     px-4
-
                     bg-[#171714]
                     text-white
-
                     items-center
                     justify-between
-
                     opacity-0
                     translate-y-2
-
                     group-hover:opacity-100
                     group-hover:translate-y-0
-
                     transition-all
                     duration-300
                   "
@@ -332,14 +316,11 @@ const CategoryPage = () => {
                     items-center
                     justify-between
                     gap-3
-
                     mt-1
-
-                    font-serif
+                    font-['Nunito']
                     text-[17px]
                     lg:text-[18px]
                     leading-tight
-
                     hover:text-[#c77718]
                     transition
                   "
@@ -360,11 +341,9 @@ const CategoryPage = () => {
                   className="
                     hidden
                     xl:block
-
                     text-[10px]
                     leading-[1.45]
                     text-[#6c6358]
-
                     mt-1.5
                   "
                 >
@@ -381,10 +360,8 @@ const CategoryPage = () => {
           className="
             hidden
             lg:flex
-
             items-center
             justify-between
-
             mt-2.5
             pt-2
           "
@@ -403,11 +380,9 @@ const CategoryPage = () => {
               flex
               items-center
               gap-2
-
               text-[9px]
               font-bold
               tracking-[0.14em]
-
               hover:text-[#c77718]
               transition
             "

@@ -11,6 +11,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  font-family: "Nunito", sans-serif;
 }
 
 /* =========================
@@ -56,6 +58,7 @@
 
   color: #a9621b;
 
+  font-family: "Nunito", sans-serif;
   font-size: 8px;
   font-weight: 700;
   line-height: 1.4;
@@ -66,7 +69,7 @@
 .essentials-heading h2 {
   margin: 0;
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Nunito", sans-serif;
 
   font-size: clamp(42px, 4vw, 55px);
   font-weight: 400;
@@ -78,6 +81,7 @@
 .essentials-heading h2 em {
   color: #d68e30;
 
+  font-family: "Nunito", sans-serif;
   font-weight: 400;
 }
 
@@ -98,6 +102,7 @@
 
   color: #514b44;
 
+  font-family: "Nunito", sans-serif;
   font-size: 11px;
   line-height: 1.65;
 }
@@ -119,6 +124,7 @@
 
   text-decoration: none;
 
+  font-family: "Nunito", sans-serif;
   font-size: 7px;
   font-weight: 700;
 
@@ -128,6 +134,7 @@
 .essentials-intro a span {
   color: #c9852d;
 
+  font-family: "Nunito", sans-serif;
   font-size: 12px;
 }
 
@@ -218,6 +225,7 @@
 
   color: #171715;
 
+  font-family: "Nunito", sans-serif;
   font-size: 9px;
   font-weight: 600;
 }
@@ -248,6 +256,7 @@
 
   color: #ffffff;
 
+  font-family: "Nunito", sans-serif;
   font-size: 8px;
   font-weight: 700;
 
@@ -259,6 +268,7 @@
 .essential-hover span:last-child {
   color: #d99537;
 
+  font-family: "Nunito", sans-serif;
   font-size: 13px;
 }
 
@@ -297,6 +307,7 @@
 
   color: #ad651c;
 
+  font-family: "Nunito", sans-serif;
   font-size: 7px;
   font-weight: 700;
 
@@ -310,7 +321,7 @@
 
   color: #171715;
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Nunito", sans-serif;
 
   font-size: 17px;
   font-weight: 400;
@@ -329,6 +340,7 @@
 
   color: #171715;
 
+  font-family: "Nunito", sans-serif;
   font-size: 10px;
   font-weight: 700;
 }
@@ -359,7 +371,7 @@
 
   color: #49433c;
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Nunito", sans-serif;
 
   font-size: 11px;
   font-style: italic;
@@ -370,6 +382,7 @@
 .essentials-footer span {
   color: #9d5c19;
 
+  font-family: "Nunito", sans-serif;
   font-size: 7px;
   font-weight: 700;
 

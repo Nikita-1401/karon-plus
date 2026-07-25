@@ -191,7 +191,10 @@ const filterCategories = [
 const ProductCard = ({ product }) => {
   return (
     <div className="group min-w-0">
-      <div className="relative overflow-hidden bg-[#ded5c8] aspect-[4/5]">
+      <Link
+        to={`/product/${product.id}`}
+        className="relative block overflow-hidden bg-[#ded5c8] aspect-[4/5]"
+      >
         <img
           src={product.image}
           alt={product.name}
@@ -203,7 +206,7 @@ const ProductCard = ({ product }) => {
             {product.badge}
           </span>
         )}
-      </div>
+      </Link>
 
       <div className="pt-3 sm:pt-4 pb-4 border-b border-[#cfc4b4]">
         <p className="text-[#b66d17] text-[8px] sm:text-[9px] tracking-[0.2em] font-semibold uppercase mb-2">
@@ -211,9 +214,11 @@ const ProductCard = ({ product }) => {
         </p>
 
         <div className="flex items-start justify-between gap-3">
-          <h3 className="font-serif text-[16px] sm:text-[19px] lg:text-[20px] leading-tight">
-            {product.name}
-          </h3>
+          <Link to={`/product/${product.id}`}>
+            <h3 className="font-serif text-[16px] sm:text-[19px] lg:text-[20px] leading-tight">
+              {product.name}
+            </h3>
+          </Link>
 
           <span className="font-semibold text-[11px] sm:text-[12px] whitespace-nowrap">
             ₹{product.price.toLocaleString("en-IN")}
@@ -241,7 +246,6 @@ const Shop = () => {
   const [sortBy, setSortBy] = useState("Featured");
 
   const [visibleCount, setVisibleCount] = useState(4);
-
 
   /* ================= FILTER ================= */
 
@@ -429,11 +433,7 @@ const Shop = () => {
             </div>
           </div>
 
-          {/* =================================================
-              CATEGORY LINKS
-
-              THESE OPEN ACTUAL CATEGORY PAGES
-          ================================================= */}
+          {/* CATEGORY LINKS */}
 
           <div
             className="
@@ -490,14 +490,10 @@ const Shop = () => {
                     <span
                       className="
                         absolute
-
                         left-0
                         right-0
-
                         -bottom-[15px]
-
                         h-[2px]
-
                         bg-[#c77718]
                       "
                     />
@@ -530,9 +526,7 @@ const Shop = () => {
               flex
               items-end
               justify-between
-
               gap-5
-
               mb-5
             "
           >
@@ -540,13 +534,10 @@ const Shop = () => {
               <p
                 className="
                   text-[#b66d17]
-
                   text-[9px]
-
                   font-bold
                   tracking-[0.3em]
                   uppercase
-
                   mb-2
                 "
               >
@@ -556,11 +547,9 @@ const Shop = () => {
               <h2
                 className="
                   font-serif
-
                   text-[34px]
                   sm:text-[40px]
                   lg:text-[42px]
-
                   leading-none
                 "
               >
@@ -573,17 +562,13 @@ const Shop = () => {
               className="
                 hidden
                 sm:flex
-
                 items-center
                 gap-5
-
                 text-[9px]
                 font-bold
                 tracking-[0.2em]
-
                 border-b
                 border-[#c7781a]
-
                 pb-2
               "
             >
@@ -600,10 +585,8 @@ const Shop = () => {
               grid
               grid-cols-2
               lg:grid-cols-4
-
               gap-x-3
               sm:gap-x-5
-
               gap-y-7
             "
           >
@@ -627,10 +610,8 @@ const Shop = () => {
         className="
           mt-12
           lg:mt-16
-
           bg-[#171715]
           text-[#f5f0e8]
-
           py-11
           lg:py-12
         "
@@ -642,13 +623,10 @@ const Shop = () => {
               sm:px-8
               lg:px-12
               xl:px-14
-
               flex
               items-end
               justify-between
-
               gap-6
-
               mb-7
             "
           >
@@ -656,13 +634,10 @@ const Shop = () => {
               <p
                 className="
                   text-[#d88b28]
-
                   text-[9px]
-
                   font-bold
                   tracking-[0.3em]
                   uppercase
-
                   mb-3
                 "
               >
@@ -672,11 +647,9 @@ const Shop = () => {
               <h2
                 className="
                   font-serif
-
                   text-[36px]
                   sm:text-[44px]
                   lg:text-[50px]
-
                   leading-none
                 "
               >
@@ -694,19 +667,14 @@ const Shop = () => {
                 className="
                   w-11
                   h-11
-
                   rounded-full
-
                   border
                   border-white/30
-
                   flex
                   items-center
                   justify-center
-
                   hover:bg-[#d48826]
                   hover:border-[#d48826]
-
                   transition
                 "
               >
@@ -722,19 +690,14 @@ const Shop = () => {
                 className="
                   w-11
                   h-11
-
                   rounded-full
-
                   border
                   border-white/30
-
                   flex
                   items-center
                   justify-center
-
                   hover:bg-[#d48826]
                   hover:border-[#d48826]
-
                   transition
                 "
               >
@@ -749,18 +712,14 @@ const Shop = () => {
               flex
               overflow-x-auto
               scroll-smooth
-
               gap-4
               sm:gap-5
-
               pl-5
               sm:pl-8
               lg:pl-12
               xl:pl-14
-
               pr-5
               pb-2
-
               [&::-webkit-scrollbar]:hidden
               [-ms-overflow-style:none]
               [scrollbar-width:none]
@@ -775,7 +734,6 @@ const Shop = () => {
                 className="
                   group
                   shrink-0
-
                   w-[72vw]
                   sm:w-[42vw]
                   md:w-[31vw]
@@ -783,43 +741,38 @@ const Shop = () => {
                   xl:w-[300px]
                 "
               >
-                <div
+                <Link
+                  to={`/product/${product.id}`}
                   className="
                     aspect-[4/5]
                     overflow-hidden
-
                     bg-[#2a2926]
-
                     relative
+                    block
                   "
                 >
                   <img
-                      src={product.image}
-                      alt={product.name}
-                      className="
-                        w-full
-                        h-full
-                        object-cover
-
-                        group-hover:scale-[1.04]
-
-                        transition-transform
-                        duration-700
-                      "
-                    />
+                    src={product.image}
+                    alt={product.name}
+                    className="
+                      w-full
+                      h-full
+                      object-cover
+                      group-hover:scale-[1.04]
+                      transition-transform
+                      duration-700
+                    "
+                  />
 
                   <span
                     className="
                       absolute
                       top-4
                       left-4
-
                       bg-[#f5f0e8]
                       text-[#171714]
-
                       px-3
                       py-2
-
                       text-[8px]
                       font-bold
                       tracking-[0.18em]
@@ -827,17 +780,15 @@ const Shop = () => {
                   >
                     BESTSELLER
                   </span>
-                </div>
+                </Link>
 
                 <div className="pt-3">
                   <p
                     className="
                       text-[#d68a28]
-
                       text-[8px]
                       tracking-[0.2em]
                       uppercase
-
                       mb-2
                     "
                   >
@@ -851,16 +802,18 @@ const Shop = () => {
                       gap-4
                     "
                   >
-                    <h3 className="
-                        font-serif
-                        text-[19px]
-
-                        hover:text-[#d68a28]
-
-                        transition
-                      ">
-                      {product.name}
-                    </h3>
+                    <Link to={`/product/${product.id}`}>
+                      <h3
+                        className="
+                          font-serif
+                          text-[19px]
+                          hover:text-[#d68a28]
+                          transition
+                        "
+                      >
+                        {product.name}
+                      </h3>
+                    </Link>
 
                     <span
                       className="
@@ -891,7 +844,6 @@ const Shop = () => {
           sm:px-8
           lg:px-12
           xl:px-14
-
           py-11
           lg:py-14
         "
@@ -902,14 +854,10 @@ const Shop = () => {
               flex
               flex-col
               lg:flex-row
-
               lg:items-end
               justify-between
-
               gap-6
-
               pb-6
-
               border-b
               border-[#cfc2af]
             "
@@ -918,13 +866,10 @@ const Shop = () => {
               <p
                 className="
                   text-[#b66d17]
-
                   text-[9px]
-
                   font-bold
                   tracking-[0.3em]
                   uppercase
-
                   mb-3
                 "
               >
@@ -934,11 +879,9 @@ const Shop = () => {
               <h2
                 className="
                   font-serif
-
                   text-[36px]
                   sm:text-[44px]
                   lg:text-[50px]
-
                   leading-none
                 "
               >
@@ -966,9 +909,7 @@ const Shop = () => {
                 flex
                 flex-wrap
                 items-center
-
                 gap-3
-
                 relative
               "
             >
@@ -985,24 +926,17 @@ const Shop = () => {
                   }}
                   className="
                     h-11
-
                     px-4
                     sm:px-5
-
                     border
                     border-[#c7baa7]
-
                     flex
                     items-center
-
                     gap-3
-
                     text-[9px]
                     font-bold
                     tracking-[0.17em]
-
                     hover:border-[#171714]
-
                     transition
                   "
                 >
@@ -1016,18 +950,12 @@ const Shop = () => {
                       absolute
                       left-0
                       top-[52px]
-
                       bg-[#f8f3eb]
-
                       border
                       border-[#c9bda9]
-
                       w-[230px]
-
                       p-5
-
                       z-30
-
                       shadow-lg
                     "
                   >
@@ -1036,7 +964,6 @@ const Shop = () => {
                         text-[9px]
                         font-bold
                         tracking-[0.2em]
-
                         mb-4
                       "
                     >
@@ -1076,7 +1003,6 @@ const Shop = () => {
                       className="
                         border-t
                         border-[#d4c9ba]
-
                         mt-5
                         pt-5
                       "
@@ -1086,7 +1012,6 @@ const Shop = () => {
                           text-[9px]
                           font-bold
                           tracking-[0.2em]
-
                           mb-3
                         "
                       >
@@ -1106,15 +1031,11 @@ const Shop = () => {
                             className="
                               w-9
                               h-9
-
                               border
                               border-[#c9bda9]
-
                               text-[10px]
-
                               hover:bg-[#171714]
                               hover:text-white
-
                               transition
                             "
                           >
@@ -1138,28 +1059,20 @@ const Shop = () => {
                   }}
                   className="
                     h-11
-
                     min-w-[150px]
                     sm:min-w-[185px]
-
                     px-4
                     sm:px-5
-
                     border
                     border-[#c7baa7]
-
                     flex
                     items-center
                     justify-between
-
                     gap-4
-
                     text-[9px]
                     font-bold
                     tracking-[0.14em]
-
                     hover:border-[#171714]
-
                     transition
                   "
                 >
@@ -1174,16 +1087,11 @@ const Shop = () => {
                       absolute
                       right-0
                       top-[52px]
-
                       bg-[#f8f3eb]
-
                       border
                       border-[#c9bda9]
-
                       w-[210px]
-
                       z-30
-
                       shadow-lg
                     "
                   >
@@ -1203,16 +1111,11 @@ const Shop = () => {
                         className="
                           block
                           w-full
-
                           text-left
-
                           px-5
                           py-3
-
                           text-[11px]
-
                           hover:bg-[#ebe2d5]
-
                           transition
                         "
                       >
@@ -1232,12 +1135,9 @@ const Shop = () => {
               grid
               grid-cols-2
               lg:grid-cols-4
-
               gap-x-3
               sm:gap-x-5
-
               gap-y-8
-
               mt-7
             "
           >
@@ -1259,7 +1159,6 @@ const Shop = () => {
               className="
                 flex
                 justify-center
-
                 mt-9
                 lg:mt-10
               "
@@ -1277,28 +1176,20 @@ const Shop = () => {
                 }
                 className="
                   group
-
                   min-w-[190px]
-
                   border
                   border-[#171714]
-
                   px-6
                   py-3.5
-
                   flex
                   items-center
                   justify-between
-
                   gap-7
-
                   text-[9px]
                   font-bold
                   tracking-[0.2em]
-
                   hover:bg-[#171714]
                   hover:text-white
-
                   transition-all
                 "
               >

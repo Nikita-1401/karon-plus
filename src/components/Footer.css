@@ -4,6 +4,8 @@
   color: #171715;
   border-top: 1px solid #d5cabb;
   overflow: hidden;
+
+  font-family: "Nunito", sans-serif;
 }
 
 /* =========================================
@@ -52,6 +54,7 @@
 
   color: #a85f18;
 
+  font-family: "Nunito", sans-serif;
   font-size: 9px;
   font-weight: 700;
 
@@ -61,7 +64,7 @@
 .footer-intro h2 {
   margin: 0;
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Nunito", sans-serif;
 
   font-size: 44px;
   font-weight: 400;
@@ -72,6 +75,7 @@
 
 .footer-intro h2 em {
   color: #cf7d1f;
+  font-family: "Nunito", sans-serif;
   font-weight: 400;
 }
 
@@ -93,6 +97,7 @@
 
   color: #625b53;
 
+  font-family: "Nunito", sans-serif;
   font-size: 12px;
   line-height: 1.65;
 }
@@ -119,12 +124,13 @@
 
   color: #171715;
 
-  font-family: inherit;
+  font-family: "Nunito", sans-serif;
   font-size: 12px;
 }
 
 .footer-newsletter input::placeholder {
   color: #817970;
+  font-family: "Nunito", sans-serif;
 }
 
 .footer-newsletter button {
@@ -144,6 +150,7 @@
 
   cursor: pointer;
 
+  font-family: "Nunito", sans-serif;
   font-size: 9px;
   font-weight: 700;
 
@@ -159,6 +166,7 @@
 .footer-newsletter button span {
   color: #c77d24;
 
+  font-family: "Nunito", sans-serif;
   font-size: 14px;
 }
 
@@ -189,6 +197,7 @@
 
   color: #a75f19;
 
+  font-family: "Nunito", sans-serif;
   font-size: 9px;
   font-weight: 700;
 
@@ -202,6 +211,7 @@
 
   color: #5f5850;
 
+  font-family: "Nunito", sans-serif;
   font-size: 12px;
   line-height: 1.7;
 }
@@ -211,7 +221,7 @@
 
   color: #34302b;
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Nunito", sans-serif;
 
   font-size: 13px;
   font-style: italic;
@@ -237,6 +247,7 @@
 
   text-decoration: none;
 
+  font-family: "Nunito", sans-serif;
   font-size: 12px;
   line-height: 1.35;
 
@@ -300,7 +311,7 @@
 .footer-mini-logo > span {
   color: #b7792f;
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Nunito", sans-serif;
 
   font-size: 31px;
 
@@ -318,7 +329,7 @@
 
   color: #171715;
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Nunito", sans-serif;
 
   font-size: 14px;
   font-weight: 400;
@@ -331,6 +342,7 @@
 
   color: #8b7c69;
 
+  font-family: "Nunito", sans-serif;
   font-size: 7px;
 
   letter-spacing: 1.5px;
@@ -341,7 +353,7 @@
 
   color: #746b60;
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Nunito", sans-serif;
 
   font-size: 12px;
   font-style: italic;
@@ -375,6 +387,7 @@
 
   color: #b9b1a7;
 
+  font-family: "Nunito", sans-serif;
   font-size: 8px;
   font-weight: 600;
 
@@ -396,6 +409,7 @@
 .footer-bottom span {
   color: #b9b1a7;
 
+  font-family: "Nunito", sans-serif;
   font-size: 9px;
 
   cursor: pointer;

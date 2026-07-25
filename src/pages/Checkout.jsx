@@ -135,6 +135,7 @@ const Checkout = () => {
     outline-none
     focus:border-[#171714]
     transition
+    font-['Nunito']
   `;
 
   const labelClass =
@@ -145,7 +146,7 @@ const Checkout = () => {
 
   if (orderPlaced) {
     return (
-      <main className="min-h-[calc(100vh-110px)] bg-[#f4efe7] flex items-center justify-center px-5 py-8">
+      <main className="min-h-[calc(100vh-110px)] bg-[#f4efe7] flex items-center justify-center px-5 py-8 font-['Nunito']">
         <div className="w-full max-w-[480px] text-center">
           <div className="w-12 h-12 mx-auto rounded-full bg-[#171714] text-white flex items-center justify-center">
             <FiCheck size={19} />
@@ -155,7 +156,7 @@ const Checkout = () => {
             Karon Plus
           </p>
 
-          <h1 className="font-serif text-[31px] sm:text-[38px] mt-1">
+          <h1 className="font-['Nunito'] text-[31px] sm:text-[38px] mt-1">
             Order Confirmed.
           </h1>
 
@@ -178,7 +179,7 @@ const Checkout = () => {
   }
 
   return (
-    <main className="bg-[#f4efe7] text-[#171714] min-h-[calc(100vh-110px)]">
+    <main className="bg-[#f4efe7] text-[#171714] min-h-[calc(100vh-110px)] font-['Nunito']">
       <section className="px-4 sm:px-6 lg:px-8 xl:px-10 py-2 lg:py-3">
         <div className="max-w-[1120px] mx-auto">
 
@@ -229,7 +230,7 @@ const Checkout = () => {
                 </p>
               </div>
 
-              <h1 className="font-serif text-[27px] sm:text-[30px] lg:text-[33px] leading-none">
+              <h1 className="font-['Nunito'] text-[27px] sm:text-[30px] lg:text-[33px] leading-none">
                 Secure{" "}
                 <span className="italic text-[#d5811e] font-normal">
                   Checkout.
@@ -257,7 +258,7 @@ const Checkout = () => {
                 className="mx-auto text-[#b98949]"
               />
 
-              <h2 className="font-serif text-[26px] mt-3">
+              <h2 className="font-['Nunito'] text-[26px] mt-3">
                 Your bag is empty.
               </h2>
 
@@ -290,7 +291,7 @@ const Checkout = () => {
               {/* LEFT SIDE */}
               <div>
                 <div className="mb-3">
-                  <h2 className="font-serif text-[20px] sm:text-[22px] leading-none">
+                  <h2 className="font-['Nunito'] text-[20px] sm:text-[22px] leading-none">
                     Contact Information
                   </h2>
 
@@ -465,7 +466,7 @@ const Checkout = () => {
                   Order Summary
                 </p>
 
-                <h2 className="font-serif text-[20px] mt-0.5 pb-2 border-b border-[#d1c5b4]">
+                <h2 className="font-['Nunito'] text-[20px] mt-0.5 pb-2 border-b border-[#d1c5b4]">
                   Your Order.
                 </h2>
 
@@ -488,7 +489,7 @@ const Checkout = () => {
                       />
 
                       <div className="flex-1 min-w-0">
-                        <p className="font-serif text-[13px] leading-tight">
+                        <p className="font-['Nunito'] text-[13px] leading-tight">
                           {item.name}
                         </p>
 
@@ -538,7 +539,7 @@ const Checkout = () => {
                     TOTAL
                   </span>
 
-                  <span className="font-serif text-[19px]">
+                  <span className="font-['Nunito'] text-[19px]">
                     ₹{subtotal.toLocaleString("en-IN")}
                   </span>
                 </div>
