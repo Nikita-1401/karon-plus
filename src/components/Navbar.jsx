@@ -3,8 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   FiSearch,
   FiUser,
-  FiShoppingBag,
-  FiHeart,
   FiChevronDown,
   FiMenu,
   FiX,
@@ -53,8 +51,17 @@ const products = [
   },
 ];
 
+const announcements = [
+  "PREMIUM STYLE. TIMELESS COMFORT.",
+  "DISCOVER THE LATEST KARON PLUS COLLECTION.",
+  "REFINED SHIRTS. MADE FOR EVERYDAY CONFIDENCE.",
+  "TIMELESS DESIGN. CONSIDERED DETAILS.",
+  "THE ULTIMATE CHOICE FOR MODERN STYLE.",
+];
+
 const Navbar = () => {
   const navigate = useNavigate();
+
   const desktopSearchRef = useRef(null);
   const mobileSearchRef = useRef(null);
 
@@ -62,85 +69,24 @@ const Navbar = () => {
   const [shopOpen, setShopOpen] = useState(false);
   const [shirtsOpen, setShirtsOpen] = useState(false);
 
-  const [wishlistCount, setWishlistCount] = useState(0);
-  const [cartCount, setCartCount] = useState(0);
-
   const [searchOpen, setSearchOpen] = useState(false);
   const [search, setSearch] = useState("");
 
-  const updateWishlistCount = () => {
-    try {
-      const saved =
-        JSON.parse(localStorage.getItem("karonWishlist")) || [];
+  const [announcementIndex, setAnnouncementIndex] = useState(0);
 
-      setWishlistCount(saved.length);
-    } catch {
-      setWishlistCount(0);
-    }
-  };
-
-  const updateCartCount = () => {
-    try {
-      const cart =
-        JSON.parse(localStorage.getItem("karonCart")) || [];
-
-      const total = cart.reduce(
-        (sum, item) => sum + (item.quantity || 1),
-        0
-      );
-
-      setCartCount(total);
-    } catch {
-      setCartCount(0);
-    }
-  };
+  /* ================= ANNOUNCEMENT ROTATION ================= */
 
   useEffect(() => {
-    updateWishlistCount();
-    updateCartCount();
-
-    window.addEventListener(
-      "wishlistUpdated",
-      updateWishlistCount
-    );
-
-    window.addEventListener(
-      "cartUpdated",
-      updateCartCount
-    );
-
-    window.addEventListener(
-      "storage",
-      updateWishlistCount
-    );
-
-    window.addEventListener(
-      "storage",
-      updateCartCount
-    );
-
-    return () => {
-      window.removeEventListener(
-        "wishlistUpdated",
-        updateWishlistCount
+    const interval = setInterval(() => {
+      setAnnouncementIndex((prev) =>
+        prev === announcements.length - 1 ? 0 : prev + 1
       );
+    }, 3500);
 
-      window.removeEventListener(
-        "cartUpdated",
-        updateCartCount
-      );
-
-      window.removeEventListener(
-        "storage",
-        updateWishlistCount
-      );
-
-      window.removeEventListener(
-        "storage",
-        updateCartCount
-      );
-    };
+    return () => clearInterval(interval);
   }, []);
+
+  /* ================= OUTSIDE SEARCH CLICK ================= */
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -156,16 +102,10 @@ const Navbar = () => {
       }
     };
 
-    document.addEventListener(
-      "mousedown",
-      handleOutsideClick
-    );
+    document.addEventListener("mousedown", handleOutsideClick);
 
     return () => {
-      document.removeEventListener(
-        "mousedown",
-        handleOutsideClick
-      );
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
 
@@ -227,18 +167,23 @@ const Navbar = () => {
 
       {/* ================= ANNOUNCEMENT ================= */}
 
-      <div className="w-full bg-[#C99A55] text-white">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 py-[7px] text-center">
-          <p className="text-[10px] sm:text-[11px] tracking-[0.15em]">
-            <span className="font-semibold">
-              PREMIUM STYLE. TIMELESS COMFORT.
-            </span>
+      <div className="w-full bg-[#C99A55] text-white overflow-hidden">
+        <div className="mx-auto flex h-[27px] max-w-[1440px] items-center justify-center px-4 sm:px-6">
 
-            <span className="hidden sm:inline">
-              {" "}
-              Discover the latest Karon Plus collection.
-            </span>
+          <p
+            key={announcementIndex}
+            className="
+              text-center
+              text-[9px]
+              sm:text-[10px]
+              font-semibold
+              tracking-[0.14em]
+              animate-[fadeAnnouncement_0.5s_ease]
+            "
+          >
+            {announcements[announcementIndex]}
           </p>
+
         </div>
       </div>
 
@@ -527,21 +472,30 @@ const Navbar = () => {
               sm:left-6
               lg:left-1/2
               lg:-translate-x-1/2
-              text-left
-              lg:text-center
+              h-[68px]
+              lg:h-[82px]
+              w-[125px]
+              lg:w-[155px]
+              flex
+              items-center
+              justify-center
+              overflow-hidden
             "
           >
-            <div className="text-[#B98949] font-serif text-[24px] sm:text-[27px] lg:text-[30px] leading-none tracking-[-0.07em]">
-              KP
-            </div>
-
-            <div className="mt-[3px] text-[#B98949] font-serif text-[13px] sm:text-[15px] lg:text-[17px] tracking-[0.08em] whitespace-nowrap">
-              KARON PLUS
-            </div>
-
-            <div className="hidden sm:block text-[6px] lg:text-[7px] text-[#8C6A3C] tracking-[0.22em] mt-[2px] whitespace-nowrap">
-              THE ULTIMATE CHOICE
-            </div>
+            <img
+              src="/karon-plus-logo.png"
+              alt="Karon Plus"
+              className="
+                block
+                w-[115px]
+                sm:w-[125px]
+                lg:w-[145px]
+                h-auto
+                object-contain
+                scale-[1.35]
+                lg:scale-[1.42]
+              "
+            />
           </Link>
 
           {/* ================= DESKTOP RIGHT ================= */}
@@ -562,13 +516,18 @@ const Navbar = () => {
               Our Promise
             </NavLink>
 
-            {/* ABOUT ADDED */}
-
             <NavLink
               to="/about"
               className="text-[14px] xl:text-[15px] whitespace-nowrap hover:text-[#B98949] transition"
             >
               About
+            </NavLink>
+
+            <NavLink
+              to="/blog"
+              className="text-[14px] xl:text-[15px] whitespace-nowrap hover:text-[#B98949] transition"
+            >
+              Blog
             </NavLink>
 
             <NavLink
@@ -578,22 +537,6 @@ const Navbar = () => {
               Contact
             </NavLink>
 
-            {/* WISHLIST */}
-
-            <Link
-              to="/wishlist"
-              aria-label="Wishlist"
-              className="relative hover:text-[#B98949] transition"
-            >
-              <FiHeart size={20} />
-
-              {wishlistCount > 0 && (
-                <span className="absolute -top-2 -right-2 min-w-[16px] h-[16px] px-1 bg-[#B98949] text-white rounded-full flex items-center justify-center text-[9px]">
-                  {wishlistCount}
-                </span>
-              )}
-            </Link>
-
             {/* ACCOUNT */}
 
             <Link
@@ -602,20 +545,6 @@ const Navbar = () => {
               className="hover:text-[#B98949] transition"
             >
               <FiUser size={20} />
-            </Link>
-
-            {/* CART */}
-
-            <Link
-              to="/cart"
-              aria-label="Cart"
-              className="relative hover:text-[#B98949] transition"
-            >
-              <FiShoppingBag size={21} />
-
-              <span className="absolute -top-2 -right-2 min-w-[16px] h-[16px] px-1 bg-[#B98949] text-white rounded-full flex items-center justify-center text-[9px]">
-                {cartCount}
-              </span>
             </Link>
 
           </nav>
@@ -635,30 +564,6 @@ const Navbar = () => {
             >
               <FiSearch size={19} />
             </button>
-
-            <Link
-              to="/wishlist"
-              className="relative hover:text-[#B98949]"
-            >
-              <FiHeart size={19} />
-
-              {wishlistCount > 0 && (
-                <span className="absolute -top-2 -right-2 min-w-[15px] h-[15px] bg-[#B98949] text-white rounded-full text-[8px] flex items-center justify-center">
-                  {wishlistCount}
-                </span>
-              )}
-            </Link>
-
-            <Link
-              to="/cart"
-              className="relative hover:text-[#B98949]"
-            >
-              <FiShoppingBag size={20} />
-
-              <span className="absolute -top-2 -right-2 min-w-[15px] h-[15px] bg-[#B98949] text-white rounded-full text-[8px] flex items-center justify-center">
-                {cartCount}
-              </span>
-            </Link>
 
             <button
               type="button"
@@ -944,8 +849,6 @@ const Navbar = () => {
               Our Promise
             </NavLink>
 
-            {/* ABOUT ADDED */}
-
             <NavLink
               to="/about"
               className="block py-4 border-b border-black/10 text-[14px]"
@@ -954,22 +857,17 @@ const Navbar = () => {
             </NavLink>
 
             <NavLink
+              to="/blog"
+              className="block py-4 border-b border-black/10 text-[14px]"
+            >
+              Blog
+            </NavLink>
+
+            <NavLink
               to="/contact"
               className="block py-4 border-b border-black/10 text-[14px]"
             >
               Contact
-            </NavLink>
-
-            <NavLink
-              to="/wishlist"
-              className="flex items-center justify-between py-4 border-b border-black/10 text-[14px]"
-            >
-              <span className="flex items-center gap-3">
-                <FiHeart size={17} />
-                Wishlist
-              </span>
-
-              <span>{wishlistCount}</span>
             </NavLink>
 
             <NavLink
@@ -984,6 +882,25 @@ const Navbar = () => {
         </div>
 
       </header>
+
+      {/* ANNOUNCEMENT FADE */}
+
+      <style>
+        {`
+          @keyframes fadeAnnouncement {
+            from {
+              opacity: 0;
+              transform: translateY(4px);
+            }
+
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+        `}
+      </style>
+
     </div>
   );
 };

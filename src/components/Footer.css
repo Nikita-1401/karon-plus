@@ -259,13 +259,21 @@
   display: flex;
   align-items: center;
 
-  gap: 6px;
+  gap: 7px;
 }
 
-.footer-connect a span {
+.footer-social-icon {
+  flex-shrink: 0;
+
   color: #c77d24;
 
-  font-size: 12px;
+  font-size: 13px;
+
+  transition: transform 0.2s ease;
+}
+
+.footer-connect a:hover .footer-social-icon {
+  transform: scale(1.08);
 }
 
 /* =========================================

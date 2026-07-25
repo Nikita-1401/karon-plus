@@ -1,3 +1,4 @@
+import { FiArrowUpRight } from "react-icons/fi";
 import "./CollectionCTA.css";
 
 const collections = [
@@ -61,7 +62,10 @@ const CollectionCTA = () => {
                   <h3>{item.name}</h3>
                 </div>
 
-                <span className="wardrobe-arrow">↗</span>
+                <FiArrowUpRight
+                  className="wardrobe-arrow"
+                  size={15}
+                />
               </a>
             ))}
           </div>
@@ -69,7 +73,11 @@ const CollectionCTA = () => {
           {/* MAIN CTA */}
           <a href="/shop" className="wardrobe-main-link">
             <span>VIEW THE COLLECTION</span>
-            <span className="wardrobe-main-arrow">↗</span>
+
+            <FiArrowUpRight
+              className="wardrobe-main-arrow"
+              size={15}
+            />
           </a>
 
         </div>

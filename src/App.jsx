@@ -22,6 +22,8 @@ import NewArrivals from "./pages/NewArrivals";
 import OurPromise from "./pages/OurPromise";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Blog from "./pages/Blog";
+
 import Wishlist from "./pages/Wishlist";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
@@ -108,6 +110,12 @@ function App() {
         <Route
           path="/contact"
           element={<Contact />}
+        />
+
+        {/* ================= BLOG ================= */}
+        <Route
+          path="/blog"
+          element={<Blog />}
         />
 
         <Route

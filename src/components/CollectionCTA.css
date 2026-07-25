@@ -287,7 +287,8 @@
   flex-shrink: 0;
 
   color: #dda044;
-  font-size: 13px;
+  width: 15px;
+  height: 15px;
 
   transition:
     transform 0.3s ease,
@@ -334,8 +335,11 @@
 }
 
 .wardrobe-main-arrow {
+  flex-shrink: 0;
+
   color: #dda044;
-  font-size: 13px;
+  width: 15px;
+  height: 15px;
 
   transition: transform 0.3s ease;
 }
@@ -600,7 +604,8 @@
   }
 
   .wardrobe-arrow {
-    font-size: 10px;
+    width: 10px;
+    height: 10px;
   }
 
   .wardrobe-main-link {

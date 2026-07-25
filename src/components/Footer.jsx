@@ -1,4 +1,9 @@
 import { Link } from "react-router-dom";
+import {
+  FiInstagram,
+  FiFacebook,
+  FiMail,
+} from "react-icons/fi";
 import "./Footer.css";
 
 const Footer = () => {
@@ -168,7 +173,8 @@ const Footer = () => {
               target="_blank"
               rel="noreferrer"
             >
-              Instagram <span>↗</span>
+              <FiInstagram className="footer-social-icon" />
+              Instagram
             </a>
 
             <a
@@ -176,11 +182,13 @@ const Footer = () => {
               target="_blank"
               rel="noreferrer"
             >
-              Facebook <span>↗</span>
+              <FiFacebook className="footer-social-icon" />
+              Facebook
             </a>
 
             <a href="mailto:hello@karonplus.com">
-              Email <span>↗</span>
+              <FiMail className="footer-social-icon" />
+              Email
             </a>
 
           </div>

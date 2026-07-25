@@ -56,7 +56,6 @@ const FeaturedProducts = () => {
         className="bg-[#fffdf9] px-5 py-12 md:px-8 md:py-14 lg:px-10 lg:py-16"
       >
         <div className="mx-auto max-w-[1450px]">
-
           {/* HEADER */}
           <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <div>
@@ -77,8 +76,9 @@ const FeaturedProducts = () => {
               </p>
             </div>
 
-            <a
-              href="#all-products"
+            {/* VIEW ALL COLLECTION */}
+            <Link
+              to="/shop"
               className="
                 group flex w-fit items-center gap-3
                 border-b border-[#222]
@@ -94,17 +94,15 @@ const FeaturedProducts = () => {
                 size={14}
                 className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
               />
-            </a>
+            </Link>
           </div>
 
           {/* PRODUCTS */}
           <div className="grid grid-cols-1 gap-x-4 gap-y-9 sm:grid-cols-2 lg:grid-cols-4">
             {products.map((product) => (
               <article key={product.id} className="group">
-
                 {/* IMAGE */}
                 <div className="relative overflow-hidden bg-[#f2ede6]">
-
                   <div className="aspect-[4/5] overflow-hidden">
                     <img
                       src={product.image}
@@ -185,18 +183,15 @@ const FeaturedProducts = () => {
                     <FiEye size={15} />
                     Quick View
                   </button>
-
                 </div>
 
                 {/* PRODUCT INFO */}
                 <div className="pt-4">
-
                   <p className="mb-1 text-[8px] font-semibold uppercase tracking-[0.25em] text-[#b9853d]">
                     {product.category}
                   </p>
 
                   <div className="flex items-start justify-between gap-3">
-
                     <h3 className="font-serif text-[19px] text-[#191919] md:text-[20px]">
                       {product.name}
                     </h3>
@@ -204,13 +199,11 @@ const FeaturedProducts = () => {
                     <p className="whitespace-nowrap text-[13px] font-semibold text-[#222]">
                       {product.price}
                     </p>
-
                   </div>
 
                   <div className="mt-3 h-px w-full bg-[#e5ded4]">
                     <div className="h-px w-0 bg-[#c99142] transition-all duration-500 group-hover:w-full" />
                   </div>
-
                 </div>
               </article>
             ))}
@@ -243,7 +236,6 @@ const FeaturedProducts = () => {
             "
             onClick={(e) => e.stopPropagation()}
           >
-
             {/* CLOSE */}
             <button
               type="button"
@@ -268,7 +260,6 @@ const FeaturedProducts = () => {
             </button>
 
             <div className="grid md:grid-cols-2">
-
               {/* IMAGE */}
               <div className="bg-[#eee6db]">
                 <img
@@ -286,7 +277,6 @@ const FeaturedProducts = () => {
 
               {/* DETAILS */}
               <div className="flex flex-col justify-center p-5 sm:p-7 md:p-9">
-
                 <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.25em] text-[#b9853d] md:mb-3">
                   {quickViewProduct.category}
                 </p>
@@ -359,7 +349,6 @@ const FeaturedProducts = () => {
                 >
                   VIEW PRODUCT
                 </Link>
-
               </div>
             </div>
           </div>
