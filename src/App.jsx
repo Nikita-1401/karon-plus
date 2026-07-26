@@ -29,6 +29,12 @@ import Cart from "./pages/Cart";
 import Account from "./pages/Account";
 import ProductDetails from "./pages/ProductDetails";
 
+// ================= ADMIN =================
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AddProduct from "./pages/admin/AddProduct";
+import ManageProducts from "./pages/admin/ManageProducts";
+import EditProduct from "./pages/admin/EditProduct";
+
 // ================= SCROLL TO TOP =================
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -68,7 +74,10 @@ function App() {
         />
 
         {/* ================= SHIRTS MAIN PAGE ================= */}
-        <Route path="/shirts" element={<CategoryPage />} />
+        <Route
+          path="/shirts"
+          element={<CategoryPage />}
+        />
 
         {/* ================= INDIVIDUAL SHIRT PAGES ================= */}
         <Route
@@ -131,6 +140,32 @@ function App() {
         <Route
           path="/account"
           element={<Account />}
+        />
+
+        {/* ================= ADMIN ================= */}
+
+        {/* ADMIN DASHBOARD */}
+        <Route
+          path="/admin"
+          element={<AdminDashboard />}
+        />
+
+        {/* ADD PRODUCT */}
+        <Route
+          path="/admin/add-product"
+          element={<AddProduct />}
+        />
+
+        {/* MANAGE PRODUCTS */}
+        <Route
+          path="/admin/products"
+          element={<ManageProducts />}
+        />
+
+        {/* EDIT PRODUCT */}
+        <Route
+          path="/admin/edit-product/:id"
+          element={<EditProduct />}
         />
 
         {/* ================= 404 ================= */}

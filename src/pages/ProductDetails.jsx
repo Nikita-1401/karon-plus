@@ -8,7 +8,11 @@ import {
   FiX,
 } from "react-icons/fi";
 
-const products = [
+/* =========================================================
+   DEFAULT PRODUCTS
+========================================================= */
+
+const defaultProducts = [
   {
     id: 1,
     name: "Signature White Shirt",
@@ -111,8 +115,45 @@ const ProductDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const product = products.find(
-    (item) => item.id === Number(id)
+  /* =========================================================
+     ADMIN PRODUCTS
+  ========================================================= */
+
+  const [adminProducts, setAdminProducts] = useState([]);
+
+  useEffect(() => {
+    try {
+      const savedProducts =
+        JSON.parse(
+          localStorage.getItem("karonAdminProducts")
+        ) || [];
+
+      setAdminProducts(
+        Array.isArray(savedProducts)
+          ? savedProducts
+          : []
+      );
+    } catch (error) {
+      console.error(
+        "Unable to load admin products:",
+        error
+      );
+
+      setAdminProducts([]);
+    }
+  }, []);
+
+  /* =========================================================
+     FIND PRODUCT
+  ========================================================= */
+
+  const allProducts = [
+    ...adminProducts,
+    ...defaultProducts,
+  ];
+
+  const product = allProducts.find(
+    (item) => Number(item.id) === Number(id)
   );
 
   const [selectedSize, setSelectedSize] = useState("");
@@ -120,8 +161,10 @@ const ProductDetails = () => {
   const [liked, setLiked] = useState(false);
   const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
 
-  // BULK ORDER
+  /* ================= BULK ORDER ================= */
+
   const [bulkOrderOpen, setBulkOrderOpen] = useState(false);
+
   const [bulkOrderSubmitted, setBulkOrderSubmitted] =
     useState(false);
 
@@ -133,42 +176,92 @@ const ProductDetails = () => {
     message: "",
   });
 
+  /* =========================================================
+     WISHLIST
+  ========================================================= */
+
   useEffect(() => {
     if (!product) return;
 
     try {
       const saved =
-        JSON.parse(localStorage.getItem("karonWishlist")) || [];
+        JSON.parse(
+          localStorage.getItem("karonWishlist")
+        ) || [];
 
-      setLiked(saved.includes(product.id));
+      setLiked(
+        saved.some(
+          (savedId) =>
+            Number(savedId) === Number(product.id)
+        )
+      );
     } catch {
       setLiked(false);
     }
   }, [product]);
 
+  /* =========================================================
+     PRODUCT NOT FOUND
+  ========================================================= */
+
   if (!product) {
     return (
       <main
         className="min-h-[50vh] bg-[#f4efe7] flex items-center justify-center"
-        style={{ fontFamily: "'Nunito', sans-serif" }}
+        style={{
+          fontFamily: "'Nunito', sans-serif",
+        }}
       >
-        <Link to="/shop">BACK TO SHOP</Link>
+        <Link to="/shop">
+          BACK TO SHOP
+        </Link>
       </main>
     );
   }
+
+  /* =========================================================
+     PRODUCT VALUES
+  ========================================================= */
+
+  const productDescription =
+    product.description ||
+    `A refined ${product.category.toLowerCase()} shirt designed for comfort, confidence and effortless everyday style.`;
+
+  const productFabric =
+    product.fabric || "Premium Cotton";
+
+  const productFit =
+    product.fit || "Regular Fit";
+
+  const productCare =
+    product.care || "Machine Wash";
+
+  /* =========================================================
+     WISHLIST TOGGLE
+  ========================================================= */
 
   const toggleWishlist = () => {
     let saved = [];
 
     try {
       saved =
-        JSON.parse(localStorage.getItem("karonWishlist")) || [];
+        JSON.parse(
+          localStorage.getItem("karonWishlist")
+        ) || [];
     } catch {
       saved = [];
     }
 
-    const updated = saved.includes(product.id)
-      ? saved.filter((item) => item !== product.id)
+    const alreadySaved = saved.some(
+      (savedId) =>
+        Number(savedId) === Number(product.id)
+    );
+
+    const updated = alreadySaved
+      ? saved.filter(
+          (savedId) =>
+            Number(savedId) !== Number(product.id)
+        )
       : [...saved, product.id];
 
     localStorage.setItem(
@@ -176,10 +269,16 @@ const ProductDetails = () => {
       JSON.stringify(updated)
     );
 
-    setLiked(updated.includes(product.id));
+    setLiked(!alreadySaved);
 
-    window.dispatchEvent(new Event("wishlistUpdated"));
+    window.dispatchEvent(
+      new Event("wishlistUpdated")
+    );
   };
+
+  /* =========================================================
+     BULK ORDER
+  ========================================================= */
 
   const handleBulkChange = (e) => {
     const { name, value } = e.target;
@@ -208,20 +307,25 @@ const ProductDetails = () => {
 
   const handleBulkSubmit = (e) => {
     e.preventDefault();
+
     setBulkOrderSubmitted(true);
   };
 
   return (
     <main
       className="bg-[#f4efe7] text-[#171714]"
-      style={{ fontFamily: "'Nunito', sans-serif" }}
+      style={{
+        fontFamily: "'Nunito', sans-serif",
+      }}
     >
       <section className="px-4 sm:px-6 lg:px-10 xl:px-12 py-3 lg:py-4">
         <div className="max-w-[1280px] mx-auto">
 
-          {/* TOP */}
+          {/* ================= TOP ================= */}
+
           <div className="flex items-center justify-between mb-3">
             <button
+              type="button"
               onClick={() => navigate("/shop")}
               className="flex items-center gap-2 text-[10px] font-bold tracking-[0.17em]"
             >
@@ -233,18 +337,34 @@ const ProductDetails = () => {
             </button>
 
             <div className="hidden sm:flex text-[9px] tracking-[0.15em] uppercase">
-              <Link to="/">Home</Link>
-              <span className="mx-2">/</span>
-              <Link to="/shop">Shop</Link>
-              <span className="mx-2">/</span>
-              <span>{product.name}</span>
+              <Link to="/">
+                Home
+              </Link>
+
+              <span className="mx-2">
+                /
+              </span>
+
+              <Link to="/shop">
+                Shop
+              </Link>
+
+              <span className="mx-2">
+                /
+              </span>
+
+              <span>
+                {product.name}
+              </span>
             </div>
           </div>
 
-          {/* PRODUCT */}
+          {/* ================= PRODUCT ================= */}
+
           <div className="grid lg:grid-cols-[0.82fr_1fr] gap-5 lg:gap-8 items-start">
 
             {/* IMAGE */}
+
             <div className="relative bg-[#ded5c8] overflow-hidden">
               <img
                 src={product.image}
@@ -265,7 +385,8 @@ const ProductDetails = () => {
               </span>
             </div>
 
-            {/* INFO */}
+            {/* ================= INFO ================= */}
+
             <div>
               <p className="text-[#b66d17] text-[9px] font-bold tracking-[0.24em] uppercase mb-1.5">
                 {product.category}
@@ -276,9 +397,13 @@ const ProductDetails = () => {
               </h1>
 
               {/* PRICE + HEART */}
+
               <div className="flex items-center justify-between mt-2">
                 <p className="text-[17px] lg:text-[18px]">
-                  ₹{product.price.toLocaleString("en-IN")}
+                  ₹
+                  {Number(
+                    product.price
+                  ).toLocaleString("en-IN")}
                 </p>
 
                 <button
@@ -293,20 +418,27 @@ const ProductDetails = () => {
                 >
                   <FiHeart
                     size={13}
-                    className={liked ? "fill-current" : ""}
+                    className={
+                      liked
+                        ? "fill-current"
+                        : ""
+                    }
                   />
                 </button>
               </div>
 
               {/* DESCRIPTION */}
+
               <p className="text-[11px] lg:text-[12px] leading-5 text-[#5b5349] border-y border-[#d1c5b4] py-2 mt-2.5">
-                {product.description}
+                {productDescription}
               </p>
 
               {/* SIZE + QUANTITY */}
+
               <div className="grid sm:grid-cols-[1fr_auto] gap-4 mt-3">
 
                 {/* SIZE */}
+
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
                     <span className="text-[9px] font-bold tracking-[0.18em]">
@@ -315,7 +447,9 @@ const ProductDetails = () => {
 
                     <button
                       type="button"
-                      onClick={() => setSizeGuideOpen(true)}
+                      onClick={() =>
+                        setSizeGuideOpen(true)
+                      }
                       className="text-[9px] border-b border-[#171714]"
                     >
                       SIZE GUIDE
@@ -323,24 +457,29 @@ const ProductDetails = () => {
                   </div>
 
                   <div className="flex gap-1.5">
-                    {["S", "M", "L", "XL"].map((size) => (
-                      <button
-                        type="button"
-                        key={size}
-                        onClick={() => setSelectedSize(size)}
-                        className={`w-9 h-8 border text-[10px] transition ${
-                          selectedSize === size
-                            ? "bg-[#171714] text-white border-[#171714]"
-                            : "border-[#bfb19e] hover:border-[#171714]"
-                        }`}
-                      >
-                        {size}
-                      </button>
-                    ))}
+                    {["S", "M", "L", "XL"].map(
+                      (size) => (
+                        <button
+                          type="button"
+                          key={size}
+                          onClick={() =>
+                            setSelectedSize(size)
+                          }
+                          className={`w-9 h-8 border text-[10px] transition ${
+                            selectedSize === size
+                              ? "bg-[#171714] text-white border-[#171714]"
+                              : "border-[#bfb19e] hover:border-[#171714]"
+                          }`}
+                        >
+                          {size}
+                        </button>
+                      )
+                    )}
                   </div>
                 </div>
 
                 {/* QUANTITY */}
+
                 <div>
                   <span className="block text-[9px] font-bold tracking-[0.18em] mb-1.5">
                     QUANTITY
@@ -351,7 +490,10 @@ const ProductDetails = () => {
                       type="button"
                       onClick={() =>
                         setQuantity((prev) =>
-                          Math.max(1, prev - 1)
+                          Math.max(
+                            1,
+                            prev - 1
+                          )
                         )
                       }
                       className="w-8 h-full flex items-center justify-center"
@@ -366,7 +508,9 @@ const ProductDetails = () => {
                     <button
                       type="button"
                       onClick={() =>
-                        setQuantity((prev) => prev + 1)
+                        setQuantity(
+                          (prev) => prev + 1
+                        )
                       }
                       className="w-8 h-full flex items-center justify-center"
                     >
@@ -376,12 +520,22 @@ const ProductDetails = () => {
                 </div>
               </div>
 
-              {/* DETAILS */}
+              {/* ================= DETAILS ================= */}
+
               <div className="mt-4 border-t border-[#d1c5b4]">
                 {[
-                  ["FABRIC", product.fabric],
-                  ["FIT", product.fit],
-                  ["CARE", product.care],
+                  [
+                    "FABRIC",
+                    productFabric,
+                  ],
+                  [
+                    "FIT",
+                    productFit,
+                  ],
+                  [
+                    "CARE",
+                    productCare,
+                  ],
                 ].map(([label, value]) => (
                   <div
                     key={label}
@@ -398,7 +552,8 @@ const ProductDetails = () => {
                 ))}
               </div>
 
-              {/* BULK ORDER */}
+              {/* ================= BULK ORDER ================= */}
+
               <button
                 type="button"
                 onClick={openBulkOrder}
@@ -423,19 +578,28 @@ const ProductDetails = () => {
         </div>
       </section>
 
-      {/* ================= BULK ORDER MODAL ================= */}
+      {/* =====================================================
+          BULK ORDER MODAL
+      ===================================================== */}
+
       {bulkOrderOpen && (
         <div
           onClick={closeBulkOrder}
           className="
-            fixed inset-0 z-[300]
+            fixed
+            inset-0
+            z-[300]
             bg-black/55
-            flex items-center justify-center
+            flex
+            items-center
+            justify-center
             p-3
           "
         >
           <div
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) =>
+              e.stopPropagation()
+            }
             className="
               relative
               bg-[#f4efe7]
@@ -451,11 +615,17 @@ const ProductDetails = () => {
               type="button"
               onClick={closeBulkOrder}
               className="
-                absolute top-4 right-4
-                w-8 h-8
-                border border-[#cbbda8]
+                absolute
+                top-4
+                right-4
+                w-8
+                h-8
+                border
+                border-[#cbbda8]
                 rounded-full
-                flex items-center justify-center
+                flex
+                items-center
+                justify-center
                 hover:bg-[#171714]
                 hover:text-white
                 transition
@@ -475,9 +645,12 @@ const ProductDetails = () => {
                 </h2>
 
                 <p className="text-[12px] leading-5 text-[#655d53] mt-2 max-w-[400px]">
-                  Looking to order in quantity? Send us your requirement
-                  and our team will get in touch with you.
+                  Looking to order in quantity?
+                  Send us your requirement and our
+                  team will get in touch with you.
                 </p>
+
+                {/* PRODUCT */}
 
                 <div className="flex items-center gap-3 mt-4 py-3 border-y border-[#d1c5b4]">
                   <img
@@ -496,16 +669,27 @@ const ProductDetails = () => {
                     </h3>
 
                     <p className="text-[11px] mt-1">
-                      ₹{product.price.toLocaleString("en-IN")} / piece
+                      ₹
+                      {Number(
+                        product.price
+                      ).toLocaleString(
+                        "en-IN"
+                      )}{" "}
+                      / piece
                     </p>
                   </div>
                 </div>
+
+                {/* FORM */}
 
                 <form
                   onSubmit={handleBulkSubmit}
                   className="mt-4"
                 >
                   <div className="grid sm:grid-cols-2 gap-3">
+
+                    {/* NAME */}
+
                     <div>
                       <label className="block text-[10px] font-bold tracking-[0.14em] mb-1.5">
                         YOUR NAME
@@ -515,12 +699,16 @@ const ProductDetails = () => {
                         type="text"
                         name="name"
                         value={bulkForm.name}
-                        onChange={handleBulkChange}
+                        onChange={
+                          handleBulkChange
+                        }
                         required
                         className="
-                          w-full h-9
+                          w-full
+                          h-9
                           bg-transparent
-                          border border-[#bfb19e]
+                          border
+                          border-[#bfb19e]
                           px-3
                           text-[12px]
                           outline-none
@@ -528,6 +716,8 @@ const ProductDetails = () => {
                         "
                       />
                     </div>
+
+                    {/* PHONE */}
 
                     <div>
                       <label className="block text-[10px] font-bold tracking-[0.14em] mb-1.5">
@@ -538,12 +728,16 @@ const ProductDetails = () => {
                         type="tel"
                         name="phone"
                         value={bulkForm.phone}
-                        onChange={handleBulkChange}
+                        onChange={
+                          handleBulkChange
+                        }
                         required
                         className="
-                          w-full h-9
+                          w-full
+                          h-9
                           bg-transparent
-                          border border-[#bfb19e]
+                          border
+                          border-[#bfb19e]
                           px-3
                           text-[12px]
                           outline-none
@@ -552,6 +746,8 @@ const ProductDetails = () => {
                       />
                     </div>
                   </div>
+
+                  {/* EMAIL */}
 
                   <div className="mt-3">
                     <label className="block text-[10px] font-bold tracking-[0.14em] mb-1.5">
@@ -562,12 +758,16 @@ const ProductDetails = () => {
                       type="email"
                       name="email"
                       value={bulkForm.email}
-                      onChange={handleBulkChange}
+                      onChange={
+                        handleBulkChange
+                      }
                       required
                       className="
-                        w-full h-9
+                        w-full
+                        h-9
                         bg-transparent
-                        border border-[#bfb19e]
+                        border
+                        border-[#bfb19e]
                         px-3
                         text-[12px]
                         outline-none
@@ -575,6 +775,8 @@ const ProductDetails = () => {
                       "
                     />
                   </div>
+
+                  {/* QUANTITY */}
 
                   <div className="mt-3">
                     <label className="block text-[10px] font-bold tracking-[0.14em] mb-1.5">
@@ -586,12 +788,16 @@ const ProductDetails = () => {
                       name="quantity"
                       min="10"
                       value={bulkForm.quantity}
-                      onChange={handleBulkChange}
+                      onChange={
+                        handleBulkChange
+                      }
                       required
                       className="
-                        w-full h-9
+                        w-full
+                        h-9
                         bg-transparent
-                        border border-[#bfb19e]
+                        border
+                        border-[#bfb19e]
                         px-3
                         text-[12px]
                         outline-none
@@ -600,9 +806,12 @@ const ProductDetails = () => {
                     />
 
                     <p className="text-[10px] text-[#766d61] mt-1">
-                      Minimum bulk order quantity: 10 pieces
+                      Minimum bulk order quantity:
+                      10 pieces
                     </p>
                   </div>
+
+                  {/* MESSAGE */}
 
                   <div className="mt-3">
                     <label className="block text-[10px] font-bold tracking-[0.14em] mb-1.5">
@@ -612,13 +821,16 @@ const ProductDetails = () => {
                     <textarea
                       name="message"
                       value={bulkForm.message}
-                      onChange={handleBulkChange}
+                      onChange={
+                        handleBulkChange
+                      }
                       rows="2"
                       placeholder="Sizes, quantity split or any special requirement..."
                       className="
                         w-full
                         bg-transparent
-                        border border-[#bfb19e]
+                        border
+                        border-[#bfb19e]
                         p-3
                         text-[12px]
                         leading-5
@@ -629,13 +841,18 @@ const ProductDetails = () => {
                     />
                   </div>
 
+                  {/* BUTTONS */}
+
                   <div className="grid grid-cols-2 gap-2 mt-4">
                     <button
                       type="button"
-                      onClick={closeBulkOrder}
+                      onClick={
+                        closeBulkOrder
+                      }
                       className="
                         h-10
-                        border border-[#171714]
+                        border
+                        border-[#171714]
                         text-[10px]
                         font-bold
                         tracking-[0.15em]
@@ -665,6 +882,8 @@ const ProductDetails = () => {
                 </form>
               </>
             ) : (
+              /* SUCCESS */
+
               <div className="py-8 text-center">
                 <p className="text-[#b66d17] text-[10px] font-bold tracking-[0.2em] uppercase">
                   Karon Plus
@@ -675,8 +894,9 @@ const ProductDetails = () => {
                 </h2>
 
                 <p className="text-[12px] leading-5 text-[#655d53] mt-3">
-                  Thank you for your bulk order enquiry. Our team will
-                  contact you regarding your requirement.
+                  Thank you for your bulk order
+                  enquiry. Our team will contact
+                  you regarding your requirement.
                 </p>
 
                 <button
@@ -703,19 +923,28 @@ const ProductDetails = () => {
         </div>
       )}
 
-      {/* ================= SIZE GUIDE ================= */}
+      {/* =====================================================
+          SIZE GUIDE
+      ===================================================== */}
+
       {sizeGuideOpen && (
         <div
-          onClick={() => setSizeGuideOpen(false)}
+          onClick={() =>
+            setSizeGuideOpen(false)
+          }
           className="fixed inset-0 z-[200] bg-black/50 flex items-center justify-center p-4"
         >
           <div
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) =>
+              e.stopPropagation()
+            }
             className="relative bg-[#f4efe7] w-full max-w-[390px] p-5"
           >
             <button
               type="button"
-              onClick={() => setSizeGuideOpen(false)}
+              onClick={() =>
+                setSizeGuideOpen(false)
+              }
               className="absolute top-4 right-4 w-7 h-7 border rounded-full flex items-center justify-center"
             >
               <FiX size={11} />
@@ -731,7 +960,11 @@ const ProductDetails = () => {
 
             <div className="mt-4">
               {[
-                ["SIZE", "CHEST", "LENGTH"],
+                [
+                  "SIZE",
+                  "CHEST",
+                  "LENGTH",
+                ],
                 ["S", '38"', '28"'],
                 ["M", '40"', '29"'],
                 ["L", '42"', '30"'],
@@ -756,7 +989,9 @@ const ProductDetails = () => {
 
             <button
               type="button"
-              onClick={() => setSizeGuideOpen(false)}
+              onClick={() =>
+                setSizeGuideOpen(false)
+              }
               className="w-full h-9 mt-4 bg-[#171714] text-white text-[10px] tracking-[0.18em]"
             >
               CLOSE

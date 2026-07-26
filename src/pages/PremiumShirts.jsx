@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 
@@ -33,11 +34,89 @@ const premiumProducts = [
 ];
 
 const PremiumShirts = () => {
+  const [adminPremiumProducts, setAdminPremiumProducts] = useState([]);
+
+  /* ================= ADMIN PREMIUM PRODUCTS ================= */
+
+  const loadAdminPremiumProducts = () => {
+    try {
+      const savedProducts =
+        JSON.parse(
+          localStorage.getItem("karonAdminProducts")
+        ) || [];
+
+      const onlyPremiumProducts = Array.isArray(savedProducts)
+        ? savedProducts
+            .filter(
+              (product) => product.category === "Premium"
+            )
+            .map((product) => ({
+              ...product,
+              type:
+                product.type || "Premium Collection",
+            }))
+        : [];
+
+      setAdminPremiumProducts(onlyPremiumProducts);
+    } catch (error) {
+      console.error(
+        "Unable to load premium products:",
+        error
+      );
+
+      setAdminPremiumProducts([]);
+    }
+  };
+
+  useEffect(() => {
+    loadAdminPremiumProducts();
+
+    const handleProductsUpdated = () => {
+      loadAdminPremiumProducts();
+    };
+
+    const handleStorage = (event) => {
+      if (event.key === "karonAdminProducts") {
+        loadAdminPremiumProducts();
+      }
+    };
+
+    window.addEventListener(
+      "productsUpdated",
+      handleProductsUpdated
+    );
+
+    window.addEventListener(
+      "storage",
+      handleStorage
+    );
+
+    return () => {
+      window.removeEventListener(
+        "productsUpdated",
+        handleProductsUpdated
+      );
+
+      window.removeEventListener(
+        "storage",
+        handleStorage
+      );
+    };
+  }, []);
+
+  /* ================= COMBINED PRODUCTS ================= */
+
+  const allPremiumProducts = [
+    ...adminPremiumProducts,
+    ...premiumProducts,
+  ];
+
   return (
     <main className="bg-[#f2ece2] text-[#171714] font-['Nunito']">
       <section className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-7 pt-3 pb-3">
 
         {/* HEADER */}
+
         <div className="flex items-end justify-between gap-8 pb-3 border-b border-[#c9b99f]">
           <div>
             <div className="flex items-center gap-3 mb-1">
@@ -83,6 +162,7 @@ const PremiumShirts = () => {
         </div>
 
         {/* COLLECTION BAR */}
+
         <div className="flex items-center justify-between py-2">
           <div className="flex items-center gap-3">
             <p className="text-[9px] font-bold tracking-[0.16em]">
@@ -106,17 +186,21 @@ const PremiumShirts = () => {
         </div>
 
         {/* PRODUCTS */}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-3 lg:gap-x-4 gap-y-6">
 
-          {premiumProducts.map((product) => (
+          {allPremiumProducts.map((product) => (
             <article
               key={product.id}
               className="group min-w-0"
             >
 
               {/* IMAGE */}
-              <div className="relative overflow-hidden bg-[#d7c9b6] h-[315px] sm:h-[270px] lg:h-[275px] xl:h-[285px]">
 
+              <Link
+                to={`/product/${product.id}`}
+                className="relative block overflow-hidden bg-[#d7c9b6] h-[315px] sm:h-[270px] lg:h-[275px] xl:h-[285px]"
+              >
                 <img
                   src={product.image}
                   alt={product.name}
@@ -126,10 +210,10 @@ const PremiumShirts = () => {
                 <div className="absolute left-3 bottom-3 bg-[#171714] text-[#dca557] px-3 py-2 text-[9px] font-bold tracking-[0.16em]">
                   KARON PREMIUM
                 </div>
-
-              </div>
+              </Link>
 
               {/* PRODUCT INFO */}
+
               <div className="pt-2 pb-2 border-b border-[#c9b99f]">
 
                 <div className="flex items-center justify-between gap-3">
@@ -139,14 +223,19 @@ const PremiumShirts = () => {
                   </p>
 
                   <p className="text-[11px] font-semibold whitespace-nowrap">
-                    ₹{product.price.toLocaleString("en-IN")}
+                    ₹
+                    {Number(product.price).toLocaleString(
+                      "en-IN"
+                    )}
                   </p>
 
                 </div>
 
-                <h3 className="mt-1 font-['Nunito'] text-[17px] lg:text-[18px] leading-tight">
-                  {product.name}
-                </h3>
+                <Link to={`/product/${product.id}`}>
+                  <h3 className="mt-1 font-['Nunito'] text-[17px] lg:text-[18px] leading-tight">
+                    {product.name}
+                  </h3>
+                </Link>
 
               </div>
 
@@ -156,6 +245,7 @@ const PremiumShirts = () => {
         </div>
 
         {/* BOTTOM */}
+
         <div className="hidden lg:flex items-center justify-between mt-2.5 pt-2">
 
           <div className="flex items-center gap-3">

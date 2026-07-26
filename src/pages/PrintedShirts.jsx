@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 
@@ -33,11 +34,89 @@ const printedProducts = [
 ];
 
 const PrintedShirts = () => {
+  const [adminPrintedProducts, setAdminPrintedProducts] = useState([]);
+
+  /* ================= ADMIN PRINTED PRODUCTS ================= */
+
+  const loadAdminPrintedProducts = () => {
+    try {
+      const savedProducts =
+        JSON.parse(
+          localStorage.getItem("karonAdminProducts")
+        ) || [];
+
+      const onlyPrintedProducts = Array.isArray(savedProducts)
+        ? savedProducts
+            .filter(
+              (product) => product.category === "Printed"
+            )
+            .map((product) => ({
+              ...product,
+              type:
+                product.type || "Printed Collection",
+            }))
+        : [];
+
+      setAdminPrintedProducts(onlyPrintedProducts);
+    } catch (error) {
+      console.error(
+        "Unable to load printed products:",
+        error
+      );
+
+      setAdminPrintedProducts([]);
+    }
+  };
+
+  useEffect(() => {
+    loadAdminPrintedProducts();
+
+    const handleProductsUpdated = () => {
+      loadAdminPrintedProducts();
+    };
+
+    const handleStorage = (event) => {
+      if (event.key === "karonAdminProducts") {
+        loadAdminPrintedProducts();
+      }
+    };
+
+    window.addEventListener(
+      "productsUpdated",
+      handleProductsUpdated
+    );
+
+    window.addEventListener(
+      "storage",
+      handleStorage
+    );
+
+    return () => {
+      window.removeEventListener(
+        "productsUpdated",
+        handleProductsUpdated
+      );
+
+      window.removeEventListener(
+        "storage",
+        handleStorage
+      );
+    };
+  }, []);
+
+  /* ================= COMBINED PRODUCTS ================= */
+
+  const allPrintedProducts = [
+    ...adminPrintedProducts,
+    ...printedProducts,
+  ];
+
   return (
     <main className="bg-[#f4efe7] text-[#171714] font-['Nunito']">
       <section className="max-w-[1400px] mx-auto px-4 sm:px-5 lg:px-5 pt-3 pb-3">
 
         {/* HEADER */}
+
         <div className="flex items-end justify-between gap-8 pb-3 border-b border-[#cdbfae]">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
@@ -74,6 +153,7 @@ const PrintedShirts = () => {
         </div>
 
         {/* COLLECTION BAR */}
+
         <div className="flex items-center justify-between py-2.5">
           <div className="flex items-center gap-3">
             <p className="text-[10px] font-bold tracking-[0.15em]">
@@ -97,17 +177,21 @@ const PrintedShirts = () => {
         </div>
 
         {/* PRODUCTS */}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-3 lg:gap-x-4 gap-y-6">
 
-          {printedProducts.map((product) => (
+          {allPrintedProducts.map((product) => (
             <article
               key={product.id}
               className="group min-w-0"
             >
 
               {/* IMAGE */}
-              <div className="relative overflow-hidden bg-[#ded4c6] h-[315px] sm:h-[270px] lg:h-[290px] xl:h-[300px]">
 
+              <Link
+                to={`/product/${product.id}`}
+                className="relative block overflow-hidden bg-[#ded4c6] h-[315px] sm:h-[270px] lg:h-[290px] xl:h-[300px]"
+              >
                 <img
                   src={product.image}
                   alt={product.name}
@@ -117,10 +201,10 @@ const PrintedShirts = () => {
                 <span className="absolute bottom-3 left-3 bg-[#f8f4ed] text-[#171714] px-3 py-1.5 text-[9px] font-bold tracking-[0.14em]">
                   PRINTED
                 </span>
-
-              </div>
+              </Link>
 
               {/* PRODUCT INFO */}
+
               <div className="pt-2 pb-2 border-b border-[#cdbfae]">
 
                 <div className="flex items-center justify-between gap-3">
@@ -130,14 +214,19 @@ const PrintedShirts = () => {
                   </p>
 
                   <p className="text-[11px] font-semibold whitespace-nowrap">
-                    ₹{product.price.toLocaleString("en-IN")}
+                    ₹
+                    {Number(product.price).toLocaleString(
+                      "en-IN"
+                    )}
                   </p>
 
                 </div>
 
-                <h3 className="mt-1 font-['Nunito'] text-[17px] lg:text-[18px] leading-tight">
-                  {product.name}
-                </h3>
+                <Link to={`/product/${product.id}`}>
+                  <h3 className="mt-1 font-['Nunito'] text-[17px] lg:text-[18px] leading-tight">
+                    {product.name}
+                  </h3>
+                </Link>
 
               </div>
             </article>
@@ -146,6 +235,7 @@ const PrintedShirts = () => {
         </div>
 
         {/* BOTTOM */}
+
         <div className="hidden lg:flex items-center justify-between mt-2.5 pt-2">
 
           <div className="flex items-center gap-3">

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 
@@ -33,11 +34,89 @@ const casualProducts = [
 ];
 
 const CasualShirts = () => {
+  const [adminCasualProducts, setAdminCasualProducts] = useState([]);
+
+  /* ================= ADMIN CASUAL PRODUCTS ================= */
+
+  const loadAdminCasualProducts = () => {
+    try {
+      const savedProducts =
+        JSON.parse(
+          localStorage.getItem("karonAdminProducts")
+        ) || [];
+
+      const onlyCasualProducts = Array.isArray(savedProducts)
+        ? savedProducts
+            .filter(
+              (product) => product.category === "Casual"
+            )
+            .map((product) => ({
+              ...product,
+              type:
+                product.type || "Casual Collection",
+            }))
+        : [];
+
+      setAdminCasualProducts(onlyCasualProducts);
+    } catch (error) {
+      console.error(
+        "Unable to load casual products:",
+        error
+      );
+
+      setAdminCasualProducts([]);
+    }
+  };
+
+  useEffect(() => {
+    loadAdminCasualProducts();
+
+    const handleProductsUpdated = () => {
+      loadAdminCasualProducts();
+    };
+
+    const handleStorage = (event) => {
+      if (event.key === "karonAdminProducts") {
+        loadAdminCasualProducts();
+      }
+    };
+
+    window.addEventListener(
+      "productsUpdated",
+      handleProductsUpdated
+    );
+
+    window.addEventListener(
+      "storage",
+      handleStorage
+    );
+
+    return () => {
+      window.removeEventListener(
+        "productsUpdated",
+        handleProductsUpdated
+      );
+
+      window.removeEventListener(
+        "storage",
+        handleStorage
+      );
+    };
+  }, []);
+
+  /* ================= COMBINED PRODUCTS ================= */
+
+  const allCasualProducts = [
+    ...adminCasualProducts,
+    ...casualProducts,
+  ];
+
   return (
     <main className="bg-[#f4efe7] text-[#171714] font-['Nunito']">
       <section className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-7 pt-3 pb-3">
 
         {/* HEADER */}
+
         <div className="flex items-end justify-between gap-8 pb-3 border-b border-[#cdbfae]">
           <div>
             <div className="flex items-center gap-3 mb-1.5">
@@ -74,6 +153,7 @@ const CasualShirts = () => {
         </div>
 
         {/* COLLECTION BAR */}
+
         <div className="flex items-center justify-between py-2.5">
           <div className="flex items-center gap-3">
             <p className="text-[10px] font-bold tracking-[0.15em]">
@@ -97,17 +177,21 @@ const CasualShirts = () => {
         </div>
 
         {/* PRODUCTS */}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-3 lg:gap-x-4 gap-y-6">
 
-          {casualProducts.map((product) => (
+          {allCasualProducts.map((product) => (
             <article
               key={product.id}
               className="group min-w-0"
             >
 
               {/* IMAGE */}
-              <div className="relative overflow-hidden bg-[#ded4c6] h-[315px] sm:h-[270px] lg:h-[270px] xl:h-[280px]">
 
+              <Link
+                to={`/product/${product.id}`}
+                className="relative block overflow-hidden bg-[#ded4c6] h-[315px] sm:h-[270px] lg:h-[270px] xl:h-[280px]"
+              >
                 <img
                   src={product.image}
                   alt={product.name}
@@ -115,13 +199,14 @@ const CasualShirts = () => {
                 />
 
                 {/* CASUAL BADGE */}
+
                 <span className="absolute left-3 bottom-3 bg-[#f8f4ed] text-[#171714] px-3 py-1.5 text-[9px] font-bold tracking-[0.14em]">
                   CASUAL
                 </span>
-
-              </div>
+              </Link>
 
               {/* PRODUCT INFO */}
+
               <div className="pt-2 pb-2 border-b border-[#cdbfae]">
 
                 <div className="flex items-center justify-between gap-3">
@@ -131,14 +216,19 @@ const CasualShirts = () => {
                   </p>
 
                   <p className="text-[11px] font-semibold whitespace-nowrap">
-                    ₹{product.price.toLocaleString("en-IN")}
+                    ₹
+                    {Number(product.price).toLocaleString(
+                      "en-IN"
+                    )}
                   </p>
 
                 </div>
 
-                <h3 className="mt-1 font-['Nunito'] text-[17px] lg:text-[18px] leading-tight">
-                  {product.name}
-                </h3>
+                <Link to={`/product/${product.id}`}>
+                  <h3 className="mt-1 font-['Nunito'] text-[17px] lg:text-[18px] leading-tight">
+                    {product.name}
+                  </h3>
+                </Link>
 
               </div>
             </article>
@@ -147,6 +237,7 @@ const CasualShirts = () => {
         </div>
 
         {/* BOTTOM */}
+
         <div className="hidden lg:flex items-center justify-between mt-2.5 pt-2">
 
           <div className="flex items-center gap-3">

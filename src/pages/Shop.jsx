@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   FiArrowLeft,
@@ -8,10 +8,10 @@ import {
 } from "react-icons/fi";
 
 /* =========================================================
-   PRODUCTS
+   DEFAULT PRODUCTS
 ========================================================= */
 
-const products = [
+const defaultProducts = [
   {
     id: 1,
     name: "Signature White Shirt",
@@ -44,7 +44,6 @@ const products = [
     image: "/formal-grey.jpg",
     badge: "",
   },
-
   {
     id: 6,
     name: "Striped Weekend Shirt",
@@ -77,7 +76,6 @@ const products = [
     image: "/casual-olive.jpg",
     badge: "",
   },
-
   {
     id: 12,
     name: "Botanical Print Shirt",
@@ -110,7 +108,6 @@ const products = [
     image: "/printed-ivory.jpg",
     badge: "",
   },
-
   {
     id: 16,
     name: "Midnight Luxe Shirt",
@@ -221,7 +218,7 @@ const ProductCard = ({ product }) => {
           </Link>
 
           <span className="font-semibold text-[11px] sm:text-[12px] whitespace-nowrap">
-            ₹{product.price.toLocaleString("en-IN")}
+            ₹{Number(product.price).toLocaleString("en-IN")}
           </span>
         </div>
       </div>
@@ -236,16 +233,89 @@ const ProductCard = ({ product }) => {
 const Shop = () => {
   const sliderRef = useRef(null);
 
+  /* ================= ADMIN PRODUCTS ================= */
+
+  const [adminProducts, setAdminProducts] = useState([]);
+
+  const loadAdminProducts = () => {
+    try {
+      const saved =
+        JSON.parse(
+          localStorage.getItem("karonAdminProducts")
+        ) || [];
+
+      setAdminProducts(
+        Array.isArray(saved) ? saved : []
+      );
+    } catch (error) {
+      console.error(
+        "Unable to load admin products:",
+        error
+      );
+
+      setAdminProducts([]);
+    }
+  };
+
+  useEffect(() => {
+    loadAdminProducts();
+
+    const handleProductsUpdated = () => {
+      loadAdminProducts();
+    };
+
+    const handleStorage = (event) => {
+      if (
+        event.key === "karonAdminProducts"
+      ) {
+        loadAdminProducts();
+      }
+    };
+
+    window.addEventListener(
+      "productsUpdated",
+      handleProductsUpdated
+    );
+
+    window.addEventListener(
+      "storage",
+      handleStorage
+    );
+
+    return () => {
+      window.removeEventListener(
+        "productsUpdated",
+        handleProductsUpdated
+      );
+
+      window.removeEventListener(
+        "storage",
+        handleStorage
+      );
+    };
+  }, []);
+
+  /* ================= COMBINE PRODUCTS ================= */
+
+  const products = [
+    ...adminProducts,
+    ...defaultProducts,
+  ];
+
   const [activeCategory, setActiveCategory] =
     useState("All Shirts");
 
-  const [sortOpen, setSortOpen] = useState(false);
+  const [sortOpen, setSortOpen] =
+    useState(false);
 
-  const [filterOpen, setFilterOpen] = useState(false);
+  const [filterOpen, setFilterOpen] =
+    useState(false);
 
-  const [sortBy, setSortBy] = useState("Featured");
+  const [sortBy, setSortBy] =
+    useState("Featured");
 
-  const [visibleCount, setVisibleCount] = useState(4);
+  const [visibleCount, setVisibleCount] =
+    useState(4);
 
   /* ================= FILTER ================= */
 
@@ -265,23 +335,27 @@ const Shop = () => {
 
   /* ================= SORT ================= */
 
-  const sortedProducts = [...filteredProducts].sort(
-    (a, b) => {
-      if (sortBy === "Price: Low to High") {
-        return a.price - b.price;
-      }
-
-      if (sortBy === "Price: High to Low") {
-        return b.price - a.price;
-      }
-
-      if (sortBy === "Name") {
-        return a.name.localeCompare(b.name);
-      }
-
-      return 0;
+  const sortedProducts = [
+    ...filteredProducts,
+  ].sort((a, b) => {
+    if (sortBy === "Price: Low to High") {
+      return (
+        Number(a.price) - Number(b.price)
+      );
     }
-  );
+
+    if (sortBy === "Price: High to Low") {
+      return (
+        Number(b.price) - Number(a.price)
+      );
+    }
+
+    if (sortBy === "Name") {
+      return a.name.localeCompare(b.name);
+    }
+
+    return 0;
+  });
 
   const visibleProducts =
     sortedProducts.slice(0, visibleCount);
@@ -290,6 +364,13 @@ const Shop = () => {
     (product) =>
       product.badge === "BESTSELLER"
   );
+
+  /* ================= NEW ARRIVALS ================= */
+
+  const newArrivalProducts = [
+    ...adminProducts,
+    ...defaultProducts,
+  ].slice(0, 4);
 
   /* ================= SLIDER ================= */
 
@@ -314,6 +395,7 @@ const Shop = () => {
         bg-[#f4efe7]
         text-[#171714]
         min-h-screen
+        font-['Nunito',sans-serif]
       "
     >
       {/* =====================================================
@@ -326,7 +408,6 @@ const Shop = () => {
           sm:px-8
           lg:px-12
           xl:px-14
-
           pt-5
           lg:pt-6
         "
@@ -336,123 +417,50 @@ const Shop = () => {
             className="
               grid
               lg:grid-cols-[1.2fr_0.8fr]
-
               gap-5
               lg:gap-12
-
               items-end
-
               pb-5
             "
           >
-            {/* LEFT */}
-
             <div>
-              <div
-                className="
-                  flex
-                  items-center
-                  gap-4
-                  mb-3
-                "
-              >
-                <span
-                  className="
-                    w-7
-                    h-px
-                    bg-[#d58420]
-                  "
-                />
+              <div className="flex items-center gap-4 mb-3">
+                <span className="w-7 h-px bg-[#d58420]" />
 
-                <p
-                  className="
-                    text-[#b66d17]
-
-                    text-[9px]
-                    sm:text-[10px]
-
-                    font-bold
-                    tracking-[0.3em]
-                    uppercase
-                  "
-                >
+                <p className="text-[#b66d17] text-[9px] sm:text-[10px] font-bold tracking-[0.3em] uppercase">
                   Karon Plus Shop
                 </p>
               </div>
 
-              <h1
-                className="
-                  font-serif
-
-                  text-[42px]
-                  sm:text-[52px]
-                  lg:text-[58px]
-
-                  leading-[0.95]
-                  tracking-[-0.03em]
-                "
-              >
+              <h1 className="text-[42px] sm:text-[52px] lg:text-[58px] leading-[0.95] tracking-[-0.03em] font-semibold">
                 Shop All{" "}
-
-                <span
-                  className="
-                    italic
-                    font-normal
-                    text-[#d5811e]
-                  "
-                >
+                <span className="italic font-normal text-[#d5811e]">
                   Shirts.
                 </span>
               </h1>
             </div>
 
-            {/* RIGHT */}
-
-            <div
-              className="
-                hidden
-                md:block
-
-                max-w-[430px]
-                lg:ml-auto
-              "
-            >
-              <p
-                className="
-                  text-[12px]
-                  leading-[1.6]
-                  text-[#514a41]
-                  text-right
-                "
-              >
-                Refined shirts for work,
-                weekends and everything in
-                between — designed for comfort,
-                confidence and effortless style.
+            <div className="hidden md:block max-w-[430px] lg:ml-auto">
+              <p className="text-[12px] leading-[1.6] text-[#514a41] text-right">
+                Refined shirts for work, weekends
+                and everything in between — designed
+                for comfort, confidence and
+                effortless style.
               </p>
             </div>
           </div>
 
           {/* CATEGORY LINKS */}
 
-          <div
-            className="
-              border-y
-              border-[#cfc2af]
-            "
-          >
+          <div className="border-y border-[#cfc2af]">
             <div
               className="
                 flex
                 items-center
-
                 gap-7
                 sm:gap-10
-
                 overflow-x-auto
-
                 py-3.5
-
                 [&::-webkit-scrollbar]:hidden
                 [-ms-overflow-style:none]
                 [scrollbar-width:none]
@@ -465,20 +473,16 @@ const Shop = () => {
                   className={`
                     relative
                     shrink-0
-
                     text-[9px]
                     sm:text-[10px]
-
                     font-bold
                     tracking-[0.2em]
                     uppercase
-
                     pb-1
-
                     transition-colors
-
                     ${
-                      category.name === "All Shirts"
+                      category.name ===
+                      "All Shirts"
                         ? "text-[#c77718]"
                         : "text-[#171714] hover:text-[#c77718]"
                     }
@@ -486,17 +490,9 @@ const Shop = () => {
                 >
                   {category.name}
 
-                  {category.name === "All Shirts" && (
-                    <span
-                      className="
-                        absolute
-                        left-0
-                        right-0
-                        -bottom-[15px]
-                        h-[2px]
-                        bg-[#c77718]
-                      "
-                    />
+                  {category.name ===
+                    "All Shirts" && (
+                    <span className="absolute left-0 right-0 -bottom-[15px] h-[2px] bg-[#c77718]" />
                   )}
                 </Link>
               ))}
@@ -509,95 +505,38 @@ const Shop = () => {
           NEW ARRIVALS
       ===================================================== */}
 
-      <section
-        className="
-          px-5
-          sm:px-8
-          lg:px-12
-          xl:px-14
-
-          pt-6
-          lg:pt-7
-        "
-      >
+      <section className="px-5 sm:px-8 lg:px-12 xl:px-14 pt-6 lg:pt-7">
         <div className="max-w-[1440px] mx-auto">
-          <div
-            className="
-              flex
-              items-end
-              justify-between
-              gap-5
-              mb-5
-            "
-          >
+          <div className="flex items-end justify-between gap-5 mb-5">
             <div>
-              <p
-                className="
-                  text-[#b66d17]
-                  text-[9px]
-                  font-bold
-                  tracking-[0.3em]
-                  uppercase
-                  mb-2
-                "
-              >
+              <p className="text-[#b66d17] text-[9px] font-bold tracking-[0.3em] uppercase mb-2">
                 Latest Drop
               </p>
 
-              <h2
-                className="
-                  font-serif
-                  text-[34px]
-                  sm:text-[40px]
-                  lg:text-[42px]
-                  leading-none
-                "
-              >
+              <h2 className="text-[34px] sm:text-[40px] lg:text-[42px] leading-none font-semibold">
                 New Arrivals
               </h2>
             </div>
 
             <Link
               to="/new-arrivals"
-              className="
-                hidden
-                sm:flex
-                items-center
-                gap-5
-                text-[9px]
-                font-bold
-                tracking-[0.2em]
-                border-b
-                border-[#c7781a]
-                pb-2
-              "
+              className="hidden sm:flex items-center gap-5 text-[9px] font-bold tracking-[0.2em] border-b border-[#c7781a] pb-2"
             >
               VIEW NEW ARRIVALS
 
-              <FiArrowRight
-                className="text-[#c7781a]"
-              />
+              <FiArrowRight className="text-[#c7781a]" />
             </Link>
           </div>
 
-          <div
-            className="
-              grid
-              grid-cols-2
-              lg:grid-cols-4
-              gap-x-3
-              sm:gap-x-5
-              gap-y-7
-            "
-          >
-            {products
-              .slice(0, 4)
-              .map((product) => (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 sm:gap-x-5 gap-y-7">
+            {newArrivalProducts.map(
+              (product) => (
                 <ProductCard
                   key={product.id}
                   product={product}
                 />
-              ))}
+              )
+            )}
           </div>
         </div>
       </section>
@@ -606,53 +545,15 @@ const Shop = () => {
           BEST SELLERS
       ===================================================== */}
 
-      <section
-        className="
-          mt-12
-          lg:mt-16
-          bg-[#171715]
-          text-[#f5f0e8]
-          py-11
-          lg:py-12
-        "
-      >
+      <section className="mt-12 lg:mt-16 bg-[#171715] text-[#f5f0e8] py-11 lg:py-12">
         <div className="max-w-[1440px] mx-auto">
-          <div
-            className="
-              px-5
-              sm:px-8
-              lg:px-12
-              xl:px-14
-              flex
-              items-end
-              justify-between
-              gap-6
-              mb-7
-            "
-          >
+          <div className="px-5 sm:px-8 lg:px-12 xl:px-14 flex items-end justify-between gap-6 mb-7">
             <div>
-              <p
-                className="
-                  text-[#d88b28]
-                  text-[9px]
-                  font-bold
-                  tracking-[0.3em]
-                  uppercase
-                  mb-3
-                "
-              >
+              <p className="text-[#d88b28] text-[9px] font-bold tracking-[0.3em] uppercase mb-3">
                 Most Wanted
               </p>
 
-              <h2
-                className="
-                  font-serif
-                  text-[36px]
-                  sm:text-[44px]
-                  lg:text-[50px]
-                  leading-none
-                "
-              >
+              <h2 className="text-[36px] sm:text-[44px] lg:text-[50px] leading-none font-semibold">
                 Best Sellers.
               </h2>
             </div>
@@ -664,19 +565,7 @@ const Shop = () => {
                   scrollSlider("left")
                 }
                 aria-label="Scroll left"
-                className="
-                  w-11
-                  h-11
-                  rounded-full
-                  border
-                  border-white/30
-                  flex
-                  items-center
-                  justify-center
-                  hover:bg-[#d48826]
-                  hover:border-[#d48826]
-                  transition
-                "
+                className="w-11 h-11 rounded-full border border-white/30 flex items-center justify-center hover:bg-[#d48826] hover:border-[#d48826] transition"
               >
                 <FiArrowLeft />
               </button>
@@ -687,19 +576,7 @@ const Shop = () => {
                   scrollSlider("right")
                 }
                 aria-label="Scroll right"
-                className="
-                  w-11
-                  h-11
-                  rounded-full
-                  border
-                  border-white/30
-                  flex
-                  items-center
-                  justify-center
-                  hover:bg-[#d48826]
-                  hover:border-[#d48826]
-                  transition
-                "
+                className="w-11 h-11 rounded-full border border-white/30 flex items-center justify-center hover:bg-[#d48826] hover:border-[#d48826] transition"
               >
                 <FiArrowRight />
               </button>
@@ -725,111 +602,60 @@ const Shop = () => {
               [scrollbar-width:none]
             "
           >
-            {[
-              ...bestSellers,
-              ...products.slice(0, 4),
-            ].map((product, index) => (
-              <div
-                key={`${product.id}-${index}`}
-                className="
-                  group
-                  shrink-0
-                  w-[72vw]
-                  sm:w-[42vw]
-                  md:w-[31vw]
-                  lg:w-[25vw]
-                  xl:w-[300px]
-                "
-              >
-                <Link
-                  to={`/product/${product.id}`}
+            {bestSellers.map(
+              (product, index) => (
+                <div
+                  key={`${product.id}-${index}`}
                   className="
-                    aspect-[4/5]
-                    overflow-hidden
-                    bg-[#2a2926]
-                    relative
-                    block
+                    group
+                    shrink-0
+                    w-[72vw]
+                    sm:w-[42vw]
+                    md:w-[31vw]
+                    lg:w-[25vw]
+                    xl:w-[300px]
                   "
                 >
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="
-                      w-full
-                      h-full
-                      object-cover
-                      group-hover:scale-[1.04]
-                      transition-transform
-                      duration-700
-                    "
-                  />
-
-                  <span
-                    className="
-                      absolute
-                      top-4
-                      left-4
-                      bg-[#f5f0e8]
-                      text-[#171714]
-                      px-3
-                      py-2
-                      text-[8px]
-                      font-bold
-                      tracking-[0.18em]
-                    "
+                  <Link
+                    to={`/product/${product.id}`}
+                    className="aspect-[4/5] overflow-hidden bg-[#2a2926] relative block"
                   >
-                    BESTSELLER
-                  </span>
-                </Link>
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700"
+                    />
 
-                <div className="pt-3">
-                  <p
-                    className="
-                      text-[#d68a28]
-                      text-[8px]
-                      tracking-[0.2em]
-                      uppercase
-                      mb-2
-                    "
-                  >
-                    {product.category}
-                  </p>
-
-                  <div
-                    className="
-                      flex
-                      justify-between
-                      gap-4
-                    "
-                  >
-                    <Link to={`/product/${product.id}`}>
-                      <h3
-                        className="
-                          font-serif
-                          text-[19px]
-                          hover:text-[#d68a28]
-                          transition
-                        "
-                      >
-                        {product.name}
-                      </h3>
-                    </Link>
-
-                    <span
-                      className="
-                        text-[12px]
-                        whitespace-nowrap
-                      "
-                    >
-                      ₹
-                      {product.price.toLocaleString(
-                        "en-IN"
-                      )}
+                    <span className="absolute top-4 left-4 bg-[#f5f0e8] text-[#171714] px-3 py-2 text-[8px] font-bold tracking-[0.18em]">
+                      BESTSELLER
                     </span>
+                  </Link>
+
+                  <div className="pt-3">
+                    <p className="text-[#d68a28] text-[8px] tracking-[0.2em] uppercase mb-2">
+                      {product.category}
+                    </p>
+
+                    <div className="flex justify-between gap-4">
+                      <Link
+                        to={`/product/${product.id}`}
+                      >
+                        <h3 className="text-[19px] font-semibold hover:text-[#d68a28] transition">
+                          {product.name}
+                        </h3>
+                      </Link>
+
+                      <span className="text-[12px] whitespace-nowrap">
+                        ₹
+                        {Number(
+                          product.price
+                        ).toLocaleString("en-IN")}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              )
+            )}
           </div>
         </div>
       </section>
@@ -838,81 +664,28 @@ const Shop = () => {
           ALL PRODUCTS
       ===================================================== */}
 
-      <section
-        className="
-          px-5
-          sm:px-8
-          lg:px-12
-          xl:px-14
-          py-11
-          lg:py-14
-        "
-      >
+      <section className="px-5 sm:px-8 lg:px-12 xl:px-14 py-11 lg:py-14">
         <div className="max-w-[1440px] mx-auto">
-          <div
-            className="
-              flex
-              flex-col
-              lg:flex-row
-              lg:items-end
-              justify-between
-              gap-6
-              pb-6
-              border-b
-              border-[#cfc2af]
-            "
-          >
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-[#cfc2af]">
             <div>
-              <p
-                className="
-                  text-[#b66d17]
-                  text-[9px]
-                  font-bold
-                  tracking-[0.3em]
-                  uppercase
-                  mb-3
-                "
-              >
+              <p className="text-[#b66d17] text-[9px] font-bold tracking-[0.3em] uppercase mb-3">
                 The Collection
               </p>
 
-              <h2
-                className="
-                  font-serif
-                  text-[36px]
-                  sm:text-[44px]
-                  lg:text-[50px]
-                  leading-none
-                "
-              >
-                {activeCategory ===
-                "All Shirts"
+              <h2 className="text-[36px] sm:text-[44px] lg:text-[50px] leading-none font-semibold">
+                {activeCategory === "All Shirts"
                   ? "All Shirts"
                   : `${activeCategory} Shirts`}
               </h2>
 
-              <p
-                className="
-                  text-[11px]
-                  text-[#756b5e]
-                  mt-3
-                "
-              >
+              <p className="text-[11px] text-[#756b5e] mt-3">
                 {sortedProducts.length} products
               </p>
             </div>
 
             {/* FILTER / SORT */}
 
-            <div
-              className="
-                flex
-                flex-wrap
-                items-center
-                gap-3
-                relative
-              "
-            >
+            <div className="flex flex-wrap items-center gap-3 relative">
               {/* FILTER */}
 
               <div className="relative">
@@ -924,49 +697,15 @@ const Shop = () => {
                     );
                     setSortOpen(false);
                   }}
-                  className="
-                    h-11
-                    px-4
-                    sm:px-5
-                    border
-                    border-[#c7baa7]
-                    flex
-                    items-center
-                    gap-3
-                    text-[9px]
-                    font-bold
-                    tracking-[0.17em]
-                    hover:border-[#171714]
-                    transition
-                  "
+                  className="h-11 px-4 sm:px-5 border border-[#c7baa7] flex items-center gap-3 text-[9px] font-bold tracking-[0.17em] hover:border-[#171714] transition"
                 >
                   <FiSliders />
                   FILTER
                 </button>
 
                 {filterOpen && (
-                  <div
-                    className="
-                      absolute
-                      left-0
-                      top-[52px]
-                      bg-[#f8f3eb]
-                      border
-                      border-[#c9bda9]
-                      w-[230px]
-                      p-5
-                      z-30
-                      shadow-lg
-                    "
-                  >
-                    <p
-                      className="
-                        text-[9px]
-                        font-bold
-                        tracking-[0.2em]
-                        mb-4
-                      "
-                    >
+                  <div className="absolute left-0 top-[52px] bg-[#f8f3eb] border border-[#c9bda9] w-[230px] p-5 z-30 shadow-lg">
+                    <p className="text-[9px] font-bold tracking-[0.2em] mb-4">
                       CATEGORY
                     </p>
 
@@ -984,7 +723,6 @@ const Shop = () => {
                             className={`
                               block
                               text-[12px]
-
                               ${
                                 activeCategory ===
                                 category
@@ -999,22 +737,8 @@ const Shop = () => {
                       )}
                     </div>
 
-                    <div
-                      className="
-                        border-t
-                        border-[#d4c9ba]
-                        mt-5
-                        pt-5
-                      "
-                    >
-                      <p
-                        className="
-                          text-[9px]
-                          font-bold
-                          tracking-[0.2em]
-                          mb-3
-                        "
-                      >
+                    <div className="border-t border-[#d4c9ba] mt-5 pt-5">
+                      <p className="text-[9px] font-bold tracking-[0.2em] mb-3">
                         AVAILABLE SIZES
                       </p>
 
@@ -1028,16 +752,7 @@ const Shop = () => {
                           <button
                             type="button"
                             key={size}
-                            className="
-                              w-9
-                              h-9
-                              border
-                              border-[#c9bda9]
-                              text-[10px]
-                              hover:bg-[#171714]
-                              hover:text-white
-                              transition
-                            "
+                            className="w-9 h-9 border border-[#c9bda9] text-[10px] hover:bg-[#171714] hover:text-white transition"
                           >
                             {size}
                           </button>
@@ -1057,24 +772,7 @@ const Shop = () => {
                     setSortOpen(!sortOpen);
                     setFilterOpen(false);
                   }}
-                  className="
-                    h-11
-                    min-w-[150px]
-                    sm:min-w-[185px]
-                    px-4
-                    sm:px-5
-                    border
-                    border-[#c7baa7]
-                    flex
-                    items-center
-                    justify-between
-                    gap-4
-                    text-[9px]
-                    font-bold
-                    tracking-[0.14em]
-                    hover:border-[#171714]
-                    transition
-                  "
+                  className="h-11 min-w-[150px] sm:min-w-[185px] px-4 sm:px-5 border border-[#c7baa7] flex items-center justify-between gap-4 text-[9px] font-bold tracking-[0.14em] hover:border-[#171714] transition"
                 >
                   {sortBy.toUpperCase()}
 
@@ -1082,19 +780,7 @@ const Shop = () => {
                 </button>
 
                 {sortOpen && (
-                  <div
-                    className="
-                      absolute
-                      right-0
-                      top-[52px]
-                      bg-[#f8f3eb]
-                      border
-                      border-[#c9bda9]
-                      w-[210px]
-                      z-30
-                      shadow-lg
-                    "
-                  >
+                  <div className="absolute right-0 top-[52px] bg-[#f8f3eb] border border-[#c9bda9] w-[210px] z-30 shadow-lg">
                     {[
                       "Featured",
                       "Price: Low to High",
@@ -1108,16 +794,7 @@ const Shop = () => {
                           setSortBy(option);
                           setSortOpen(false);
                         }}
-                        className="
-                          block
-                          w-full
-                          text-left
-                          px-5
-                          py-3
-                          text-[11px]
-                          hover:bg-[#ebe2d5]
-                          transition
-                        "
+                        className="block w-full text-left px-5 py-3 text-[11px] hover:bg-[#ebe2d5] transition"
                       >
                         {option}
                       </button>
@@ -1130,17 +807,7 @@ const Shop = () => {
 
           {/* PRODUCTS */}
 
-          <div
-            className="
-              grid
-              grid-cols-2
-              lg:grid-cols-4
-              gap-x-3
-              sm:gap-x-5
-              gap-y-8
-              mt-7
-            "
-          >
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 sm:gap-x-5 gap-y-8 mt-7">
             {visibleProducts.map(
               (product) => (
                 <ProductCard
@@ -1155,14 +822,7 @@ const Shop = () => {
 
           {visibleCount <
             sortedProducts.length && (
-            <div
-              className="
-                flex
-                justify-center
-                mt-9
-                lg:mt-10
-              "
-            >
+            <div className="flex justify-center mt-9 lg:mt-10">
               <button
                 type="button"
                 onClick={() =>
@@ -1174,33 +834,11 @@ const Shop = () => {
                       )
                   )
                 }
-                className="
-                  group
-                  min-w-[190px]
-                  border
-                  border-[#171714]
-                  px-6
-                  py-3.5
-                  flex
-                  items-center
-                  justify-between
-                  gap-7
-                  text-[9px]
-                  font-bold
-                  tracking-[0.2em]
-                  hover:bg-[#171714]
-                  hover:text-white
-                  transition-all
-                "
+                className="group min-w-[190px] border border-[#171714] px-6 py-3.5 flex items-center justify-between gap-7 text-[9px] font-bold tracking-[0.2em] hover:bg-[#171714] hover:text-white transition-all"
               >
                 LOAD MORE
 
-                <FiArrowRight
-                  className="
-                    group-hover:translate-x-1
-                    transition-transform
-                  "
-                />
+                <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           )}
